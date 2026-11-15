@@ -1,0 +1,20 @@
+[
+    "longitude",
+    "latitude",
+    "day_of_week",
+    "first_road_class",
+    "road_type",
+    "speed_limit",
+    "junction_detail",
+    "junction_control",
+    "second_road_class",
+    "pedestrian_crossing",
+    "light_conditions",
+    "weather_conditions",
+    "road_surface_conditions",
+    "urban_or_rural_area",
+    "trunk_road_flag",
+    "year",
+    "month",
+    "hour"
+]
