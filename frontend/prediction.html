@@ -1,0 +1,1203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RoadGuard AI - Accident Analysis</title>
+
+    <!-- Leaflet Map -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        nav {
+            background: #0f172a;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        nav h2 {
+            color: #38bdf8;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        .hero h1 {
+            margin-top: 0;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .panel {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+        }
+
+        .panel h2 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 18px 0 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            background: white;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            color: white;
+            background: #2563eb;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 22px;
+        }
+
+        .hint {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-top: 7px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .status {
+            padding: 13px;
+            border-radius: 7px;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .loading {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .result-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .severity {
+            font-size: 29px;
+            font-weight: bold;
+            margin: 12px 0;
+        }
+
+        .severity.Slight {
+            color: #16a34a;
+        }
+
+        .severity.Serious {
+            color: #d97706;
+        }
+
+        .severity.Fatal {
+            color: #dc2626;
+        }
+
+        .detail {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        #map {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .hospital-card {
+            border: 1px solid #e2e8f0;
+            padding: 17px;
+            border-radius: 9px;
+            margin-top: 13px;
+            background: #fff;
+        }
+
+        .hospital-card h3 {
+            margin-top: 0;
+            color: #2563eb;
+        }
+
+        .hospital-card p {
+            line-height: 1.5;
+        }
+
+        .hospital-card a {
+            display: inline-block;
+            background: #059669;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-top: 5px;
+        }
+
+        .hospital-card a:hover {
+            background: #047857;
+        }
+
+        .hospital-card.nearest {
+            border: 2px solid #16a34a;
+        }
+
+        .nearest-label {
+            color: #15803d;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .notice {
+            background: #fefce8;
+            border: 1px solid #fde68a;
+            padding: 15px;
+            border-radius: 8px;
+            color: #854d0e;
+            line-height: 1.6;
+            margin-top: 18px;
+            font-size: 14px;
+        }
+
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 22px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        @media(max-width: 650px) {
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <h2>🛡 RoadGuard AI</h2>
+        <a href="index.html">← Back to Home</a>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Accident Severity Analysis</h1>
+        <p>
+            Analyze road conditions, estimate accident severity
+            and discover nearby hospitals.
+        </p>
+    </section>
+
+
+    <main class="container">
+
+        <!-- INPUT FORM -->
+        <section class="panel">
+
+            <h2>📍 Accident Location</h2>
+
+            <p class="detail">
+                Enter a UK postcode, town, city or road name
+                to analyze the selected location.
+            </p>
+
+            <form id="analysisForm">
+
+                <label for="location">UK Location</label>
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="Example: Manchester, UK or M1 1AE"
+                    minlength="2"
+                    maxlength="200"
+                    required
+                >
+
+                <label for="surface">
+                    Road Surface Condition (Optional)
+                </label>
+
+                <select id="surface">
+                    <option value="">Use available road data</option>
+                    <option value="1">Dry</option>
+                    <option value="2">Wet or damp</option>
+                    <option value="3">Snow</option>
+                    <option value="4">Frost or ice</option>
+                    <option value="5">Flood over 3cm deep</option>
+                    <option value="9">Unknown</option>
+                </select>
+
+                <p class="hint">
+                    Select a condition only when it is known.
+                    These are STATS20 road-surface codes used by
+                    the trained model.
+                </p>
+
+                <label for="radius">
+                    Hospital Search Radius
+                </label>
+
+                <select id="radius">
+                    <option value="5000">5 km</option>
+                    <option value="10000">10 km</option>
+                    <option value="15000">15 km</option>
+                    <option value="25000">25 km</option>
+                </select>
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    id="analyzeBtn"
+                >
+                    Analyze Accident Location
+                </button>
+
+            </form>
+
+            <div id="mainStatus" class="hidden"></div>
+
+        </section>
+
+
+        <!-- PREDICTION RESULTS -->
+        <section id="predictionSection" class="panel hidden">
+
+            <h2>🚦 Severity Prediction</h2>
+
+            <div id="predictionStatus"></div>
+
+            <div class="result-grid">
+
+                <div class="result-box">
+
+                    <h3>Predicted Severity</h3>
+
+                    <div id="severityValue" class="severity">
+                        --
+                    </div>
+
+                    <p class="detail" id="severityDescription">
+                        Prediction will appear here.
+                    </p>
+
+                </div>
+
+                <div class="result-box">
+
+                    <h3>Analyzed Location</h3>
+
+                    <p id="resolvedLocation" class="detail">
+                        --
+                    </p>
+
+                    <p id="coordinates" class="detail">
+                        Coordinates: --
+                    </p>
+
+                    <p id="nearestRoad" class="detail">
+                        Nearest road: --
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div id="missingFeatures" class="hidden"></div>
+
+            <div class="notice">
+                <strong>Important:</strong>
+                This is an experimental severity classification
+                system. The prediction estimates severity conditional
+                on a collision occurring. It does not predict whether
+                a collision will happen or replace emergency services.
+            </div>
+
+        </section>
+
+
+        <!-- HOSPITAL RESULTS -->
+        <section id="hospitalSection" class="panel hidden">
+
+            <h2>🏥 Nearby Hospital Recommendations</h2>
+
+            <div id="hospitalStatus"></div>
+
+            <div id="map"></div>
+
+            <div id="hospitalResults"></div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>© 2026 RoadGuard AI | Intelligent Road Safety</p>
+    </footer>
+
+
+    <!-- LEAFLET -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+    <script>
+
+        // =====================================================
+        // 1. BACKEND CONFIGURATION
+        // =====================================================
+
+        const API_BASE_URL = "http://127.0.0.1:8000";
+
+
+        // =====================================================
+        // 2. DOM ELEMENTS
+        // =====================================================
+
+        const form = document.getElementById("analysisForm");
+
+        const analyzeBtn = document.getElementById("analyzeBtn");
+
+        const mainStatus = document.getElementById("mainStatus");
+
+        const predictionSection =
+            document.getElementById("predictionSection");
+
+        const hospitalSection =
+            document.getElementById("hospitalSection");
+
+
+        // =====================================================
+        // 3. MAP INITIALIZATION
+        // =====================================================
+
+        const map = L.map("map").setView(
+            [54.5, -3.0],
+            6
+        );
+
+        L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+                attribution: "&copy; OpenStreetMap contributors",
+                maxZoom: 19
+            }
+        ).addTo(map);
+
+        let accidentMarker = null;
+        let hospitalMarkers = [];
+
+
+        // =====================================================
+        // 4. DISTANCE CALCULATION
+        // =====================================================
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+
+            const R = 6371;
+
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+
+            const a =
+                Math.sin(dLat / 2) ** 2 +
+                Math.cos(lat1 * Math.PI / 180) *
+                Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) ** 2;
+
+            const c = 2 * Math.atan2(
+                Math.sqrt(a),
+                Math.sqrt(1 - a)
+            );
+
+            return R * c;
+        }
+
+
+        // =====================================================
+        // 5. STATUS HELPER
+        // =====================================================
+
+        function showStatus(element, message, type) {
+
+            element.className = "status " + type;
+
+            element.textContent = message;
+
+            element.classList.remove("hidden");
+        }
+
+
+        // =====================================================
+        // 6. API ERROR HANDLING
+        // =====================================================
+
+        async function getErrorMessage(response) {
+
+            let data;
+
+            try {
+                data = await response.json();
+            } catch {
+                return `Server error (${response.status}).`;
+            }
+
+            const detail = data.detail;
+
+            if (typeof detail === "string") {
+                return detail;
+            }
+
+            if (detail && typeof detail === "object") {
+                return detail.message ||
+                    JSON.stringify(detail);
+            }
+
+            return `Request failed (${response.status}).`;
+        }
+
+
+        // =====================================================
+        // 7. REMOVE OLD MARKERS
+        // =====================================================
+
+        function clearMarkers() {
+
+            if (accidentMarker) {
+                map.removeLayer(accidentMarker);
+                accidentMarker = null;
+            }
+
+            hospitalMarkers.forEach(marker => {
+                map.removeLayer(marker);
+            });
+
+            hospitalMarkers = [];
+
+        }
+
+
+        // =====================================================
+        // 8. DISPLAY SEVERITY PREDICTION
+        // =====================================================
+
+        function displayPrediction(data) {
+
+            predictionSection.classList.remove("hidden");
+
+            const severity = String(
+                data.predicted_severity ?? "Unknown"
+            );
+
+            const severityValue =
+                document.getElementById("severityValue");
+
+            severityValue.textContent = severity;
+
+            severityValue.className =
+                "severity " + severity;
+
+            document.getElementById(
+                "severityDescription"
+            ).textContent =
+                data.interpretation ||
+                "Experimental model prediction.";
+
+            document.getElementById(
+                "resolvedLocation"
+            ).textContent = data.location;
+
+            document.getElementById(
+                "coordinates"
+            ).textContent =
+                `Latitude: ${data.latitude}, Longitude: ${data.longitude}`;
+
+            document.getElementById(
+                "nearestRoad"
+            ).textContent =
+                "Prediction generated from the prepared road features.";
+
+            showStatus(
+                document.getElementById("predictionStatus"),
+                "Severity prediction generated successfully.",
+                "success"
+            );
+
+        }
+
+
+        // =====================================================
+        // 9. DISPLAY MISSING FEATURES
+        // =====================================================
+
+        function displayMissingFeatures(data) {
+
+            const missingBox =
+                document.getElementById("missingFeatures");
+
+            missingBox.className = "status warning";
+
+            const missing = data.missing_features || [];
+
+            missingBox.textContent =
+                "Prediction unavailable. Missing model features: " +
+                (missing.join(", ") || "Unable to determine.");
+
+            missingBox.classList.remove("hidden");
+
+            if (data.features) {
+                const details = document.createElement("details");
+
+                const summary = document.createElement("summary");
+
+                summary.textContent = "View available feature values";
+
+                const pre = document.createElement("pre");
+
+                pre.style.whiteSpace = "pre-wrap";
+                pre.style.overflowWrap = "anywhere";
+                pre.textContent = JSON.stringify(
+                    data.features,
+                    null,
+                    2
+                );
+
+                details.append(summary, pre);
+
+                missingBox.appendChild(details);
+            }
+
+        }
+
+
+        // =====================================================
+        // 10. FIND NEARBY HOSPITALS
+        // =====================================================
+
+        async function findHospitals(latitude, longitude) {
+
+            const radius =
+                Number(document.getElementById("radius").value);
+
+            const status =
+                document.getElementById("hospitalStatus");
+
+            const results =
+                document.getElementById("hospitalResults");
+
+            hospitalSection.classList.remove("hidden");
+
+            results.replaceChildren();
+
+            clearMarkers();
+
+            showStatus(
+                status,
+                "Searching nearby hospitals...",
+                "loading"
+            );
+
+            try {
+
+                const url =
+                    `${API_BASE_URL}/hospitals/nearby?` +
+                    `latitude=${latitude}&` +
+                    `longitude=${longitude}&` +
+                    `radius=${radius}`;
+
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error(
+                        await getErrorMessage(response)
+                    );
+                }
+
+                const data = await response.json();
+
+                const hospitals = (data.hospitals || [])
+                    .map(hospital => {
+
+                        const lat = Number(hospital.latitude);
+                        const lon = Number(hospital.longitude);
+
+                        if (
+                            !Number.isFinite(lat) ||
+                            !Number.isFinite(lon) ||
+                            lat < -90 || lat > 90 ||
+                            lon < -180 || lon > 180
+                        ) {
+                            return null;
+                        }
+
+                        return {
+                            name: hospital.name || "Unnamed Hospital",
+                            latitude: lat,
+                            longitude: lon,
+                            phone: hospital.phone || "Not available",
+                            distance: calculateDistance(
+                                latitude,
+                                longitude,
+                                lat,
+                                lon
+                            )
+                        };
+
+                    })
+                    .filter(Boolean)
+                    .sort((a, b) => a.distance - b.distance);
+
+
+                // Display accident marker
+
+                accidentMarker = L.marker([
+                    latitude,
+                    longitude
+                ])
+                .addTo(map)
+                .bindPopup("Selected Accident Location");
+
+
+                // Display hospital markers
+
+                hospitals.forEach(hospital => {
+
+                    const marker = L.marker([
+                        hospital.latitude,
+                        hospital.longitude
+                    ]).addTo(map);
+
+                    const popup = document.createElement("div");
+
+                    const name = document.createElement("strong");
+                    name.textContent = hospital.name;
+
+                    const distance = document.createElement("p");
+                    distance.textContent =
+                        `Distance: ${hospital.distance.toFixed(2)} km`;
+
+                    popup.append(name, distance);
+
+                    marker.bindPopup(popup);
+
+                    hospitalMarkers.push(marker);
+
+                });
+
+
+                // Fit map to show the selected location and hospitals
+
+                const allMarkers = [
+                    accidentMarker,
+                    ...hospitalMarkers
+                ];
+
+                if (allMarkers.length > 1) {
+
+                    const group = L.featureGroup(allMarkers);
+
+                    map.fitBounds(group.getBounds().pad(0.2));
+
+                } else {
+
+                    map.setView([latitude, longitude], 13);
+
+                }
+
+                setTimeout(() => map.invalidateSize(), 100);
+
+
+                // No hospitals
+
+                if (hospitals.length === 0) {
+
+                    showStatus(
+                        status,
+                        `No hospitals found within ${radius / 1000} km.`,
+                        "warning"
+                    );
+
+                    return;
+
+                }
+
+
+                // Hospital count
+
+                showStatus(
+                    status,
+                    `${hospitals.length} hospitals found within ${radius / 1000} km. Recommendations are sorted by straight-line distance.`,
+                    "success"
+                );
+
+
+                // Display hospital cards
+
+                hospitals.forEach((hospital, index) => {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className = "hospital-card";
+
+                    if (index === 0) {
+                        card.classList.add("nearest");
+                    }
+
+                    if (index === 0) {
+
+                        const badge =
+                            document.createElement("div");
+
+                        badge.className = "nearest-label";
+
+                        badge.textContent =
+                            "★ NEAREST LISTED HOSPITAL";
+
+                        card.appendChild(badge);
+
+                    }
+
+                    const name =
+                        document.createElement("h3");
+
+                    name.textContent = hospital.name;
+
+                    const distance =
+                        document.createElement("p");
+
+                    distance.textContent =
+                        `Distance: ${hospital.distance.toFixed(2)} km`;
+
+                    const phone =
+                        document.createElement("p");
+
+                    phone.textContent =
+                        `Phone: ${hospital.phone}`;
+
+                    const directions =
+                        document.createElement("a");
+
+                    directions.href =
+                        `https://www.google.com/maps/dir/?api=1&destination=${hospital.latitude},${hospital.longitude}`;
+
+                    directions.target = "_blank";
+
+                    directions.rel = "noopener noreferrer";
+
+                    directions.textContent = "Get Directions";
+
+                    card.append(
+                        name,
+                        distance,
+                        phone,
+                        directions
+                    );
+
+                    results.appendChild(card);
+
+                });
+
+            } catch (error) {
+
+                console.error("Hospital API error:", error);
+
+                showStatus(
+                    status,
+                    error.message || "Unable to retrieve hospitals.",
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // 11. MAIN ANALYSIS WORKFLOW
+        // =====================================================
+
+        form.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const location =
+                document.getElementById("location").value.trim();
+
+            const surface =
+                document.getElementById("surface").value;
+
+            if (!location) {
+                return;
+            }
+
+            // Disable button
+
+            analyzeBtn.disabled = true;
+
+            analyzeBtn.textContent = "Analyzing...";
+
+            // Reset previous results
+
+            predictionSection.classList.add("hidden");
+
+            hospitalSection.classList.add("hidden");
+
+            document.getElementById(
+                "missingFeatures"
+            ).classList.add("hidden");
+
+            document.getElementById(
+                "severityValue"
+            ).textContent = "--";
+
+            showStatus(
+                mainStatus,
+                "Resolving UK location...",
+                "loading"
+            );
+
+            clearMarkers();
+
+
+            try {
+
+                // -------------------------------------------------
+                // STEP 1: GEOCODE LOCATION
+                // -------------------------------------------------
+
+                const geoResponse = await fetch(
+                    `${API_BASE_URL}/location/search?query=` +
+                    encodeURIComponent(location)
+                );
+
+                if (!geoResponse.ok) {
+
+                    throw new Error(
+                        await getErrorMessage(geoResponse)
+                    );
+
+                }
+
+                const geoData = await geoResponse.json();
+
+                const latitude = Number(geoData.latitude);
+
+                const longitude = Number(geoData.longitude);
+
+                showStatus(
+                    mainStatus,
+                    "Location found. Analyzing road and weather conditions...",
+                    "loading"
+                );
+
+
+                // -------------------------------------------------
+                // STEP 2: BUILD REQUEST
+                // -------------------------------------------------
+
+                const requestData = {
+                    location: location
+                };
+
+                if (surface !== "") {
+                    requestData.road_surface_conditions =
+                        Number(surface);
+                }
+
+
+                // -------------------------------------------------
+                // STEP 3: ANALYZE AND FIND HOSPITALS
+                // -------------------------------------------------
+
+                // Both operations run concurrently.
+
+                const [analysisResult] = await Promise.all([
+
+                    fetch(`${API_BASE_URL}/analyze`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(requestData)
+                    }),
+
+                    findHospitals(latitude, longitude)
+
+                ]);
+
+
+                // -------------------------------------------------
+                // STEP 4: CHECK ANALYSIS
+                // -------------------------------------------------
+
+                if (!analysisResult.ok) {
+
+                    throw new Error(
+                        await getErrorMessage(analysisResult)
+                    );
+
+                }
+
+                const analysis =
+                    await analysisResult.json();
+
+
+                // -------------------------------------------------
+                // STEP 5: CHECK MODEL FEATURE COMPLETENESS
+                // -------------------------------------------------
+
+                if (!analysis.can_run_model) {
+
+                    predictionSection.classList.remove("hidden");
+
+                    document.getElementById(
+                        "resolvedLocation"
+                    ).textContent = analysis.location;
+
+                    document.getElementById(
+                        "coordinates"
+                    ).textContent =
+                        `Latitude: ${latitude}, Longitude: ${longitude}`;
+
+                    showStatus(
+                        document.getElementById("predictionStatus"),
+                        "Location analysis completed, but the model cannot run because some required features are unavailable.",
+                        "warning"
+                    );
+
+                    displayMissingFeatures({
+                        missing_features: analysis.missing_features,
+                        features: analysis.features
+                    });
+
+                    showStatus(
+                        mainStatus,
+                        "Location analyzed. Hospital search completed. Severity prediction requires additional data.",
+                        "warning"
+                    );
+
+                    return;
+
+                }
+
+
+                // -------------------------------------------------
+                // STEP 6: CALL RANDOM FOREST PREDICTION
+                // -------------------------------------------------
+
+                showStatus(
+                    mainStatus,
+                    "Road analysis completed. Running Random Forest prediction...",
+                    "loading"
+                );
+
+                const predictionResponse = await fetch(
+                    `${API_BASE_URL}/predict`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(requestData)
+                    }
+                );
+
+
+                if (!predictionResponse.ok) {
+
+                    const errorData = await predictionResponse.json()
+                        .catch(() => ({}));
+
+                    if (
+                        predictionResponse.status === 409 &&
+                        errorData.detail &&
+                        typeof errorData.detail === "object"
+                    ) {
+
+                        displayMissingFeatures(
+                            errorData.detail
+                        );
+
+                        predictionSection.classList.remove("hidden");
+
+                        document.getElementById(
+                            "resolvedLocation"
+                        ).textContent = analysis.location;
+
+                        document.getElementById(
+                            "coordinates"
+                        ).textContent =
+                            `Latitude: ${latitude}, Longitude: ${longitude}`;
+
+                        showStatus(
+                            document.getElementById("predictionStatus"),
+                            "Prediction could not be generated because the prediction endpoint reported missing features.",
+                            "warning"
+                        );
+
+                        showStatus(
+                            mainStatus,
+                            "Hospital recommendations are available, but severity prediction needs additional data.",
+                            "warning"
+                        );
+
+                        return;
+                    }
+
+                    throw new Error(
+                        errorData.detail?.message ||
+                        errorData.detail ||
+                        `Prediction failed (${predictionResponse.status}).`
+                    );
+
+                }
+
+
+                // -------------------------------------------------
+                // STEP 7: DISPLAY PREDICTION
+                // -------------------------------------------------
+
+                const predictionData =
+                    await predictionResponse.json();
+
+                displayPrediction(predictionData);
+
+                showStatus(
+                    mainStatus,
+                    "Accident analysis completed successfully!",
+                    "success"
+                );
+
+
+            } catch (error) {
+
+                console.error("RoadGuard Analysis Error:", error);
+
+                showStatus(
+                    mainStatus,
+                    error.message ||
+                    "Something went wrong. Check the backend connection.",
+                    "error"
+                );
+
+            } finally {
+
+                analyzeBtn.disabled = false;
+
+                analyzeBtn.textContent =
+                    "Analyze Accident Location";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

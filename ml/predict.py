@@ -21,6 +21,10 @@ TARGET_LABELS = {
 
 # Expected 18 input features
 EXPECTED_FEATURES = list(preprocessor.feature_names_in_)
+import json
+
+with open(ML_DIR / "roadguard_category_mappings.json", "r") as file:
+    CATEGORY_MAPPINGS = json.load(file)
 
 
 def predict_severity(input_data):
@@ -33,6 +37,16 @@ def predict_severity(input_data):
 
     if missing:
         raise ValueError(f"Missing features: {sorted(missing)}")
+    
+    # Validate categorical feature values
+    for feature, valid_values in CATEGORY_MAPPINGS.items():
+        value = input_data[feature]
+
+        if value not in valid_values:
+            raise ValueError(
+            f"Invalid value for {feature}: {value}. "
+            f"Observed training values: {valid_values}"
+        )
 
     # Arrange features in the correct order
     input_df = pd.DataFrame([input_data])[EXPECTED_FEATURES]

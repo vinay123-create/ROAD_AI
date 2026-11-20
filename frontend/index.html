@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoadGuard AI | Intelligent Road Safety</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 7%;
+            background: #0f172a;
+            color: white;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 75px 20px;
+            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            margin-bottom: 25px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .feature-icon {
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .feature-card a {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .feature-card a:hover {
+            background: #1d4ed8;
+        }
+
+        .hospital-btn {
+            background: #059669 !important;
+        }
+
+        .hospital-btn:hover {
+            background: #047857 !important;
+        }
+
+        .about {
+            margin-top: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 14px;
+            line-height: 1.8;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding: 25px;
+            text-align: center;
+            background: #0f172a;
+            color: #cbd5e1;
+        }
+
+        @media(max-width: 700px) {
+            nav {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">🛡 RoadGuard AI</div>
+
+        <div>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+
+        <h1>Intelligent Road Safety System</h1>
+
+        <p>
+            Predict accident severity and locate nearby hospitals
+            using Machine Learning and geographical data.
+        </p>
+
+    </section>
+
+
+    <!-- MAIN FEATURES -->
+    <main class="container" id="features">
+
+        <div class="section-title">
+            <h2>Our Features</h2>
+
+            <p>
+                Explore RoadGuard AI's intelligent road safety tools.
+            </p>
+        </div>
+
+
+        <div class="features">
+
+            <!-- SEVERITY PREDICTION -->
+            <div class="feature-card">
+
+                <div class="feature-icon">🚦</div>
+
+                <h3>Accident Severity Prediction</h3>
+
+                <p>
+                    Analyze road conditions and geographical
+                    information to estimate accident severity
+                    using our Random Forest machine learning model.
+                </p>
+
+                <a href="prediction.html">
+                    Predict Severity →
+                </a>
+
+            </div>
+
+
+            <!-- HOSPITAL FINDER -->
+            <div class="feature-card">
+
+                <div class="feature-icon">🏥</div>
+
+                <h3>Nearby Hospital Finder</h3>
+
+                <p>
+                    Select an accident location on the UK map,
+                    discover nearby hospitals, check distances
+                    and access navigation directions.
+                </p>
+
+                <a href="hospital-finder.html" class="hospital-btn">
+                    Find Hospitals →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ABOUT -->
+        <section class="about" id="about">
+
+            <h2>About RoadGuard AI</h2>
+
+            <p>
+                RoadGuard AI is a machine learning-based road
+                safety project designed to estimate collision
+                severity and help users identify nearby hospitals.
+                It combines a Random Forest classification model,
+                geographical analysis and OpenStreetMap data.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 RoadGuard AI | Intelligent Road Safety</p>
+    </footer>
+
+</body>
+</html>

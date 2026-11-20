@@ -1,27 +1,47 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nearby Hospital Finder</title>
+
+    <title>RoadGuard AI - Nearby Hospital Finder</title>
 
     <!-- Leaflet CSS -->
     <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     >
 
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        h2 {
+            color: #1e293b;
         }
 
         #map {
-            height: 450px;
+            height: 500px;
             width: 100%;
             border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        #status {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #334155;
         }
 
         #results {
@@ -29,263 +49,643 @@
         }
 
         .hospital {
-            padding: 12px;
-            margin-bottom: 10px;
+            padding: 18px;
+            margin-bottom: 12px;
             border: 1px solid #ddd;
             border-radius: 8px;
+            background: white;
         }
 
-        button {
-            padding: 10px 15px;
-            cursor: pointer;
+        .hospital h3 {
+            color: #2563eb;
+            margin-top: 0;
         }
+
+        .hospital a {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 9px 14px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .hospital a:hover {
+            background: #1d4ed8;
+        }
+
+        .info {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .error {
+            color: #dc2626 !important;
+        }
+
+        .loading {
+            color: #2563eb !important;
+        }
+
+        .distance {
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                margin: 10px;
+            }
+
+            #map {
+                height: 400px;
+            }
+
+        }
+
     </style>
+
 </head>
 
 <body>
 
-    <h2>Nearby Hospital Finder</h2>
+    <h2>RoadGuard AI - Nearby Hospital Finder</h2>
 
-    <p>Click anywhere on the map to select an accident location.</p>
+    <p>
+        Select an accident location anywhere in the United Kingdom
+        to find nearby hospitals.
+    </p>
 
+    <!-- Map -->
     <div id="map"></div>
 
-    <p id="status">Select a location on the map.</p>
+    <!-- Status -->
+    <p id="status">
+        Select an accident location on the UK map.
+    </p>
 
+    <!-- Hospital Results -->
     <div id="results"></div>
+
 
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+
     <script>
-        // 1. Initialize map (Hyderabad default view)
-        const map = L.map('map').setView(
-            [17.3850, 78.4867], 12
+
+        // =====================================================
+        // 1. BACKEND CONFIGURATION
+        // =====================================================
+
+        const API_BASE_URL = "http://127.0.0.1:8000";
+
+        const SEARCH_RADIUS = 5000;
+
+
+        // =====================================================
+        // 2. INITIALIZE UK MAP
+        // =====================================================
+
+        const ukBounds = L.latLngBounds(
+            [49.8, -8.7],
+            [60.9, 2.1]
         );
 
-        // 2. Load OpenStreetMap tiles
+        const map = L.map("map", {
+
+            maxBounds: ukBounds,
+
+            maxBoundsViscosity: 1.0,
+
+            minZoom: 5
+
+        }).setView(
+
+            [54.5, -3.0],
+
+            6
+
+        );
+
+
+        // OpenStreetMap tiles
+
         L.tileLayer(
-            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
             {
-                attribution: '&copy; OpenStreetMap contributors'
+                attribution: "&copy; OpenStreetMap contributors",
+                maxZoom: 19
             }
+
         ).addTo(map);
 
+
+        // =====================================================
+        // 3. MARKER VARIABLES
+        // =====================================================
+
         let accidentMarker = null;
+
         let hospitalMarkers = [];
 
-        // 3. Calculate distance using Haversine formula
+        let searchCircle = null;
+
+        // Prevent older requests from replacing newer results
+
+        let searchRequestId = 0;
+
+
+        // =====================================================
+        // 4. DISTANCE CALCULATION
+        // =====================================================
+
         function calculateDistance(lat1, lon1, lat2, lon2) {
 
             const R = 6371;
 
-            const dLat = (lat2 - lat1) * Math.PI / 180;
-            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const dLat =
+                (lat2 - lat1) * Math.PI / 180;
+
+            const dLon =
+                (lon2 - lon1) * Math.PI / 180;
 
             const a =
+
                 Math.sin(dLat / 2) ** 2 +
+
                 Math.cos(lat1 * Math.PI / 180) *
+
                 Math.cos(lat2 * Math.PI / 180) *
+
                 Math.sin(dLon / 2) ** 2;
 
             const c = 2 * Math.atan2(
+
                 Math.sqrt(a),
+
                 Math.sqrt(1 - a)
+
             );
 
             return R * c;
+
         }
 
-        // 4. Search hospitals using Overpass API
-        async function findHospitals(lat, lon) {
 
-            const status = document.getElementById('status');
-            const results = document.getElementById('results');
+        // =====================================================
+        // 5. ESCAPE HTML
+        // =====================================================
 
-            status.textContent = 'Searching nearby hospitals...';
-            results.innerHTML = '';
+        function escapeHTML(value) {
 
-            const radius = 5000;
+            return String(value).replace(/[&<>"']/g, char => ({
 
-            const query = `
-                [out:json][timeout:25];
-                (
-                    nwr["amenity"="hospital"]
-                    (around:${radius},${lat},${lon});
+                "&": "&amp;",
 
-                    nwr["healthcare"="hospital"]
-                    (around:${radius},${lat},${lon});
-                );
-                out center tags;
-            `;
+                "<": "&lt;",
+
+                ">": "&gt;",
+
+                '"': "&quot;",
+
+                "'": "&#39;"
+
+            })[char]);
+
+        }
+
+
+        // =====================================================
+        // 6. CLEAR PREVIOUS RESULTS
+        // =====================================================
+
+        function clearHospitalMarkers() {
+
+            hospitalMarkers.forEach(marker => {
+
+                map.removeLayer(marker);
+
+            });
+
+            hospitalMarkers = [];
+
+            if (searchCircle) {
+
+                map.removeLayer(searchCircle);
+
+                searchCircle = null;
+
+            }
+
+        }
+
+
+        // =====================================================
+        // 7. BACKEND ERROR HANDLING
+        // =====================================================
+
+        async function getErrorMessage(response) {
 
             try {
 
-                const response = await fetch(
-                    'https://overpass-api.de/api/interpreter',
-                    {
-                        method: 'POST',
-                        body: new URLSearchParams({
-                            data: query
-                        })
-                    }
-                );
+                const data = await response.json();
+
+                const detail = data.detail;
+
+                if (typeof detail === "string") {
+
+                    return detail;
+
+                }
+
+                if (detail && typeof detail === "object") {
+
+                    return detail.message ||
+                        JSON.stringify(detail);
+
+                }
+
+                return "Something went wrong.";
+
+            } catch {
+
+                return `Server error: ${response.status}`;
+
+            }
+
+        }
+
+
+        // =====================================================
+        // 8. FIND NEARBY HOSPITALS
+        // =====================================================
+
+        async function findHospitals(lat, lon) {
+
+            const status =
+                document.getElementById("status");
+
+            const results =
+                document.getElementById("results");
+
+            const currentRequest = ++searchRequestId;
+
+
+            status.className = "loading";
+
+            status.textContent =
+                "Searching nearby UK hospitals...";
+
+            results.innerHTML = "";
+
+            clearHospitalMarkers();
+
+
+            // Show 5 km search radius
+
+            searchCircle = L.circle(
+
+                [lat, lon],
+
+                {
+
+                    radius: SEARCH_RADIUS,
+
+                    color: "#2563eb",
+
+                    fillColor: "#3b82f6",
+
+                    fillOpacity: 0.08,
+
+                    weight: 2
+
+                }
+
+            ).addTo(map);
+
+
+            try {
+
+                // =================================================
+                // CALL FASTAPI BACKEND
+                // =================================================
+
+                const url =
+
+                    `${API_BASE_URL}/hospitals/nearby?` +
+
+                    `latitude=${encodeURIComponent(lat)}&` +
+
+                    `longitude=${encodeURIComponent(lon)}&` +
+
+                    `radius=${SEARCH_RADIUS}`;
+
+
+                const response = await fetch(url);
+
+
+                // Handle backend errors
 
                 if (!response.ok) {
-                    throw new Error('Hospital search failed');
+
+                    throw new Error(
+                        await getErrorMessage(response)
+                    );
+
                 }
+
 
                 const data = await response.json();
 
-                // Remove previous hospital markers
-                hospitalMarkers.forEach(marker => {
-                    map.removeLayer(marker);
-                });
 
-                hospitalMarkers = [];
+                // Ignore outdated requests
 
-                // 5. Process hospital data
-                const hospitals = data.elements.map(hospital => {
+                if (currentRequest !== searchRequestId) {
 
-                    const hospitalLat =
-                        hospital.lat ?? hospital.center?.lat;
+                    return;
 
-                    const hospitalLon =
-                        hospital.lon ?? hospital.center?.lon;
+                }
 
-                    if (hospitalLat == null || hospitalLon == null) {
-                        return null;
-                    }
 
-                    return {
-                        name: hospital.tags?.name || 'Unnamed Hospital',
-                        lat: hospitalLat,
-                        lon: hospitalLon,
-                        phone: hospital.tags?.phone ||
-                               hospital.tags?.['contact:phone'] ||
-                               'Not available',
-                        distance: calculateDistance(
-                            lat, lon, hospitalLat, hospitalLon
-                        )
-                    };
+                // =================================================
+                // PROCESS HOSPITAL DATA
+                // =================================================
 
-                }).filter(Boolean);
+                const hospitals = data.hospitals.map(hospital => ({
 
-                // Remove duplicate locations
-                const uniqueHospitals = [
-                    ...new Map(
-                        hospitals.map(h => [
-                            `${h.lat},${h.lon}`, h
-                        ])
-                    ).values()
-                ];
+                    name: hospital.name,
 
-                // 6. Sort by distance
-                uniqueHospitals.sort(
+                    latitude: hospital.latitude,
+
+                    longitude: hospital.longitude,
+
+                    phone: hospital.phone || "Not available",
+
+                    distance: calculateDistance(
+
+                        lat,
+
+                        lon,
+
+                        hospital.latitude,
+
+                        hospital.longitude
+
+                    )
+
+                }));
+
+
+                // Sort by nearest distance
+
+                hospitals.sort(
+
                     (a, b) => a.distance - b.distance
+
                 );
 
-                // 7. Display hospital markers
-                uniqueHospitals.forEach(hospital => {
+
+                // =================================================
+                // HANDLE EMPTY RESULTS
+                // =================================================
+
+                if (hospitals.length === 0) {
+
+                    status.className = "";
+
+                    status.textContent =
+                        "No hospitals found within 5 km.";
+
+                    return;
+
+                }
+
+
+                // =================================================
+                // DISPLAY HOSPITAL MARKERS
+                // =================================================
+
+                hospitals.forEach(hospital => {
 
                     const marker = L.marker([
-                        hospital.lat,
-                        hospital.lon
+
+                        hospital.latitude,
+
+                        hospital.longitude
+
                     ]).addTo(map);
 
-                    marker.bindPopup(
-                        `<b>${escapeHTML(hospital.name)}</b><br>
-                         Distance: ${hospital.distance.toFixed(2)} km`
-                    );
+
+                    marker.bindPopup(`
+
+                        <b>${escapeHTML(hospital.name)}</b>
+
+                        <br><br>
+
+                        Distance:
+                        ${hospital.distance.toFixed(2)} km
+
+                        <br>
+
+                        Phone:
+                        ${escapeHTML(hospital.phone)}
+
+                    `);
+
 
                     hospitalMarkers.push(marker);
 
                 });
 
-                // 8. Display hospital details
-                if (uniqueHospitals.length === 0) {
 
-                    status.textContent =
-                        'No hospitals found within 5 km.';
+                // =================================================
+                // DISPLAY SEARCH STATUS
+                // =================================================
 
-                    return;
-                }
+                status.className = "";
 
                 status.textContent =
-                    `${uniqueHospitals.length} hospitals found within 5 km.`;
 
-                uniqueHospitals.slice(0, 10).forEach(hospital => {
+                    `${hospitals.length} hospitals found ` +
 
-                    const card = document.createElement('div');
-                    card.className = 'hospital';
+                    `within ${SEARCH_RADIUS / 1000} km.`;
 
-                    const name = document.createElement('h3');
-                    name.textContent = hospital.name;
 
-                    const distance = document.createElement('p');
+                // =================================================
+                // DISPLAY HOSPITAL CARDS
+                // =================================================
+
+                hospitals.slice(0, 10).forEach(hospital => {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className = "hospital";
+
+
+                    // Hospital name
+
+                    const name =
+                        document.createElement("h3");
+
+                    name.textContent =
+                        hospital.name;
+
+
+                    // Distance
+
+                    const distance =
+                        document.createElement("p");
+
+                    distance.className = "distance";
+
                     distance.textContent =
+
                         `Distance: ${hospital.distance.toFixed(2)} km`;
 
-                    const phone = document.createElement('p');
-                    phone.textContent = `Phone: ${hospital.phone}`;
 
-                    const link = document.createElement('a');
+                    // Phone
+
+                    const phone =
+                        document.createElement("p");
+
+                    phone.textContent =
+
+                        `Phone: ${hospital.phone}`;
+
+
+                    // Directions
+
+                    const link =
+                        document.createElement("a");
+
                     link.href =
-                        `https://www.google.com/maps/dir/?api=1&destination=${hospital.lat},${hospital.lon}`;
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-                    link.textContent = 'Get Directions';
 
-                    card.append(name, distance, phone, link);
+                        `https://www.google.com/maps/dir/?api=1&destination=` +
+
+                        `${hospital.latitude},${hospital.longitude}`;
+
+                    link.target = "_blank";
+
+                    link.rel = "noopener noreferrer";
+
+                    link.textContent = "Get Directions";
+
+
+                    // Append card elements
+
+                    card.append(
+
+                        name,
+
+                        distance,
+
+                        phone,
+
+                        link
+
+                    );
+
+
                     results.appendChild(card);
+
                 });
+
 
             } catch (error) {
 
-                console.error(error);
+                // Ignore errors from outdated requests
 
-                status.textContent =
-                    'Unable to retrieve hospitals. Please try again later.';
+                if (currentRequest !== searchRequestId) {
+
+                    return;
+
+                }
+
+
+                console.error(
+
+                    "Hospital Finder Error:",
+
+                    error
+
+                );
+
+
+                status.className = "error";
+
+                status.textContent = error.message;
+
+
+                results.innerHTML = "";
+
             }
+
         }
 
-        // Escape text used inside map popup HTML
-        function escapeHTML(value) {
-            return String(value).replace(/[&<>"']/g, char => ({
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#39;'
-            })[char]);
-        }
 
-        // 9. Detect map click
-        map.on('click', function(event) {
+        // =====================================================
+        // 9. ACCIDENT LOCATION SELECTION
+        // =====================================================
+
+        map.on("click", function(event) {
 
             const lat = event.latlng.lat;
+
             const lon = event.latlng.lng;
 
+
             // Remove previous accident marker
+
             if (accidentMarker) {
+
                 map.removeLayer(accidentMarker);
+
             }
 
-            // Mark selected accident location
+
+            // Add selected accident marker
+
             accidentMarker = L.marker([lat, lon])
+
                 .addTo(map)
-                .bindPopup('Selected Accident Location')
+
+                .bindPopup("Selected Accident Location")
+
                 .openPopup();
 
-            console.log('Latitude:', lat);
-            console.log('Longitude:', lon);
 
-            // Search nearby hospitals
+            console.log("Selected Latitude:", lat);
+
+            console.log("Selected Longitude:", lon);
+
+
+            // Search hospitals using FastAPI
+
             findHospitals(lat, lon);
 
         });
 
+
+        // =====================================================
+        // 10. INITIAL MESSAGE
+        // =====================================================
+
+        console.log("RoadGuard AI Hospital Finder initialized.");
+
+        console.log("Backend API:", API_BASE_URL);
+
+        console.log("Search radius:", SEARCH_RADIUS, "metres");
+
+        console.log("Country restriction: United Kingdom");
+
+
     </script>
 
 </body>
+
 </html>
