@@ -1,0 +1,4341 @@
+import re
+
+
+
+import httpx
+
+
+
+from datetime import datetime, timedelta, timezone
+
+
+
+from zoneinfo import ZoneInfo
+
+
+
+from math import radians, sin, cos, sqrt, atan2
+
+
+
+OVERPASS_URL = "https://overpass.atownsend.org.uk/api/interpreter"
+
+
+
+EARTH_RADIUS = 6371000
+
+
+
+UK_TIMEZONE = ZoneInfo("Europe/London")
+
+
+
+VEHICLE_ROAD_TYPES = {
+
+
+
+    "motorway",
+
+
+
+    "trunk",
+
+
+
+    "primary",
+
+
+
+    "secondary",
+
+
+
+    "tertiary",
+
+
+
+    "unclassified",
+
+
+
+    "residential",
+
+
+
+    "living_street",
+
+
+
+    "motorway_link",
+
+
+
+    "trunk_link",
+
+
+
+    "primary_link",
+
+
+
+    "secondary_link",
+
+
+
+    "tertiary_link"
+
+
+
+}
+
+
+
+PEDESTRIAN_WAY_TYPES = {
+
+
+
+    "footway",
+
+
+
+    "path",
+
+
+
+    "steps"
+
+
+
+}
+
+
+
+MODEL_FEATURES = [
+
+
+
+    "longitude",
+
+
+
+    "latitude",
+
+
+
+    "day_of_week",
+
+
+
+    "first_road_class",
+
+
+
+    "road_type",
+
+
+
+    "speed_limit",
+
+
+
+    "junction_detail",
+
+
+
+    "junction_control",
+
+
+
+    "second_road_class",
+
+
+
+    "pedestrian_crossing",
+
+
+
+    "light_conditions",
+
+
+
+    "weather_conditions",
+
+
+
+    "road_surface_conditions",
+
+
+
+    "urban_or_rural_area",
+
+
+
+    "trunk_road_flag",
+
+
+
+    "year",
+
+
+
+    "month",
+
+
+
+    "hour"
+
+
+
+]
+
+
+
+# 1. Get current UK date and time features
+
+
+
+def get_current_time_features():
+
+
+
+    current_time = datetime.now(UK_TIMEZONE)
+
+
+
+    return {
+
+
+
+        "day_of_week": current_time.weekday(),
+
+
+
+        "year": current_time.year,
+
+
+
+        "month": current_time.month,
+
+
+
+        "hour": current_time.hour
+
+
+
+    }
+
+
+
+# 1A. Retrieve current weather from Open-Meteo
+
+
+
+OPEN_METEO_URL = "https://api.open-meteo.com/v1/forecast"
+
+
+
+GALE_THRESHOLD_KMH = 56.3  # Approximately 35 mph
+
+
+
+async def get_current_weather(latitude, longitude):
+
+
+
+    """
+
+
+
+    Retrieve current weather at the selected UK coordinates.
+
+
+
+    Returns raw observations; it does not infer road-surface state.
+
+
+
+    """
+
+
+
+    params = {
+
+
+
+        "latitude": latitude,
+
+
+
+        "longitude": longitude,
+
+
+
+        "current": (
+
+
+
+            "temperature_2m,relative_humidity_2m,precipitation,rain,"
+
+
+
+            "showers,snowfall,weather_code,wind_speed_10m,wind_gusts_10m"
+
+
+
+        ),
+
+
+
+        "wind_speed_unit": "kmh",
+
+
+
+        "timezone": "Europe/London"
+
+
+
+    }
+
+
+
+    async with httpx.AsyncClient(timeout=20) as client:
+
+
+
+        response = await client.get(OPEN_METEO_URL, params=params)
+
+
+
+        response.raise_for_status()
+
+
+
+        payload = response.json()
+
+
+
+    current = payload.get("current")
+
+
+
+    if not isinstance(current, dict) or current.get("weather_code") is None:
+
+
+
+        raise ValueError("Open-Meteo response did not contain current weather data")
+
+
+
+    return current
+
+
+
+def map_weather_to_stats20(weather):
+
+
+
+    """
+
+
+
+    Conservatively map Open-Meteo WMO codes to STATS20 weather candidates.
+
+
+
+    High-wind impact and hazardous fog cannot be established from the API.
+
+
+
+    """
+
+
+
+    if not isinstance(weather, dict):
+
+
+
+        return None, {"reason": "No current weather observation supplied"}
+
+
+
+    try:
+
+
+
+        wmo_code = int(weather["weather_code"])
+
+
+
+    except (KeyError, TypeError, ValueError):
+
+
+
+        return None, {"reason": "Weather code missing or invalid"}
+
+
+
+    wind_speed = weather.get("wind_speed_10m")
+
+
+
+    wind_gusts = weather.get("wind_gusts_10m")
+
+
+
+    wind_values = [
+
+
+
+        value for value in (wind_speed, wind_gusts)
+
+
+
+        if isinstance(value, (int, float))
+
+
+
+    ]
+
+
+
+    max_wind = max(wind_values) if wind_values else None
+
+
+
+    evidence = {
+
+
+
+        "provider": "Open-Meteo",
+
+
+
+        "wmo_weather_code": wmo_code,
+
+
+
+        "wind_speed_kmh": wind_speed,
+
+
+
+        "wind_gusts_kmh": wind_gusts
+
+
+
+    }
+
+
+
+    if max_wind is not None and max_wind >= GALE_THRESHOLD_KMH:
+
+
+
+        evidence["reason"] = (
+
+
+
+            "High wind threshold reached; STATS20 codes 4-6 require "
+
+
+
+            "evidence that wind adversely affected driving, which this "
+
+
+
+            "weather API cannot establish"
+
+
+
+        )
+
+
+
+        return None, evidence
+
+
+
+    if wmo_code in {0, 1, 2, 3}:
+
+
+
+        return 1, {**evidence, "reason": "No adverse precipitation or fog reported"}
+
+
+
+    if wmo_code in {51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82}:
+
+
+
+        return 2, {**evidence, "reason": "Rain or drizzle reported by WMO code"}
+
+
+
+    if wmo_code in {71, 73, 75, 77, 85, 86}:
+
+
+
+        return 3, {**evidence, "reason": "Snow or snow grains reported by WMO code"}
+
+
+
+    if wmo_code in {45, 48}:
+
+
+
+        evidence["reason"] = (
+
+
+
+            "Fog/mist reported, but whether it is a driving hazard "
+
+
+
+            "at the selected road cannot be established"
+
+
+
+        )
+
+
+
+        return None, evidence
+
+
+
+    if wmo_code in {95, 96, 99}:
+
+
+
+        return 8, {**evidence, "reason": "Thunderstorm reported; mapped as other adverse weather"}
+
+
+
+    evidence["reason"] = "WMO code is not confidently mapped to a STATS20 category"
+
+
+
+    return None, evidence
+
+
+
+# 2. Calculate approximate sunrise and sunset
+
+
+
+def calculate_sunrise_sunset(latitude, longitude, date):
+
+
+
+    day_number = date.timetuple().tm_yday
+
+
+
+    def calculate_event(is_sunrise):
+
+
+
+        longitude_hour = longitude / 15
+
+
+
+        approximate_time = day_number + (
+
+
+
+            (6 - longitude_hour) / 24
+
+
+
+            if is_sunrise
+
+
+
+            else (18 - longitude_hour) / 24
+
+
+
+        )
+
+
+
+        mean_anomaly = (
+
+
+
+            0.9856 * approximate_time
+
+
+
+        ) - 3.289
+
+
+
+        true_longitude = (
+
+
+
+            mean_anomaly
+
+
+
+            + 1.916 * sin(radians(mean_anomaly))
+
+
+
+            + 0.020 * sin(2 * radians(mean_anomaly))
+
+
+
+            + 282.634
+
+
+
+        ) % 360
+
+
+
+        right_ascension = (
+
+
+
+            atan2(
+
+
+
+                0.91764 * sin(radians(true_longitude)),
+
+
+
+                cos(radians(true_longitude))
+
+
+
+            )
+
+
+
+            * 180 / 3.141592653589793
+
+
+
+        ) % 360
+
+
+
+        right_ascension /= 15
+
+
+
+        longitude_quadrant = (
+
+
+
+            int(true_longitude / 90) * 90
+
+
+
+        )
+
+
+
+        right_ascension_quadrant = (
+
+
+
+            int(right_ascension * 15 / 90) * 90
+
+
+
+        )
+
+
+
+        right_ascension += (
+
+
+
+            longitude_quadrant - right_ascension_quadrant
+
+
+
+        ) / 15
+
+
+
+        sin_declination = (
+
+
+
+            0.39782 * sin(radians(true_longitude))
+
+
+
+        )
+
+
+
+        cos_declination = cos(
+
+
+
+            atan2(
+
+
+
+                sin_declination,
+
+
+
+                sqrt(1 - sin_declination ** 2)
+
+
+
+            )
+
+
+
+        )
+
+
+
+        cos_hour_angle = (
+
+
+
+            cos(radians(90.833))
+
+
+
+            - sin_declination * sin(radians(latitude))
+
+
+
+        ) / (
+
+
+
+            cos_declination * cos(radians(latitude))
+
+
+
+        )
+
+
+
+        if not -1 <= cos_hour_angle <= 1:
+
+
+
+            return None
+
+
+
+        angle = (
+
+
+
+            atan2(
+
+
+
+                sqrt(1 - cos_hour_angle ** 2),
+
+
+
+                cos_hour_angle
+
+
+
+            )
+
+
+
+            * 180 / 3.141592653589793
+
+
+
+        )
+
+
+
+        hour_angle = 360 - angle if is_sunrise else angle
+
+
+
+        hour_angle /= 15
+
+
+
+        local_mean_time = (
+
+
+
+            hour_angle
+
+
+
+            + right_ascension
+
+
+
+            - 0.06571 * approximate_time
+
+
+
+            - 6.622
+
+
+
+        )
+
+
+
+        utc_hour = (
+
+
+
+            local_mean_time - longitude_hour
+
+
+
+        ) % 24
+
+
+
+        utc_midnight = datetime(
+
+
+
+            date.year,
+
+
+
+            date.month,
+
+
+
+            date.day,
+
+
+
+            tzinfo=timezone.utc
+
+
+
+        )
+
+
+
+        return utc_midnight + timedelta(hours=utc_hour)
+
+
+
+    sunrise_utc = calculate_event(True)
+
+
+
+    sunset_utc = calculate_event(False)
+
+
+
+    if sunrise_utc is None or sunset_utc is None:
+
+
+
+        return None, None
+
+
+
+    return (
+
+
+
+        sunrise_utc.astimezone(UK_TIMEZONE),
+
+
+
+        sunset_utc.astimezone(UK_TIMEZONE)
+
+
+
+    )
+
+
+
+# 3. Infer STATS19 light_conditions
+
+
+
+def infer_light_conditions(
+
+
+
+    latitude,
+
+
+
+    longitude,
+
+
+
+    road,
+
+
+
+    current_time=None
+
+
+
+):
+
+
+
+    if current_time is None:
+
+
+
+        current_time = datetime.now(UK_TIMEZONE)
+
+
+
+    if current_time.tzinfo is None:
+
+
+
+        current_time = current_time.replace(
+
+
+
+            tzinfo=UK_TIMEZONE
+
+
+
+        )
+
+
+
+    else:
+
+
+
+        current_time = current_time.astimezone(UK_TIMEZONE)
+
+
+
+    sunrise, sunset = calculate_sunrise_sunset(
+
+
+
+        latitude,
+
+
+
+        longitude,
+
+
+
+        current_time.date()
+
+
+
+    )
+
+
+
+    if sunrise is None or sunset is None:
+
+
+
+        return None, {
+
+
+
+            "reason": "Sunrise or sunset could not be calculated"
+
+
+
+        }
+
+
+
+    # STATS20:
+
+
+
+    # Darkness starts 30 minutes after sunset.
+
+
+
+    # Darkness ends 30 minutes before sunrise.
+
+
+
+    darkness_starts = sunset + timedelta(minutes=30)
+
+
+
+    darkness_ends = sunrise - timedelta(minutes=30)
+
+
+
+    is_dark = (
+
+
+
+        current_time >= darkness_starts
+
+
+
+        or current_time < darkness_ends
+
+
+
+    )
+
+
+
+    if not is_dark:
+
+
+
+        return 1, {
+
+
+
+            "reason": "Daylight based on calculated sunrise and sunset",
+
+
+
+            "sunrise": sunrise.isoformat(),
+
+
+
+            "sunset": sunset.isoformat()
+
+
+
+        }
+
+
+
+    if not road:
+
+
+
+        return None, {
+
+
+
+            "reason": "Darkness detected but no nearest road found"
+
+
+
+        }
+
+
+
+    tags = road.get("tags", {})
+
+
+
+    lighting = str(tags.get("lit", "")).lower()
+
+
+
+    if lighting == "yes":
+
+
+
+        return 4, {
+
+
+
+            "reason": "Darkness with OSM lit=yes",
+
+
+
+            "lighting_tag": lighting,
+
+
+
+            "sunrise": sunrise.isoformat(),
+
+
+
+            "sunset": sunset.isoformat(),
+
+
+
+            "note": (
+
+
+
+                "OSM indicates street lighting, "
+
+
+
+                "but actual lamp operation is not verified"
+
+
+
+            )
+
+
+
+        }
+
+
+
+    return None, {
+
+
+
+        "reason": (
+
+
+
+            "Darkness detected but street-light status "
+
+
+
+            "cannot be reliably established"
+
+
+
+        ),
+
+
+
+        "lighting_tag": lighting or None,
+
+
+
+        "sunrise": sunrise.isoformat(),
+
+
+
+        "sunset": sunset.isoformat()
+
+
+
+    }
+
+
+
+# 4. Retrieve nearby roads and traffic-control features
+
+
+
+async def get_nearby_roads(latitude, longitude, radius=500):
+
+
+
+    """
+
+
+
+    Retrieve nearby vehicle roads and mapped traffic-control/crossing nodes
+
+
+
+    from OpenStreetMap via Overpass.
+
+
+
+    Uses POST so the Overpass QL query is not embedded in a long URL.
+
+
+
+    Returns the same dictionary structure used by the existing pipeline.
+
+
+
+    """
+
+
+
+    if not isinstance(latitude, (int, float)) or isinstance(latitude, bool):
+
+
+
+        raise ValueError("latitude must be a numeric coordinate")
+
+
+
+    if not isinstance(longitude, (int, float)) or isinstance(longitude, bool):
+
+
+
+        raise ValueError("longitude must be a numeric coordinate")
+
+
+
+    if not -90 <= latitude <= 90:
+
+
+
+        raise ValueError("latitude must be between -90 and 90")
+
+
+
+    if not -180 <= longitude <= 180:
+
+
+
+        raise ValueError("longitude must be between -180 and 180")
+
+
+
+    if not isinstance(radius, (int, float)) or isinstance(radius, bool) or radius <= 0:
+
+
+
+        raise ValueError("radius must be a positive number of metres")
+
+
+
+    query = f"""
+
+
+
+[out:json][timeout:25];
+
+
+
+(
+
+
+
+  way(around:{radius},{latitude},{longitude})["highway"];
+
+
+
+  node(around:{radius},{latitude},{longitude})["highway"="traffic_signals"];
+
+
+
+  node(around:{radius},{latitude},{longitude})["highway"="mini_roundabout"];
+
+
+
+  node(around:{radius},{latitude},{longitude})["junction"="mini_roundabout"];
+
+
+
+  node(around:{radius},{latitude},{longitude})["highway"="stop"];
+
+
+
+  node(around:{radius},{latitude},{longitude})["highway"="give_way"];
+
+
+
+  node(around:{radius},{latitude},{longitude})["highway"="crossing"];
+
+
+
+);
+
+
+
+out body;
+
+
+
+>;
+
+
+
+out skel qt;
+
+
+
+"""
+
+
+
+    async with httpx.AsyncClient(timeout=90) as client:
+
+
+
+        response = await client.post(
+
+
+
+            OVERPASS_URL,
+
+
+
+            data={"data": query},
+
+
+
+            headers={"User-Agent": "RoadGuardAI/1.0 (road feature retrieval)"}
+
+
+
+        )
+
+
+
+        if response.is_error:
+
+
+
+            detail = response.text[:1000].strip()
+
+
+
+            raise httpx.HTTPStatusError(
+
+
+
+                f"Overpass API returned HTTP {response.status_code}. "
+
+
+
+                f"Response: {detail}",
+
+
+
+                request=response.request,
+
+
+
+                response=response
+
+
+
+            )
+
+
+
+        try:
+
+
+
+            data = response.json()
+
+
+
+        except ValueError as exc:
+
+
+
+            raise ValueError(
+
+
+
+                "Overpass API returned a response that was not valid JSON"
+
+
+
+            ) from exc
+
+
+
+    if not isinstance(data, dict) or "elements" not in data:
+
+
+
+        raise ValueError("Overpass API response did not contain an elements list")
+
+
+
+    roads = []
+
+
+
+    traffic_signals = []
+
+
+
+    mini_roundabouts = []
+
+
+
+    stop_signs = []
+
+
+
+    give_way_signs = []
+
+
+
+    pedestrian_crossings = []
+
+
+
+    nodes = {
+
+
+
+        element["id"]: element
+
+
+
+        for element in data.get("elements", [])
+
+
+
+        if element.get("type") == "node" and "id" in element
+
+
+
+    }
+
+
+
+    # Extract road and pedestrian-way geometry from the returned ways.
+
+
+
+    for element in data.get("elements", []):
+
+
+
+        if element.get("type") != "way":
+
+
+
+            continue
+
+
+
+        tags = element.get("tags", {})
+
+
+
+        node_ids = element.get("nodes", [])
+
+
+
+        road_nodes = [
+
+
+
+            nodes[node_id]
+
+
+
+            for node_id in node_ids
+
+
+
+            if node_id in nodes
+
+
+
+        ]
+
+
+
+        geometry = [
+
+
+
+            {
+
+
+
+                "lat": node["lat"],
+
+
+
+                "lon": node["lon"],
+
+
+
+                "id": node["id"]
+
+
+
+            }
+
+
+
+            for node in road_nodes
+
+
+
+            if "lat" in node and "lon" in node
+
+
+
+        ]
+
+
+
+        if geometry:
+
+
+
+            latitude_center = sum(point["lat"] for point in geometry) / len(geometry)
+
+
+
+            longitude_center = sum(point["lon"] for point in geometry) / len(geometry)
+
+
+
+        else:
+
+
+
+            latitude_center = None
+
+
+
+            longitude_center = None
+
+
+
+        roads.append({
+
+
+
+            "id": element["id"],
+
+
+
+            "name": tags.get("name"),
+
+
+
+            "tags": tags,
+
+
+
+            "nodes": node_ids,
+
+
+
+            "geometry": geometry,
+
+
+
+            "latitude": latitude_center,
+
+
+
+            "longitude": longitude_center
+
+
+
+        })
+
+
+
+    # Extract traffic-control and pedestrian-crossing nodes.
+
+
+
+    for element in data.get("elements", []):
+
+
+
+        if element.get("type") != "node":
+
+
+
+            continue
+
+
+
+        tags = element.get("tags", {})
+
+
+
+        location = {
+
+
+
+            "latitude": element.get("lat"),
+
+
+
+            "longitude": element.get("lon")
+
+
+
+        }
+
+
+
+        if tags.get("highway") == "traffic_signals":
+
+
+
+            traffic_signals.append({
+
+
+
+                "name": tags.get("name", "Traffic signal"),
+
+
+
+                "tags": tags,
+
+
+
+                **location
+
+
+
+            })
+
+
+
+        elif (
+
+
+
+            tags.get("highway") == "mini_roundabout"
+
+
+
+            or tags.get("junction") == "mini_roundabout"
+
+
+
+        ):
+
+
+
+            mini_roundabouts.append({
+
+
+
+                "name": tags.get("name", "Mini roundabout"),
+
+
+
+                "type": "mini_roundabout",
+
+
+
+                "tags": tags,
+
+
+
+                **location
+
+
+
+            })
+
+
+
+        elif tags.get("highway") == "stop":
+
+
+
+            stop_signs.append({
+
+
+
+                "name": tags.get("name", "Stop sign"),
+
+
+
+                "tags": tags,
+
+
+
+                **location
+
+
+
+            })
+
+
+
+        elif tags.get("highway") == "give_way":
+
+
+
+            give_way_signs.append({
+
+
+
+                "name": tags.get("name", "Give way sign"),
+
+
+
+                "tags": tags,
+
+
+
+                **location
+
+
+
+            })
+
+
+
+        elif tags.get("highway") == "crossing":
+
+
+
+            pedestrian_crossings.append({
+
+
+
+                "id": element["id"],
+
+
+
+                "name": tags.get("name", "Pedestrian crossing"),
+
+
+
+                "tags": tags,
+
+
+
+                **location
+
+
+
+            })
+
+
+
+    return {
+
+
+
+        "roads": roads,
+
+
+
+        "traffic_signals": traffic_signals,
+
+
+
+        "mini_roundabouts": mini_roundabouts,
+
+
+
+        "stop_signs": stop_signs,
+
+
+
+        "give_way_signs": give_way_signs,
+
+
+
+        "pedestrian_crossings": pedestrian_crossings
+
+
+
+    }
+
+
+
+# 5. Calculate distance between two coordinates
+
+
+
+def calculate_distance(lat1, lon1, lat2, lon2):
+
+
+
+    lat1 = radians(lat1)
+
+
+
+    lon1 = radians(lon1)
+
+
+
+    lat2 = radians(lat2)
+
+
+
+    lon2 = radians(lon2)
+
+
+
+    dlat = lat2 - lat1
+
+
+
+    dlon = lon2 - lon1
+
+
+
+    a = (
+
+
+
+        sin(dlat / 2) ** 2
+
+
+
+        + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+
+
+
+    )
+
+
+
+    return EARTH_RADIUS * 2 * atan2(
+
+
+
+        sqrt(a),
+
+
+
+        sqrt(1 - a)
+
+
+
+    )
+
+
+
+# 6. Calculate distance from a location to a road segment
+
+
+
+def point_to_segment_distance(
+
+
+
+    latitude,
+
+
+
+    longitude,
+
+
+
+    start,
+
+
+
+    end
+
+
+
+):
+
+
+
+    latitude_radians = radians(latitude)
+
+
+
+    start_x = (
+
+
+
+        radians(start["lon"] - longitude)
+
+
+
+        * EARTH_RADIUS
+
+
+
+        * cos(latitude_radians)
+
+
+
+    )
+
+
+
+    start_y = radians(
+
+
+
+        start["lat"] - latitude
+
+
+
+    ) * EARTH_RADIUS
+
+
+
+    end_x = (
+
+
+
+        radians(end["lon"] - longitude)
+
+
+
+        * EARTH_RADIUS
+
+
+
+        * cos(latitude_radians)
+
+
+
+    )
+
+
+
+    end_y = radians(
+
+
+
+        end["lat"] - latitude
+
+
+
+    ) * EARTH_RADIUS
+
+
+
+    segment_x = end_x - start_x
+
+
+
+    segment_y = end_y - start_y
+
+
+
+    length_squared = (
+
+
+
+        segment_x ** 2 + segment_y ** 2
+
+
+
+    )
+
+
+
+    if length_squared == 0:
+
+
+
+        return sqrt(start_x ** 2 + start_y ** 2)
+
+
+
+    t = -(
+
+
+
+        start_x * segment_x
+
+
+
+        + start_y * segment_y
+
+
+
+    ) / length_squared
+
+
+
+    t = max(0, min(1, t))
+
+
+
+    closest_x = start_x + t * segment_x
+
+
+
+    closest_y = start_y + t * segment_y
+
+
+
+    return sqrt(
+
+
+
+        closest_x ** 2 + closest_y ** 2
+
+
+
+    )
+
+
+
+# 7. Calculate minimum distance to an entire road geometry
+
+
+
+def distance_to_road(latitude, longitude, road):
+
+
+
+    geometry = road.get("geometry", [])
+
+
+
+    if not geometry:
+
+
+
+        return None
+
+
+
+    if len(geometry) == 1:
+
+
+
+        point = geometry[0]
+
+
+
+        return calculate_distance(
+
+
+
+            latitude,
+
+
+
+            longitude,
+
+
+
+            point["lat"],
+
+
+
+            point["lon"]
+
+
+
+        )
+
+
+
+    minimum_distance = float("inf")
+
+
+
+    for index in range(len(geometry) - 1):
+
+
+
+        distance = point_to_segment_distance(
+
+
+
+            latitude,
+
+
+
+            longitude,
+
+
+
+            geometry[index],
+
+
+
+            geometry[index + 1]
+
+
+
+        )
+
+
+
+        minimum_distance = min(
+
+
+
+            minimum_distance,
+
+
+
+            distance
+
+
+
+        )
+
+
+
+    return minimum_distance
+
+
+
+# 8. Find the nearest road using actual geometry
+
+
+
+def find_nearest_road(latitude, longitude, roads):
+
+
+
+    nearest_road = None
+
+
+
+    minimum_distance = float("inf")
+
+
+
+    for road in roads:
+
+
+
+        distance = distance_to_road(
+
+
+
+            latitude,
+
+
+
+            longitude,
+
+
+
+            road
+
+
+
+        )
+
+
+
+        if distance is None:
+
+
+
+            continue
+
+
+
+        if distance < minimum_distance:
+
+
+
+            minimum_distance = distance
+
+
+
+            nearest_road = road
+
+
+
+    return {
+
+
+
+        "road": nearest_road,
+
+
+
+        "distance_meters": (
+
+
+
+            round(minimum_distance, 2)
+
+
+
+            if nearest_road else None
+
+
+
+        )
+
+
+
+    }
+
+
+
+# 9. Map OSM evidence to STATS19 road_type
+
+
+
+def map_road_type(road):
+    """
+    Map explicit OSM evidence to a STATS19 road_type candidate.
+
+    1 = Roundabout
+    2 = One-way street (explicit single-carriageway + oneway evidence)
+    3 = Dual carriageway
+    6 = Single carriageway
+    7 = Slip road (link-road candidate)
+
+    A bare oneway=yes tag is not enough: it may describe one carriageway
+    of a dual carriageway. Unknown cases remain None rather than guessed.
+    """
+    if not road:
+        return None, "No road found"
+
+    tags = road.get("tags", {})
+    highway = str(tags.get("highway", "")).lower()
+    junction = str(tags.get("junction", "")).lower()
+    dual_carriageway = str(tags.get("dual_carriageway", "")).lower()
+    oneway = str(tags.get("oneway", "")).lower()
+
+    if junction in {"roundabout", "circular"}:
+        return 1, "OSM roundabout tag"
+
+    if highway.endswith("_link"):
+        return 7, "OSM link road; candidate slip road, requires STATS19 validation"
+
+    if dual_carriageway == "yes":
+        return 3, "Explicit OSM dual_carriageway=yes"
+
+    if dual_carriageway == "no" and oneway in {"yes", "true", "1"}:
+        return 2, "Explicit single-carriageway and oneway=yes evidence"
+
+    if dual_carriageway == "no":
+        return 6, "Explicit OSM dual_carriageway=no"
+
+    return None, (
+        "Insufficient evidence: oneway status alone cannot distinguish "
+        "a one-way street from one carriageway of a dual carriageway"
+    )
+
+
+# 10. Parse speed limit
+
+
+
+def parse_speed_limit(value):
+
+
+
+    if not value:
+
+
+
+        return None
+
+
+
+    match = re.search(r"\d+", str(value))
+
+
+
+    if match:
+
+
+
+        return int(match.group())
+
+
+
+    return None
+
+
+
+# 11. Extract useful OpenStreetMap attributes
+
+
+
+def extract_road_features(road):
+
+
+
+    tags = road.get("tags", {})
+
+
+
+    road_type, road_type_evidence = map_road_type(road)
+
+
+
+    return {
+
+
+
+        "road_name": road.get("name"),
+
+
+
+        "osm_road_type": tags.get("highway"),
+
+
+
+        "speed_limit": parse_speed_limit(
+
+
+
+            tags.get("maxspeed")
+
+
+
+        ),
+
+
+
+        "lanes": tags.get("lanes"),
+
+
+
+        "street_lighting": tags.get("lit"),
+
+
+
+        "surface_material": tags.get("surface"),
+
+
+
+        "oneway": tags.get("oneway"),
+
+
+
+        "dual_carriageway": tags.get("dual_carriageway"),
+
+
+
+        "road_reference": tags.get("ref"),
+
+
+
+        "junction": tags.get("junction"),
+
+
+
+        "road_type": road_type,
+
+
+
+        "road_type_evidence": road_type_evidence
+
+
+
+    }
+
+
+
+# 12. Map recognizable road references to STATS19 road class
+
+
+
+def map_first_road_class(road_reference):
+    """
+    Map an explicitly tagged UK road reference to the STATS19 road-class code.
+
+    STATS19:
+      1 = Motorway
+      2 = A(M)
+      3 = A
+      4 = B
+      5 = C
+
+    This function deliberately does not infer a road class from the OSM
+    highway=* functional-road tag. If no usable road reference is present,
+    the result remains None.
+    """
+    if not road_reference:
+        return None
+
+    # OSM ref values can contain more than one route reference.
+    references = re.split(r"[;,/]", str(road_reference).upper())
+    detected_classes = []
+
+    for raw_reference in references:
+        reference = re.sub(r"\s+", "", raw_reference.strip())
+        if not reference:
+            continue
+
+        # A(M) roads are commonly written as A1(M) in UK road data.
+        if re.fullmatch(r"A\d+[A-Z]?\(M\)", reference) or re.fullmatch(
+            r"A\(M\)\d+[A-Z]?", reference
+        ):
+            detected_classes.append(2)
+        elif re.fullmatch(r"M\d+[A-Z]?", reference):
+            detected_classes.append(1)
+        elif re.fullmatch(r"A\d+[A-Z]?", reference):
+            detected_classes.append(3)
+        elif re.fullmatch(r"B\d+[A-Z]?", reference):
+            detected_classes.append(4)
+        elif re.fullmatch(r"C\d+[A-Z]?", reference):
+            detected_classes.append(5)
+
+    # Where a way carries multiple route refs, use the highest road class
+    # (the lowest STATS19 code), consistent with STATS20's priority order.
+    return min(detected_classes) if detected_classes else None
+
+
+# 13. Identify a physical road across multiple OSM segments
+
+
+
+def get_road_identity(road):
+
+
+
+    tags = road.get("tags", {})
+
+
+
+    road_type = tags.get("highway")
+
+
+
+    reference = tags.get("ref")
+
+
+
+    name = tags.get("name")
+
+
+
+    if reference:
+
+
+
+        return (
+
+
+
+            "reference",
+
+
+
+            reference.upper().replace(" ", ""),
+
+
+
+            road_type
+
+
+
+        )
+
+
+
+    if name:
+
+
+
+        return (
+
+
+
+            "name",
+
+
+
+            name.strip().casefold(),
+
+
+
+            road_type
+
+
+
+        )
+
+
+
+    return ("osm_id", road.get("id"))
+
+
+
+# 14. Find junctions using shared OSM node IDs
+
+
+
+def find_nearby_junctions(
+
+
+
+    latitude,
+
+
+
+    longitude,
+
+
+
+    roads,
+
+
+
+    radius=500
+
+
+
+):
+
+
+
+    shared_nodes = {}
+
+
+
+    for road in roads:
+
+
+
+        road_type = road["tags"].get("highway")
+
+
+
+        if road_type not in VEHICLE_ROAD_TYPES:
+
+
+
+            continue
+
+
+
+        for node_id in road.get("nodes", []):
+
+
+
+            if node_id not in shared_nodes:
+
+
+
+                shared_nodes[node_id] = {}
+
+
+
+            shared_nodes[node_id][road["id"]] = road
+
+
+
+    junctions = []
+
+
+
+    for node_id, connected_roads in shared_nodes.items():
+
+
+
+        if len(connected_roads) < 2:
+
+
+
+            continue
+
+
+
+        first_road = next(iter(connected_roads.values()))
+
+
+
+        node_location = next(
+
+
+
+            (
+
+
+
+                point
+
+
+
+                for point in first_road["geometry"]
+
+
+
+                if point["id"] == node_id
+
+
+
+            ),
+
+
+
+            None
+
+
+
+        )
+
+
+
+        if node_location is None:
+
+
+
+            continue
+
+
+
+        lat = node_location["lat"]
+
+
+
+        lon = node_location["lon"]
+
+
+
+        distance = calculate_distance(
+
+
+
+            latitude,
+
+
+
+            longitude,
+
+
+
+            lat,
+
+
+
+            lon
+
+
+
+        )
+
+
+
+        if distance > radius:
+
+
+
+            continue
+
+
+
+        unique_roads = {}
+
+
+
+        for road in connected_roads.values():
+
+
+
+            identity = get_road_identity(road)
+
+
+
+            if identity not in unique_roads:
+
+
+
+                unique_roads[identity] = {
+
+
+
+                    "name": road.get("name"),
+
+
+
+                    "road_type": road["tags"].get("highway"),
+
+
+
+                    "reference": road["tags"].get("ref"),
+
+
+
+                    "osm_way_ids": [road["id"]]
+
+
+
+                }
+
+
+
+            else:
+
+
+
+                unique_roads[identity]["osm_way_ids"].append(
+
+
+
+                    road["id"]
+
+
+
+                )
+
+
+
+        connected_road_details = list(unique_roads.values())
+
+
+
+        junctions.append({
+
+
+
+            "node_id": node_id,
+
+
+
+            "latitude": lat,
+
+
+
+            "longitude": lon,
+
+
+
+            "distance_meters": round(distance, 2),
+
+
+
+            "connected_road_count": len(connected_road_details),
+
+
+
+            "connected_roads": connected_road_details
+
+
+
+        })
+
+
+
+    junctions.sort(
+
+
+
+        key=lambda junction: junction["distance_meters"]
+
+
+
+    )
+
+
+
+    return junctions
+
+
+
+# 15. Infer STATS19 junction_detail
+
+
+
+def infer_junction_detail(
+
+
+
+    latitude,
+
+
+
+    longitude,
+
+
+
+    roads,
+
+
+
+    road_type=None
+
+
+
+):
+
+
+
+    if road_type in (1, 7):
+
+
+
+        return None
+
+
+
+    junctions = find_nearby_junctions(
+
+
+
+        latitude,
+
+
+
+        longitude,
+
+
+
+        roads,
+
+
+
+        radius=20
+
+
+
+    )
+
+
+
+    if not junctions:
+
+
+
+        return 0
+
+
+
+    return None
+
+
+
+# 16. Infer STATS19 junction_control
+
+
+
+def infer_junction_control(
+
+
+
+    junction_detail,
+
+
+
+    junctions,
+
+
+
+    traffic_signals=None,
+
+
+
+    stop_signs=None,
+
+
+
+    give_way_signs=None,
+
+
+
+    radius=20
+
+
+
+):
+
+
+
+    if junction_detail in (None, 0):
+
+
+
+        return None, "Junction control not established"
+
+
+
+    if junction_detail not in (13, 16, 17, 18, 19):
+
+
+
+        return None, "Junction control not applicable"
+
+
+
+    if not junctions:
+
+
+
+        return None, "No junction location available"
+
+
+
+    nearest_junction = junctions[0]
+
+
+
+    junction_lat = nearest_junction["latitude"]
+
+
+
+    junction_lon = nearest_junction["longitude"]
+
+
+
+    controls = {
+
+
+
+        2: traffic_signals or [],
+
+
+
+        3: stop_signs or [],
+
+
+
+        4: give_way_signs or []
+
+
+
+    }
+
+
+
+    detected_codes = set()
+
+
+
+    for control_code, control_items in controls.items():
+
+
+
+        for item in control_items:
+
+
+
+            item_lat = item.get("latitude")
+
+
+
+            item_lon = item.get("longitude")
+
+
+
+            if item_lat is None or item_lon is None:
+
+
+
+                continue
+
+
+
+            distance = calculate_distance(
+
+
+
+                junction_lat,
+
+
+
+                junction_lon,
+
+
+
+                item_lat,
+
+
+
+                item_lon
+
+
+
+            )
+
+
+
+            if distance <= radius:
+
+
+
+                detected_codes.add(control_code)
+
+
+
+    if len(detected_codes) > 1:
+
+
+
+        return None, "Conflicting control evidence"
+
+
+
+    if len(detected_codes) == 1:
+
+
+
+        control_code = detected_codes.pop()
+
+
+
+        evidence = {
+
+
+
+            2: "Nearby OSM traffic signal",
+
+
+
+            3: "Nearby OSM stop sign",
+
+
+
+            4: "Nearby OSM give-way sign"
+
+
+
+        }
+
+
+
+        return control_code, evidence[control_code]
+
+
+
+    return None, "No reliable junction-control evidence"
+
+
+
+# 17. Infer STATS19 second_road_class
+
+
+
+def infer_second_road_class(
+
+
+
+    latitude,
+
+
+
+    longitude,
+
+
+
+    roads,
+
+
+
+    first_road,
+
+
+
+    junction_detail
+
+
+
+):
+
+
+
+    if junction_detail in (None, 0):
+
+
+
+        return None, "Second road class not applicable or junction unknown"
+
+
+
+    if junction_detail == 18:
+
+
+
+        return 6, "STATS20 private drive/entrance rule"
+
+
+
+    if junction_detail not in (13, 16, 17, 19):
+
+
+
+        return None, "Unsupported or unknown junction detail"
+
+
+
+    junctions = find_nearby_junctions(
+
+
+
+        latitude,
+
+
+
+        longitude,
+
+
+
+        roads,
+
+
+
+        radius=20
+
+
+
+    )
+
+
+
+    if not junctions:
+
+
+
+        return None, "No nearby junction identified"
+
+
+
+    nearest_junction = junctions[0]
+
+
+
+    junction_node_id = nearest_junction["node_id"]
+
+
+
+    first_road_identity = (
+
+
+
+        get_road_identity(first_road)
+
+
+
+        if first_road else None
+
+
+
+    )
+
+
+
+    candidate_classes = []
+
+
+
+    for road in roads:
+
+
+
+        if junction_node_id not in road.get("nodes", []):
+
+
+
+            continue
+
+
+
+        if road.get("tags", {}).get("highway") not in VEHICLE_ROAD_TYPES:
+
+
+
+            continue
+
+
+
+        road_identity = get_road_identity(road)
+
+
+
+        if road_identity == first_road_identity:
+
+
+
+            continue
+
+
+
+        road_reference = road.get("tags", {}).get("ref")
+
+
+
+        road_class = map_first_road_class(road_reference)
+
+
+
+        if road_class is None:
+
+
+
+            continue
+
+
+
+        candidate_classes.append({
+
+
+
+            "road_class": road_class,
+
+
+
+            "road_name": road.get("name"),
+
+
+
+            "road_reference": road_reference,
+
+
+
+            "road_identity": road_identity
+
+
+
+        })
+
+
+
+    if not candidate_classes:
+
+
+
+        return None, "No reliably classified second road found"
+
+
+
+    highest_class = min(
+
+
+
+        candidate["road_class"]
+
+
+
+        for candidate in candidate_classes
+
+
+
+    )
+
+
+
+    selected_roads = [
+
+
+
+        candidate
+
+
+
+        for candidate in candidate_classes
+
+
+
+        if candidate["road_class"] == highest_class
+
+
+
+    ]
+
+
+
+    return highest_class, {
+
+
+
+        "reason": "Highest class among connected second roads",
+
+
+
+        "candidate_roads": selected_roads
+
+
+
+    }
+
+
+
+# 18. Infer STATS19 pedestrian_crossing
+
+
+
+def infer_pedestrian_crossing(
+
+
+
+    latitude,
+
+
+
+    longitude,
+
+
+
+    roads,
+
+
+
+    pedestrian_crossings=None,
+
+
+
+    junction_detail=None,
+
+
+
+    radius=50
+
+
+
+):
+
+
+
+    pedestrian_crossings = pedestrian_crossings or []
+
+
+
+    candidates = []
+
+
+
+    # Inspect mapped pedestrian crossing nodes.
+
+
+
+    for crossing in pedestrian_crossings:
+
+
+
+        crossing_lat = crossing.get("latitude")
+
+
+
+        crossing_lon = crossing.get("longitude")
+
+
+
+        if crossing_lat is None or crossing_lon is None:
+
+
+
+            continue
+
+
+
+        distance = calculate_distance(
+
+
+
+            latitude,
+
+
+
+            longitude,
+
+
+
+            crossing_lat,
+
+
+
+            crossing_lon
+
+
+
+        )
+
+
+
+        if distance > radius:
+
+
+
+            continue
+
+
+
+        tags = crossing.get("tags", {})
+
+
+
+        crossing_type = tags.get("crossing", "")
+
+
+
+        crossing_island = tags.get("crossing:island", "")
+
+
+
+        crossing_code = None
+
+
+
+        evidence = None
+
+
+
+        if crossing_type == "zebra":
+
+
+
+            crossing_code = 13
+
+
+
+            evidence = "OSM zebra crossing tag"
+
+
+
+        elif crossing_type in {
+
+
+
+            "traffic_signals",
+
+
+
+            "pelican",
+
+
+
+            "puffin",
+
+
+
+            "toucan"
+
+
+
+        }:
+
+
+
+            if junction_detail in (13, 16, 17, 18, 19):
+
+
+
+                crossing_code = 15
+
+
+
+                evidence = (
+
+
+
+                    "Signal-controlled crossing at a detected junction"
+
+
+
+                )
+
+
+
+            elif junction_detail == 0:
+
+
+
+                crossing_code = 14
+
+
+
+                evidence = (
+
+
+
+                    "Signal-controlled pedestrian crossing away from junction"
+
+
+
+                )
+
+
+
+            else:
+
+
+
+                evidence = (
+
+
+
+                    "Signal crossing detected; junction classification "
+
+
+
+                    "is insufficient to distinguish code 14 from 15"
+
+
+
+                )
+
+
+
+        elif crossing_island == "yes":
+
+
+
+            crossing_code = 17
+
+
+
+            evidence = "OSM pedestrian crossing island tag"
+
+
+
+        if crossing_code is not None:
+
+
+
+            candidates.append({
+
+
+
+                "code": crossing_code,
+
+
+
+                "distance_meters": round(distance, 2),
+
+
+
+                "evidence": evidence,
+
+
+
+                "crossing": crossing
+
+
+
+            })
+
+
+
+    # Inspect mapped pedestrian footbridges and subways.
+
+
+
+    for road in roads:
+
+
+
+        tags = road.get("tags", {})
+
+
+
+        if tags.get("highway") not in PEDESTRIAN_WAY_TYPES:
+
+
+
+            continue
+
+
+
+        bridge = tags.get("bridge", "")
+
+
+
+        tunnel = tags.get("tunnel", "")
+
+
+
+        if bridge not in ("yes", "viaduct") and tunnel not in (
+
+
+
+            "yes",
+
+
+
+            "building_passage"
+
+
+
+        ):
+
+
+
+            continue
+
+
+
+        distance = distance_to_road(
+
+
+
+            latitude,
+
+
+
+            longitude,
+
+
+
+            road
+
+
+
+        )
+
+
+
+        if distance is None or distance > radius:
+
+
+
+            continue
+
+
+
+        candidates.append({
+
+
+
+            "code": 16,
+
+
+
+            "distance_meters": round(distance, 2),
+
+
+
+            "evidence": (
+
+
+
+                "OSM pedestrian footway bridge"
+
+
+
+                if bridge in ("yes", "viaduct")
+
+
+
+                else "OSM pedestrian subway/tunnel"
+
+
+
+            ),
+
+
+
+            "crossing": {
+
+
+
+                "id": road.get("id"),
+
+
+
+                "name": road.get("name"),
+
+
+
+                "tags": tags
+
+
+
+            }
+
+
+
+        })
+
+
+
+    if not candidates:
+
+
+
+        return None, (
+
+
+
+            "No mapped crossing found; absence of OSM data "
+
+
+
+            "does not establish STATS19 code 00"
+
+
+
+        )
+
+
+
+    candidates.sort(
+
+
+
+        key=lambda item: item["distance_meters"]
+
+
+
+    )
+
+
+
+    nearest = candidates[0]
+
+
+
+    equally_near = [
+
+
+
+        candidate
+
+
+
+        for candidate in candidates
+
+
+
+        if abs(
+
+
+
+            candidate["distance_meters"]
+
+
+
+            - nearest["distance_meters"]
+
+
+
+        ) < 1
+
+
+
+    ]
+
+
+
+    detected_codes = {
+
+
+
+        candidate["code"]
+
+
+
+        for candidate in equally_near
+
+
+
+    }
+
+
+
+    if len(detected_codes) > 1:
+
+
+
+        return None, {
+
+
+
+            "reason": "Conflicting crossing types at similar distances",
+
+
+
+            "candidates": equally_near
+
+
+
+        }
+
+
+
+    return nearest["code"], {
+
+
+
+        "reason": nearest["evidence"],
+
+
+
+        "distance_meters": nearest["distance_meters"],
+
+
+
+        "candidate": nearest["crossing"]
+
+
+
+    }
+
+
+
+# 19. Prepare candidate values for the RoadGuard model
+
+
+
+def build_model_feature_candidates(
+
+
+
+    latitude,
+
+
+
+    longitude,
+
+
+
+    roads,
+
+
+
+    traffic_signals=None,
+
+
+
+    stop_signs=None,
+
+
+
+    give_way_signs=None,
+
+
+
+    pedestrian_crossings=None,
+
+
+
+    weather_data=None,
+
+
+
+    road_surface_override=None
+
+
+
+):
+
+
+
+    vehicle_roads = [
+
+
+
+        road
+
+
+
+        for road in roads
+
+
+
+        if road.get("tags", {}).get("highway")
+
+
+
+        in VEHICLE_ROAD_TYPES
+
+
+
+    ]
+
+
+
+    nearest = find_nearest_road(
+
+
+
+        latitude,
+
+
+
+        longitude,
+
+
+
+        vehicle_roads
+
+
+
+    )
+
+
+
+    road = nearest["road"]
+
+
+
+    features = {
+
+
+
+        feature: None
+
+
+
+        for feature in MODEL_FEATURES
+
+
+
+    }
+
+
+
+    features["latitude"] = latitude
+
+
+
+    features["longitude"] = longitude
+
+
+
+    features.update(get_current_time_features())
+
+
+
+    road_details = None
+
+
+
+    if road:
+
+
+
+        road_details = extract_road_features(road)
+
+
+
+        features["speed_limit"] = road_details["speed_limit"]
+
+
+
+        features["first_road_class"] = map_first_road_class(
+
+
+
+            road_details["road_reference"]
+
+
+
+        )
+
+
+
+        features["road_type"] = road_details["road_type"]
+
+
+
+    # Find nearby junctions.
+
+
+
+    nearby_junctions = find_nearby_junctions(
+
+
+
+        latitude,
+
+
+
+        longitude,
+
+
+
+        vehicle_roads,
+
+
+
+        radius=500
+
+
+
+    )
+
+
+
+    # Junction detail.
+
+
+
+    features["junction_detail"] = infer_junction_detail(
+
+
+
+        latitude,
+
+
+
+        longitude,
+
+
+
+        vehicle_roads,
+
+
+
+        road_type=features["road_type"]
+
+
+
+    )
+
+
+
+    # Junction control.
+
+
+
+    junction_control, junction_control_evidence = (
+
+
+
+        infer_junction_control(
+
+
+
+            junction_detail=features["junction_detail"],
+
+
+
+            junctions=nearby_junctions,
+
+
+
+            traffic_signals=traffic_signals,
+
+
+
+            stop_signs=stop_signs,
+
+
+
+            give_way_signs=give_way_signs
+
+
+
+        )
+
+
+
+    )
+
+
+
+    features["junction_control"] = junction_control
+
+
+
+    # Second road class.
+
+
+
+    second_road_class, second_road_class_evidence = (
+
+
+
+        infer_second_road_class(
+
+
+
+            latitude,
+
+
+
+            longitude,
+
+
+
+            vehicle_roads,
+
+
+
+            first_road=road,
+
+
+
+            junction_detail=features["junction_detail"]
+
+
+
+        )
+
+
+
+    )
+
+
+
+    features["second_road_class"] = second_road_class
+
+
+
+    # Pedestrian crossing.
+
+
+
+    pedestrian_crossing, pedestrian_crossing_evidence = (
+
+
+
+        infer_pedestrian_crossing(
+
+
+
+            latitude,
+
+
+
+            longitude,
+
+
+
+            roads,
+
+
+
+            pedestrian_crossings=pedestrian_crossings,
+
+
+
+            junction_detail=features["junction_detail"]
+
+
+
+        )
+
+
+
+    )
+
+
+
+    features["pedestrian_crossing"] = pedestrian_crossing
+    # Current weather (fetched asynchronously by the caller).
+    weather_conditions, weather_conditions_evidence = (
+        map_weather_to_stats20(weather_data)
+    )
+    features["weather_conditions"] = weather_conditions
+    # Road surface condition is not safely inferable from weather alone.
+    # Accept an explicit user-selected STATS20 value when supplied.
+    valid_surface_codes = {1, 2, 3, 4, 5, 9}
+    if road_surface_override is not None:
+        if isinstance(road_surface_override, bool) or road_surface_override not in valid_surface_codes:
+            raise ValueError(
+                "road_surface_override must be one of 1, 2, 3, 4, 5, or 9"
+            )
+        features["road_surface_conditions"] = int(road_surface_override)
+        road_surface_conditions_evidence = {
+            "source": "user selection",
+            "code": int(road_surface_override),
+            "note": "Road surface condition selected by the user for the scenario"
+        }
+    else:
+        features["road_surface_conditions"] = None
+        road_surface_conditions_evidence = {
+            "source": None,
+            "reason": (
+                "Current weather does not establish the actual road surface; "
+                "ask the user when this feature is required"
+            )
+        }
+    # These require authoritative geographic/network datasets. OSM road
+    # class tags alone do not establish the STATS19 trunk-road flag or
+    features["urban_or_rural_area"] = None
+    features["trunk_road_flag"] = None
+    area_and_trunk_evidence = {
+        "urban_or_rural_area": (
+            "Requires an official UK urban/rural geographic classification"
+
+
+
+        ),
+
+
+
+        "trunk_road_flag": (
+
+
+
+            "Requires authoritative trunk-road network membership; OSM highway=trunk "
+
+
+
+            "or a road reference alone is not sufficient"
+
+
+
+        )
+
+
+
+    }
+
+
+
+    # Light conditions.
+
+
+
+    light_conditions, light_conditions_evidence = (
+
+
+
+        infer_light_conditions(
+
+
+
+            latitude,
+
+
+
+            longitude,
+
+
+
+            road
+
+
+
+        )
+
+
+
+    )
+
+
+
+    features["light_conditions"] = light_conditions
+
+
+
+    # Find the nearest road with a reference.
+
+
+
+    referenced_roads = [
+
+
+
+        candidate
+
+
+
+        for candidate in vehicle_roads
+
+
+
+        if candidate.get("tags", {}).get("ref")
+
+
+
+    ]
+
+
+
+    nearest_referenced = find_nearest_road(
+
+
+
+        latitude,
+
+
+
+        longitude,
+
+
+
+        referenced_roads
+
+
+
+    )
+
+
+
+    referenced_road_details = None
+
+
+
+    if nearest_referenced["road"]:
+
+
+
+        referenced_road_details = extract_road_features(
+
+
+
+            nearest_referenced["road"]
+
+
+
+        )
+
+
+
+    # Identify unavailable model features.
+
+
+
+    missing_features = [
+
+
+
+        feature
+
+
+
+        for feature, value in features.items()
+
+
+
+        if value is None
+
+
+
+    ]
+
+
+
+    return {
+
+
+
+        "features": features,
+
+
+
+        "nearest_road": road_details,
+
+
+
+        "nearest_road_distance_meters": nearest["distance_meters"],
+
+
+
+        "nearest_referenced_road": referenced_road_details,
+
+
+
+        "nearest_referenced_road_distance_meters": (
+
+
+
+            nearest_referenced["distance_meters"]
+
+
+
+        ),
+
+
+
+        "nearby_junctions": nearby_junctions,
+
+
+
+        "junction_control_evidence": junction_control_evidence,
+
+
+
+        "second_road_class_evidence": second_road_class_evidence,
+
+
+
+        "pedestrian_crossing_evidence": pedestrian_crossing_evidence,
+
+
+
+        "light_conditions_evidence": light_conditions_evidence,
+
+
+
+        "weather_conditions_evidence": weather_conditions_evidence,
+
+
+
+        "road_surface_conditions_evidence": road_surface_conditions_evidence,
+
+
+
+        "area_and_trunk_evidence": area_and_trunk_evidence,
+
+
+
+        "missing_features": missing_features,
+
+
+
+        "ready_for_prediction": len(missing_features) == 0
+
+
+
+    }

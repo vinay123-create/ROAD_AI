@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
 import os
 import httpx
 
@@ -589,56 +595,38 @@ async def collect_location_candidates(
     try:
 
         result = road_data.build_model_feature_candidates(
-
             latitude=latitude,
-
             longitude=longitude,
-
             roads=osm_data.get("roads", []),
-
             traffic_signals=osm_data.get(
                 "traffic_signals", []
             ),
-
             stop_signs=osm_data.get(
                 "stop_signs", []
             ),
-
             give_way_signs=osm_data.get(
                 "give_way_signs", []
             ),
-
             pedestrian_crossings=osm_data.get(
                 "pedestrian_crossings", []
             ),
-
             weather_data=weather,
-
             road_surface_override=road_surface_override,
-
         )
-
     except ValueError as exc:
-
         raise HTTPException(
             status_code=422,
             detail=str(exc),
         ) from exc
-
     features = result["features"]
-
     missing_features = [
         name
         for name, value in features.items()
         if value is None
     ]
-
     can_run_model = len(missing_features) == 0
-
     return {
-
         "location": resolved["location"],
-
         "latitude": latitude,
 
         "longitude": longitude,

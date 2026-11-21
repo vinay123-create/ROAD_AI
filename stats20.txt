@@ -1,0 +1,4589 @@
+                                                                           STATS 20
+
+Department for Transport
+
+Instructions for
+the Completion of
+Road Collision Reports
+
+With effect from 1 January 2024
+
+Last updated: 27 November 2025
+
+                                                                        1
+STATS20
+
+Instructions for the Completion of Road Collision Reports
+
+CONTENTS
+
+Section                                                                                Page
+1 Introduction                                                                              3
+2 Collisions to be Reported                                                                 6
+3 Vehicles to be Reported                                                                   9
+4 Casualties to be Reported
+5 Road safety factors                                                                     10
+                                                                                          12
+
+Annex
+
+1 Attendant Circumstances Variables                                                    13
+
+2 Vehicle Variables                                                                    44
+
+3 Casualty Variables                                                                   83
+
+4 Road safety factors                                                                  107
+
+5 Deletions                                                                            121
+
+6 Police Force Codes                                                                   130
+
+7 Local Authority Codes                                                                131
+
+8 Central government enquiry points                                                    132
+
+9 Examples for coding the locations of collisions and vehicles                         133
+
+10 National Collision Reporting Form                                                   134
+
+11 Pedestrian direction and coordinates (3.12, 3.12fn, 3.12fe)                         135
+
+12 Variables where the collection status has changed as a result of a STATS19 review.  137
+
+13 STATS20 Changelog                                                                   138
+
+                                      2
+1. INTRODUCTION
+
+1.1 The STATS20 manual provides a detailed explanation of the information, referred to as STATS19,
+          which is the set of data which has to be collected by a Police Officer when an injury road collision1 is
+          reported to them). It is for the use of police forces and local authorities (and their agents)
+
+1.2 This is the 2024 edition of STATS20 and incorporates amendments arising from the 2018 Review of
+          Road Collision Data as approved by the Standing Committee on Road Accident Statistics (SCRAS).
+          SCRAS has since changed its name to Standing Committee on Roads Injury Collision Statistics
+          (SCRICS). SCRICS comprises representatives from the Department for Transport (DfT), devolved
+          administrations, police forces, local authorities and other Government departments with an interest
+          in the collation of road collision data.
+
+1.3 Local processing authorities (LPA) may continue to code data in accordance with the 2011 version of
+          this manual (dated September 2011) until 1 January 2025 to avoid the need for multiple system
+          updates during migration.
+
+1.4 The STATS19 reports are analysed nationally by reference to a great variety of characteristics and
+          attendant circumstances and the results are used extensively for research work and for guidance in
+          the improvement of road safety in relation to roads, road users, vehicles and traffic movement. The
+          data also form the basis for annual statistics on road collisions and casualties published by DfT, the
+          Scottish Government (SG) and the Welsh Government (WG). Local authorities also publish similar
+          statistics.
+
+1.5 Local authorities also make extensive use of road collision data. Engineers use it extensively for
+          establishing priority sites for remedial measures and previous experience has shown that even low
+          cost measures can be extremely effective in reducing or eliminating collisions at particular sites.
+
+1.6 Road safety officers also gain much of their evidence on which to base national and local
+          educational programmes and training from the data which accrue from local road collision statistics.
+
+1.7 The police, who collect these data, also use them as a guide to the operational tactical deployment
+          of their patrols in order to fulfil one of their primary roles, the reduction of casualties.
+
+1.8 The accumulated data, over long periods of time, is also used by a range of establishments for
+          research into road safety measures.
+
+1.9 It is because of the many various uses to which this data is put that the need for accuracy and
+          prompt return is paramount. The speedy return of accurate data will not only be of value to those
+          bodies noted above but will also do much to enhance the early publication of Departmental collision
+          and casualty statistics, which are of great use to those working in the field of collision prevention and
+          road safety education.
+
+1.10 A separate document, STATS21, describes:
+
+          (a) The validity checks and error procedures to be carried out locally on STATS19 data
+          (b) The procedures for writing and submitting data to external bodies such as DfT, Scottish
+
+                     Government (SG), Welsh government (WG) and local authorities;
+          (c) The specification of media formats in which the data can be submitted to DfT, SG or WG;
+          (d) The procedures for dealing with rejections or queries of data received by DfT/SG/WG.
+
+1 The terminology of the Road Traffic Act in refers to road traffic accidents. Following stakeholder feedback,
+from 2022, where possible this terminology has been changed in the statistics and published data tables to
+refer to collisions. In this context, these terms are interchangeable and have the meaning as in the Act.
+
+1.11 By "Reported" it is meant that STATS19 data for the injury collision has to be collected by the Police
+          Force concerned and then passed on to external bodies such as DfT, Scottish gov, Welsh gov and
+          local authorities and local highway authority in the agreed format.
+
+                                                                        3
+1.12 The STATS19 is managed though the Annual Data Requirement (ADR341) that sets out requests
+          for data made to all police forces in England and Wales under the Home Secretary's statutory
+          powers. ADR341expands the requirement to collect data beyond Road Traffic Act 1991 (RTA),
+          which only applies to motorised vehicle and brings bicycles inside the scope of collection.
+
+1.13 Why we ask you to collect STATS19 data.
+
+          STATS19 data is to support and provide an evidence base for a wide variety of stakeholders. The
+          aim of collecting the data is to save lives and reduce life changing injuries. Road traffic incidents are
+          estimated to have cost the economy over £40bn in 2022 and have a significant human cost1.
+
+          Improving road safety
+
+          The data are of high strategic importance for policy making and delivery to DfT, Scottish
+          government, Welsh government and highways authorities.
+
+          The data are used to:
+                · develop and monitor road safety policies, including as part of road safety strategies
+                · monitor Key Performance Indicators for National Highways, Transport for London and local
+                     authorities.
+                · provide evidence to support the allocation of funding (For example, the data were used to
+                     identify 27 roads for nearly £50m infrastructure improvements under the Safer Roads Fund
+                     in 2023).
+
+             · measure DfT business outcomes, including a performance indicator in the Department for
+
+                     Transport's annual reports (https://www.gov.uk/government/collections/dft-annual-reports-
+                     and-accounts )
+                · inform decisions on legislation and vehicle safety supports and the development of new
+                     legislation.
+                · answer official correspondence, Parliamentary Questions, Freedom of information and
+                     public enquiries on a daily basis
+                · facilitate targeted road safety education and advertisements to make the public aware of
+                     changes and safety issues that may affect them e.g. THINK! campaign
+
+          Police operational planning and training
+
+          Aside from periods influenced by COVID lockdowns, since 2017 we have seen a plateauing in the
+          number of people killed and seriously injured on our roads after years of steadily declining numbers.
+          For this reason, the Department for Transport (DfT) instituted a roads policing review working with
+          the Home Office, the National Police Chiefs' Council and other agencies. This wide-ranging review
+          considered how intelligence can be used to better target dangerous behaviours, how technology can
+          assist in enforcing road traffic law now and in the future and also how to better understand the value
+          of enforcement in influencing road user behaviour and the current enforcement capability.
+          https://www.gov.uk/government/consultations/roads-policing-review-future-methods-to-improve-
+          safety-and-reduce-causalities/roads-policing-review-call-for-evidence
+
+          Highways authorities
+
+          The data enables local and national highway authorities to perform their statutory road safety duties
+          and investigate collisions on the road they manage. The data is a vital source for identifying parts of
+          the network that needs road safety interventions, education or changes to infrastructure.
+
+1 Source: Reported road collisions, vehicles and casualties tables for Great Britain (RAS4001).
+Link to table https://assets.publishing.service.gov.uk/media/65143a8d88281e000db4e960/ras4001.ods.
+
+                                                                        4
+Produce national statistics and open data
+The data is used as the basis for several National Statistics publications on Reported Road
+Casualties Great Britain (RRCGB) each year, among the most high-profile published by DfT.
+The statistics are also used for local, police force, country, and international comparisons.
+The statistics are available at: https://www.gov.uk/government/collections/road-accidents-and-
+safety-statistics
+The data is also analysed and used for a wide range of purposes by a range of internal and external
+stakeholders, including central and local government, police forces, road safety organisations,
+vehicle manufacturers, researchers, media and the public. Non-sensitive data is made available
+annually to the public on data.gov: https://data.gov.uk/dataset/cb7ae6f0-4be6-4935-9277-
+47e5ce24a11f/road-safety-data
+Other public sector organisations, non-government agencies and approved researchers can be
+granted access for specific statistical or research purposes to gain new insights to road safety
+issues.
+
+                                                             5
+2. COLLISIONS TO BE REPORTED
+
+2.1 All road collisions involving human death or personal injury occurring on the Highway ('road' in
+          Scotland) and notified to the police within 30 days of occurrence, and in which one or more vehicles
+          are involved, are to be reported. This is a wider definition of road collisions than that used in Road
+          Traffic Act 1991 (RTA).
+
+          The definition used in STATS19 collisions has changed for reportable collisions. Historically
+          STATS19 has used the word `highway' for a definition of reportable collisions. This presented
+          challenges applying that definition to spatial network definition that can be used by digital systems,
+
+          The problem with the highway definition is it can mean any right of way from a footpath to a
+          motorway. Analysis was done to work out how to apply the STATS19 requirement to a network.
+
+          The roads in STATS19 reportable collisions had some similar characteristics, they all have general
+          public access and historically have been adopted by highways authorities. Road adoption is a
+          process where a road in private ownership becomes a public road, which is then there after
+          managed and maintained by the council, as part of the public highway. Adoption is governed by a
+          legal contract known as a Section 38 agreement. Adopted roads have characteristics such as
+          classification (motorways, A, B, C and unclassified roads), official numbering (for motorways, A and
+          B classification roads) and speed limits (20,30,40,50,60 and 70 mph).
+
+          Recent years have seen a rise in the number of roads which are intended to be adopted by local
+          authorities but where adoption has not yet occurred. These roads typically are in a finished state
+          and constitute a public right of way. Such roads that are intended to be adopted but have not yet
+          been adopted should be considered STATS19 reportable, even if there is currently no timescale for
+          their adoption.
+
+          Unadopted roads described above are different from private roads which do not constitute a public
+          right of way, for example gated housing estates. Private roads remain out of scope of the STATS19
+          collection.
+
+          Advice on the adoption process
+          https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/609561/advice-note-
+          on-road-adoptions.pdf
+
+          The above does not imply that all collisions on a public right of way should be in scope of
+          STATS19, only public rights of way that could reasonably be considered to constitute a "public
+          road". This includes "green lanes", and byways open to all traffic (BOATs).
+
+2.2 Examples of collisions to be reported include:
+
+          (a) collisions which commence on the highway but which involve casualties off the highway
+                     (e.g. where a vehicle runs out of control while on the highway and causes casualties
+                     elsewhere);
+
+          (b) collisions involving the boarding and alighting of buses or coaches and collisions in which
+                     passengers already aboard a bus/coach are injured, whether or not another vehicle or a
+                     pedestrian is involved;
+
+          (c) collisions to pedal cyclists or horse riders, where they injure themselves or a pedestrian;
+
+          (d) collisions resulting from deliberate acts of violence against others
+                                (i) including acts of terrorism
+                                (ii) action to endanger vehicles (e.g. throwing a concrete block onto a motorway.
+                                (iii) pedestrian assaulted by driver / rider or passengers of moving vehicle
+                                (iv) driver / rider or passengers of moving vehicle assaulted by pedestrian
+
+                                                                        6
+       (e) collisions within bus stations/interchanges where they form part of the highway;
+
+       (f)  collisions in Royal Parks (on roads to which the public have motor vehicle access)
+
+       (g) Any publicly reported collision received by the police within 30 days of a collision needs to
+                 be reported to the DfT, even if it is not processed into police systems at that time.
+
+       (h) collision caused by a runaway vehicle that then injured a road user or pedestrian on the
+                 highway
+
+2.3 Examples of collisions which should not be reported include:
+
+       (a) collisions which do not involve personal injury;
+
+       (b) collisions on private roads (except Royal Parks) or private drives
+
+       (c) collisions in car parks;
+
+       (d) collisions reported to the police by the public in 30 or more days after they occurred.
+
+            The Road Traffic Act 1991 requires drivers to report the collision to the police if they were
+            unable to exchange details at the scene, if anyone was injured, or if they suspect that the
+            other person may have committed a driving offence within 24 hours, however in some
+            circumstances it is not possible to report at the time e.g. driver taken to hospital and some
+            injuries do not manifest at the time of the collision e.g. concussion
+
+       (e) collisions involving confirmed suicides only.
+
+       (f)  casualty expired in parked vehicle that was not in a collision e.g. heatstroke
+
+       (g) Roads closed using a Temporary Traffic Regulation Order (TRO). TROs are legal
+                 documents that restrict or prohibit the use of the highway network, in line with The Road
+                 Traffic Regulation Act 1984. A road closed using a TRO effectively stops the road being a
+                 public highway for the period defined in TRO. Roads closed with a TRO would not be
+                 reportable.
+
+            Examples might include roads closed for a:
+
+            · sporting events e.g. Tour de France (Racing by its very nature includes a number of
+                 behaviours (speeding) that would be unacceptable under normal driving conditions on
+                 highways. During a race the normal rules of the road are disregarded, such as speed
+                 limits, caution warnings are ignored, so the road is not being used in the way it was
+                 designed to be used)
+
+            · charity fun run, as pedestrians are using the road preventing other traffic
+            · street party, as road closed to all traffic
+            · roadworks that shuts a road and collision started and finished within the roadworks e.g.
+
+                 road worker hit by construction vehicle. This type of incident would fall under the Health
+                 and Safety Executive (HSE) remit for reporting
+
+       (h) No moving vehicle was involved in the collision, for example where objects (for example a
+                 tree or wall) fell on a parked car, or a pedestrian injured themselves on a parked vehicle
+                 with no other parties present in the collision. "Stopped" vehicles (those that are being driven
+                 but not presently moving) count as "moving" vehicles for reporting purposes. Non-moving
+                 vehicles generally refers only to parked vehicles.
+
+NOTES
+
+                                     7
+A.  The Road Traffic Act 1991 (section 170), as amended by Section 72 of the 1991 Act, stipulates that
+
+    all fatal or injury accidents on public roads involving at least one mechanically propelled vehicle
+
+    should be reported by the public to the police unless insurance documents, name and address, and
+
+    details of vehicle ownership and registration are exchanged between drivers. This legislation defines
+
+    the duty of the public to report a personal injury road accident.
+
+B.  In the past the interpretation of "mechanically propelled vehicle" has varied widely between local
+
+    police forces, particularly about whether pedal cycle collisions, not involving a motor vehicle, should
+
+    be reported. The STATS19 requirement is clear that all collisions involving non-motor
+
+    vehicles such as pedal cycles and ridden horses on 'public roads' (see 2.1) should be
+
+    reported, regardless of motor vehicle or pedestrian involvement. See Note L on page 44 for
+
+    other examples of non-motor vehicles. Also, Note C on page 69 contains examples which should
+
+    not be treated as vehicles.
+
+C.  The current legislation Road Traffic Act 1991 Section 39 (3a) states the Secretary of State and Local
+
+    authorities must carry out studies into accidents arising out of the use of vehicles
+
+D.  Comes from UN treaty in mid 50s
+
+E.  The STATS19 requirement goes beyond duties stated in the RTA, which only applies to driver/rider
+
+    of motorised vehicles and expands reporting to include non-motorised vehicles as well e.g. bicycles
+
+                                     8
+3. VEHICLES TO BE REPORTED
+
+3.1 Complete vehicle details, regardless or whether the vehicle was damaged or not, are required for
+          each vehicle which was involved in, or contributed to, an injury collision. This includes pedal cycles,
+          ridden horses and horse-drawn vehicles. (See Note L on page 44 for other examples of non-motor
+          vehicles).
+          Including:
+          (a) vehicles in which driver/rider/passenger was injured;
+          (b) vehicles which suffered damage in the collision;
+          (c) vehicles which caused injury to a pedestrian (including parked vehicles on or off the
+                     carriageway into which a pedestrian walked ­ provided that the overall collision involves at
+                     least one non-parked vehicle);
+          (d) vehicles which were in collision with another vehicle in the collision;
+          (e) vehicles which did not suffer damage, nor caused nor contained casualties, but which
+                     contributed to the collision (includes parked, stationary, temporarily held-up or moving
+                     vehicles and untraced vehicles).
+
+                                                                        9
+4. CASUALTIES TO BE REPORTED
+
+4.1 Any persons killed or injured in a road collision (as defined in 2.1)
+
+Including:
+
+(a) a person who moves quickly to avoid being involved in an collision, is successful in that, but
+          in doing so incurs an injury (e.g. twists an ankle). Also includes occupant of vehicle which
+          manoeuvres or brakes suddenly to avoid an impact, but in so doing sustains an injury;
+
+(b) a pedestrian who injures themselves on a parked vehicle ­ provided that the overall collision
+          involves at least one non-parked vehicle;
+
+(c) a person who is injured after falling / pushed from a vehicle;
+
+(d) a person who is injured boarding or alighting a bus or coach;
+
+(e) a person injured whilst aboard a bus or coach as a result of braking, a sudden manoeuvre
+          or a collision, whether or not another vehicle is involved;
+
+(f)  a person who is injured away from the carriageway as a result of an collision which
+
+     commenced on the public highway;
+
+(g) all casualties in collisions arising from using a vehicle to cause deliberate acts of violence;
+
+(h) Attempted suicides are reportable
+
+(i)  a person injured by part of vehicle e.g. tyre or load coming loose and hitting them
+
+Excluding:
+
+(h) death/injury to babies unborn up to the time of the collision.
+
+(i)  person injured in a road collision as a result of illness prior to the collision (e.g. heart attack),
+
+     where the only injury sustained is deemed to be a result of the illness rather than the road
+
+     collision (If there are any other injuries to the person caused by the collision then these
+
+     would make them reportable).
+
+     It may be difficult to determine that illness was the cause of the collision at the roadside, in
+     which case it would be reportable until a coroner can clarify whether the injury was a result
+     of the collision. All other casualties involved in the collision should be included. A medical
+     practitioner or coroner should determine if the injury is attributable to a medical episode;
+
+(j)  person who dies in a road collision from natural causes (e.g. heart attack) and whose death
+
+     is not ascribed by the Coroner's Court (Procurator Fiscal in Scotland) to have been a result
+
+     of the collision. Other casualties in these collisions should be reported;
+
+(k) Casualties that have been determined as a suicide by a coroner or procurator fiscal. Only
+          coroner or procurator fiscal can decide if a casualty is a suicides. Other casualties in these
+          collisions should be reported. Injured persons suspected of having attempted suicide should
+          be reported;
+
+(l)  any person who witnesses an collision and suffers shock but who is not directly involved.
+
+(m) Occupants of vehicle whose only injuries are caused when exiting vehicle after a collision
+
+(n) person injured whilst working on a stationary vehicle e.g. securing a load, performing
+          maintenance, cleaning
+
+                                       10
+       (o) Collisions or accidents cover by another reporting method e.g. Heath and Safety Executive
+                 (HSE) e.g. collision in a construction site is investigated by HSE
+
+NOTES
+
+A.     Cases (j) and (k) may be reported to external bodies such as DfT, Scottish gov, Welsh gov and local
+
+       authorities in the first instance, pending the decision of the Coroner's Court (or Procurator Fiscal). It
+
+       may, therefore, be necessary for the police/local processing centre to notify the external bodies if, at
+
+       a later stage, such cases are to be deleted from their computer records (see STATS21).
+
+B.     Definitions of casualty severity can be found in Section 3.9 of Annex 3, on page 72.
+
+       11
+5. ROAD SAFETY FACTORS
+
+5.1 The road safety factors (RSF) in a road collisions are the key actions and failures that led directly to
+          the actual impact (a full set of RSF are listed in Annex 4). They show why the collision occurred and
+          give clues about how it may have been prevented.
+
+5.2 RSF should only be completed for collisions where a police officer attended the scene and obtained
+          details for the report.
+
+5.3 The Collision, Vehicle and Casualty records mainly record objective details. The RSF are largely
+          subjective and depend on the skill and experience of the investigating officer to reconstruct the
+          events which led directly to the collision. The notes in Annex 4 aim to present the system clearly and
+          so to minimise the scope for differences in reporting. However, the need to exercise judgement
+          when recording RSF is unavoidable.
+
+5.4 The RSF reflect the Reporting Officer's opinion at the time of reporting and are not necessarily the
+          result of extensive investigation. Furthermore, it is recognised that subsequent enquiries could lead
+          to the reporting officer changing his opinion. This is not a problem.
+
+5.5 Factors should be identified on the basis of evidence rather than guesses about what may have
+          happened. This evidence can come from various sources such as witness statements, vehicle and
+          site inspections. It can be of variable quality, which is the reason for recording the assessment of the
+          reliability of the RSF.
+
+5.6 When there is conflicting evidence (e.g. conflicting witness statements) the reporting officer should
+          decide on the most plausible account of the collision and, taking into account all other available
+          evidence, base the codes on this.
+
+5.7 Procedure:
+
+1.  Select up to six factors from the grid, relevant to the collision.
+
+2.  Factors may be shown in any order, but an indication must be given of whether each factor
+
+    is very likely (A) or possible (B).
+
+3.  Only include factors which have contributed to the collision (e.g. do not include "Road
+
+    surface was slippery due to weather" unless it was relevant to the collision).
+
+4.  More than one factor may, if appropriate, be related to the same road user.
+
+5.  The same factor may be related to more than one road user.
+
+6.  The participant should be identified by the relevant vehicle or casualty reference number
+
+    (e.g. 001, 002 etc), preceded by "V" if factor applies to a vehicle, driver/rider or the road
+
+    environment (e.g. V002), or "C" if the factor relates to a pedestrian or passenger casualty
+
+    (e.g. C001).
+
+7.  Enter "U000" if the factor relates to an uninjured pedestrian.
+
+                                         12
+ANNEX 1 - ATTENDANT CIRCUMSTANCES VARIABLES
+
+                                                                       13
+1.1 RECORD TYPE  1
+
+CODES
+
+11. New collision record
+15. Amended collision record
+
+NOTES
+
+A.     First box always coded 1 to enable collision records to be easily identified during computer
+
+       processing and analysis at local and national levels.
+
+B.     In second box, code 5 only to be used when an collision record already been released to external
+
+       bodies such as DfT, Scottish gov, Welsh gov and local authorities. To be used where the original
+
+       record (11) or previously supplied (15) record is to be replaced by a new updated record.
+
+                              14
+1.2a REPORTING POLICE FORCE
+
+NOTES
+
+A.     Enter the code number of the police force who is owning the investigating responsibilities for the
+
+       collision. The relevant codes are listed in Annex 6
+
+B.     Note that leading zeros are incorporated in some of these codes and must be entered (e.g. the
+
+       code for Cumbria is entered as 03).
+
+                                            15
+1.2b GEOGRAPHIC POLICE FORCE
+
+In most cases the reporting police force would be the same as the geographic police force, however it is
+possible for a police force to retain the investigation responsibility for an incident outside of their force
+boundary e.g. police chase ending in a collision in another forces area.
+
+Where possible geographic police force should be automatically populated by police systems based on the
+collisions coordinates.
+
+NOTES
+
+A.     Enter the code number of the police force in whose area the collision occurred. The relevant codes
+
+       are listed in Annex 6.
+
+B.     Where reporting police force is the same as the geographic police force then geographic police can
+
+       be left blank.
+
+                               16
+1.3 COLLISION REFERENCE
+
+NOTES
+
+A.     The collision reference allocated by the police must be unique within that police force for the
+
+       collision and for the calendar year in which it took place. It must also be sufficient for the police to
+
+       identify the collision in the event of a query.
+
+B.     The collision reference may contain a total of 7, or fewer, numbers and/or alphabetic characters in
+
+       any sequence convenient to Police Force requirements.
+
+C.     Unused spaces to the left of collision references containing less than 7 characters are to be coded
+
+       zero (e.g. ABC123 would be coded 0ABC123).
+
+                                                        17
+1.4a LEGACY COLLISION SEVERITY
+
+Optional requirement that can be automatically collected by some systems
+
+Where possible legacy collision severity should be automatically populated by police systems based on the
+injuries of the casualty recorded in 3.22.
+
+Code   Definition
+1      Fatal
+2      Serious
+3      Slight
+
+NOTES
+
+Legacy collision severity is a calculated field captured by systems like PRONTO, CRaSH and single online
+home. derived
+
+                   18
+1.4b COLLISION SEVERITY
+
+Optional requirement that can be automatically collected by some systems
+
+Where possible collision severity should be automatically populated by police systems based on the injuries
+of the casualty recorded in 3.22.
+
+Code  Definition
+
+1     Fatal
+5     Very Serious
+6     Moderately Serious
+7     Less Serious
+3     Slight
+
+NOTES
+
+Collision severity is a calculated field captured by systems like PRONTO, CRaSH and single online home.
+derived
+
+                          19
+1.5 NUMBER OF VEHICLE RECORDS
+
+NOTES
+
+A.     Enter the number of vehicle records submitted for the collision.
+
+B.     Unused boxes to the left of the number of vehicles should be coded zero (e.g. if 2 vehicles were
+
+       involved, this item would be coded 002).
+
+                                                 20
+1.6 NUMBER OF CASUALTY RECORDS
+
+NOTES
+
+A.     Enter the number of casualty records submitted for the collision.
+
+B.     Unused boxes to the left of the number of casualty records should be coded zero (e.g. if there were
+
+       3 casualty records, this item would be coded 003).
+
+                                21
+                            Day Month  Year
+
+1.7 DATE OF COLLISION                  20
+
+NOTES
+
+A.     The first two boxes are to be used for the day, the second two for the month and the remaining four
+
+       boxes for the year.
+
+B.     Unused boxes to the left of the day or month are to be entered as zeros (e.g. 4th May 2024 would be
+
+       coded as 04052024).
+
+                            22
+                            Hours Minutes
+
+1.9 TIME OF COLLISION
+
+NOTES
+
+A.     The hours, on a 24 hour system, are to be entered in the first two boxes.
+
+B.     The number of minutes past any of these hours should be recorded in the two right hand boxes, to
+
+       the nearest minute.
+
+C.     Zeros should be entered where necessary, i.e. 8 minutes past 9am. is entered as 0908.
+
+D.     The coding 0000 is permitted as more mobile digital systems are being used to collect the data and
+
+       collision time can be automatically collected which can happen in the first minute of a new day. The
+
+       date should be set as the day just starting (e.g. where an collision occurs at midnight between 8th
+
+       and 9th January 2024, then the date entered should be 09012024).
+
+                            23
+1.10 LOCAL AUTHORITY ONS DISTRICT CODE
+
+NOTES
+
+A.     Enter the code number of the local authority in whose area the collision occurred.
+
+B.     The codes comply with the Government Statistical Service (GSS) Coding and Naming policy for
+
+       statistical geographies at the time of publication.
+
+C.     The codes are listed in Annex 7
+
+D.     If ONS (Office for National Statistics) should revise their codes for an area (e.g. As a result of a
+
+       boundary change) LPAs should continue to use the codes listed in Annex 7 until a revision is agreed
+
+       with DfT.
+
+E      EHEATHROW is a special code used by Transport for London for collisions that occur in Hillingdon
+
+       within the bounds of London Heathrow Airport
+
+                                        24
+1.11E GRID REFERENCE EASTING
+
+NOTES
+
+FULL ORDNANCE SURVEY GRID REFERENCE NUMBER
+
+A.     Record the 6-digit map reference
+
+B.     A collision should usually be located where the first impact, at which an injury was sustained,
+
+       occurred, although there may be circumstances in which the LPA feel it more appropriate to locate
+
+       the collision at the point where a vehicle lost control. Where a vehicle impacts after having left the
+
+       carriageway, the collision should, normally, be located at the point at which the vehicle first left the
+
+       carriageway.
+
+                                         25
+1.11N GRID REFERENCE NORTHING
+
+FULL ORDNANCE SURVEY GRID REFERENCE NUMBER
+
+NOTES
+
+A.     Record the 7-digit map reference
+
+B.     The first Northing box (shown in grey) should only contain zero or 1. One would only be used for
+
+collisions that occurred in the extreme North of Scotland.
+
+C.     A collision should usually be located where the first impact, at which an injury was sustained,
+
+occurred, although there may be circumstances in which the LPA feel it more appropriate to locate the
+
+collision at the point where a vehicle lost control. Where a vehicle impacts after having left the carriageway,
+
+the collision should, normally, be located at the point at which the vehicle first left the carriageway.
+
+                                         26
+1.12 1st ROAD CLASS
+
+CODES
+
+1.     Motorway
+
+2.     A(M)
+
+3.     A
+
+4.     B
+
+5.     C
+
+6.     Unclassified
+
+9      Unknown (self-reported only)
+
+NOTES
+
+A.     Enter the code number for the class of the road on which the collision location is being recorded.
+
+B.     For an collision at a junction, where the collision cannot clearly be allocated to one specific road, the
+
+       class of the main road, should be the one which is entered here. The main road is defined as the
+
+       road which has priority. For roundabouts and signal controlled junctions, the main road is the one
+
+       with the highest class of all the roads entering the junction. If roads are of equal class then the road
+
+       with the lowest number should be taken as the main road.
+
+C.     It is for individual local processing authorities to decide whether or not to separately identify 'C'
+
+       roads. Where this is not done, such roads should be coded 6 'Unclassified'.
+
+D.     The Road Class for an collision occurring on a Service Road running alongside a major road should
+
+       be coded according to the class of the Service Road itself (usually 'Unclassified'), not the major
+
+       road.
+
+E.     Codes 1 - 4 must be accompanied by a valid road number in 1.13 (1st Road Number).
+
+F.     See also "Examples for coding the locations of collisions and vehicles" in Annex 9
+
+G      Only self-reported collisions made by the public can use code 9 where the person reporting the
+
+       collision does not know the road classification.
+
+                                     27
+1.13 1st ROAD NUMBER
+
+NOTES
+
+A.     Enter the road number of the road whose class was entered at 1.12 (1st Road Class). See 1.12
+
+       Note B where the collision cannot be clearly allocated to one specific road.
+
+B.     If the road number contains less than four digits, leading zeros should be inserted to the left of the
+
+       number (e.g. A46 is coded 0046).
+
+C.     If 1.12 is coded 5 or 6, the local processing authority will decide whether a road number is required.
+
+D.     If 1.12 is coded 1 - 4, 1.13 must contain a valid road number.
+
+                                         28
+1.14 ROAD TYPE
+
+CODES
+
+1.     Roundabout
+
+2.     One way street
+
+3.     Dual carriageway
+
+6.     Single carriageway
+
+7.     Slip Road
+
+9.     Unknown (self-reported only)
+
+NOTES
+
+A.     Enter the appropriate code for the road on which the collision occurred.
+
+B.     The road type for a collision which occurs off the main carriageway (e.g. footway or cycleway)
+
+       should be coded as appropriate for the main carriageway e.g. the road type for an collision occurring
+
+       on a cycleway running alongside a dual carriageway should be coded 3.
+
+C.     For junction collisions, where the road layout at the scene of the incident is different from the
+
+       general road type, the code appropriate to the general road type should be used e.g. an collision
+
+       which occurs on the approach to a junction, where, for a short section, the road has a central
+
+       reservation, but where the general road type is Single Carriageway, should have Road Type coded
+
+       6.
+
+D.     Roundabout includes mini-roundabouts and large, purpose built gyratory systems. Where existing
+
+       streets have been made into a one way (gyratory) system the Road Type should be coded 2. A
+
+       second road should be added for roundabouts in 1.19 (2nd Road Number). This may have the same
+
+       classification and road number as the first road.
+
+E.     One way streets with contraflow bus or cycle lanes should be coded 3 or 6, as appropriate.
+
+F.     Slip roads are dedicated to getting traffic from one road to another. They include roads connecting
+
+       grade separated roads (i.e. roads at different levels) and "filter lanes" at non-grade separated
+
+       junctions which connect two roads by avoiding a roundabout or other junction. Includes slip lanes
+
+       marked by white lines at roundabouts, but which are not physically separated from the roundabout.
+
+G. A dual carriageway is a road in which the opposing carriageways are physically separated (e.g. by a
+          central reservation or barrier). Carriageways separated only by line markings (or no markings at all)
+          are single.
+
+H.     If a contraflow is on a dual carriageway due to roadworks, use code 3 as normal but enter code 4,
+
+       'Road works present' in 1.24 (Special Conditions).
+
+I.     Code 9 'Unknown (self-reported only)' should only be used in exceptional circumstances where no
+
+       information on road type is available, or where the other Road Type codes are inappropriate.
+
+J.     If 1.15 (Speed Limit) is coded 70, 1.14 must not be coded 2 or 6.
+
+K.     Examples for the coding of location of collisions and vehicles are shown in Annex 9.
+
+                                     29
+1.15 SPEED LIMIT (Permanent)  0
+
+       MPH
+
+NOTES
+
+A.     This applies to the general speed limit applicable to the road on which the collision occurred, not to
+
+       that governing a specified class of vehicle (e.g. articulated vehicle or tram), even when such a
+
+       vehicle is involved.
+
+B.     The permanent legal speed limit in mph is to be entered in every case.
+
+C.     Where a lower variable or temporary speed limit is in force (mandatory or otherwise) the normal
+
+       permanent legal speed limit applicable to the road, not the temporary one, should be entered.
+
+       Possible examples include sections of roads outside schools at certain times of day, roadworks sites
+
+       and motorway digital signage. Please consider whether any of the speed road safety factors
+
+       affected should be recorded if the drivers speed within the temporary speed limit contributed to the
+
+       collision.
+
+D.     Speeds of under 20mph should only be used in very exceptional circumstances and the reporting
+
+       officer should confirm that the collision is on a Highway ('road' in Scotland). See Section 2, pages 6
+
+       to 8.
+
+E.     The local processing authority should query any speed limit coded other than 20, 30, 40, 50, 60 or
+
+       70mph, as to whether the collision actually occurred on the highway.
+
+                                 30
+1.16a JUNCTION DETAIL
+
+CODES
+
+00. Not at or within 20 metres of junction
+
+13. T or staggered junction
+
+16. Crossroads
+
+17. Junction ­ more than 4 arms (not a roundabout)
+
+18. Using private drive or entrance
+
+19. Other junction
+
+99 Unknown (self-reported only)
+
+[SPACE]        Not applicable (where collision is at roundabout or slip road)
+
+NOTES
+
+A.     Junction is defined as a place where two or more roads meet (excluding where one of the roads
+
+       crosses the other by a bridge or flyover) whatever the angle of the axes of the roads. The meeting
+
+       point of a public highway and private drive (in use at time of collision) is a junction for this purpose.
+
+B.     If there are two or more junctions within 20 metres of the collision, code the junction which is closest
+
+       to the collision.
+
+C.     A gap in the central reservation of a road is not a junction and should be coded 00 unless other
+
+       roads join the dual carriageway at that point.
+
+D.     Code 00 is to be used when the collision occurs more than 20 metres from a junction. Codes 13 - 19
+
+       must be used for points at or within 20 metres of a junction. Where the collision is coded as at a
+
+       roundabout or slip road in 1.14, then 1.16a should be left blank i.e. [SPACE].
+
+E.     Code 13, 'T or staggered junction' includes 3 arm junctions at which 2 roads join at an acute angle
+
+       (previously known as 'Y' junction).
+
+F.     Crossroads: four arm junction where the alignments of both roads are uninterrupted whatever the
+
+       angle of the crossing, and the arms are not staggered.
+
+G. Using Private Drive or entrance: not to be used merely to record the presence of a private drive or
+          entrance. Only for use where the private drive or entrance is being used by a vehicle involved in the
+          collision.
+
+H.     Other Junction: only to be used in exceptional circumstances where the junction is not defined
+
+       above.
+
+I.     If 1.16 is coded 13 - 19, items 1.17 (Junction Control), 1.18 (2nd Road Class) and, if applicable, 1.19
+
+       (2nd Road Number) must be completed. On each vehicle record, 2.10 (Junction Location of Vehicle)
+
+       must be coded 1 - 8.
+
+J.     If 1.16 is coded 00, items 1.17, 1.18 and 1.19 must not contain any coded entries and 2.10 must be
+
+       coded 0 for each vehicle.
+
+K.     See also "Examples for coding the locations of collisions and vehicles" in Annex 9.
+
+L.     Only self-reported collisions by the public reports can use code 99 where the person reporting does
+
+       not know the junction details.
+
+                                                       31
+1.17 JUNCTION CONTROL
+
+CODES
+
+1.     Authorised person
+
+2.     Automatic traffic signal
+
+3.     Stop sign
+
+4.     Give way or uncontrolled
+
+9      Unknown (self-reported only)
+
+[SPACE]        Not applicable
+
+NOTES
+
+A.     To be completed for 'junction collisions' only. If item 1.16 (Junction Detail) is coded 00, leave 1.17
+
+       blank.
+
+B.     An 'authorised person' at a junction means a police officer, traffic warden in uniform or school
+
+       crossing patrol (see 1.20a - Note C) who is controlling the traffic.
+
+C.     If an 'authorised person' is controlling the junction, even if there are traffic signals or other junction
+
+       controls, code 1 'authorised person' should be entered.
+
+D.     Where part time traffic signals are employed, use code 2 if the traffic signals were in operation at the
+
+       time of the collision, and code 4 if not.
+
+E.     On a junction where the traffic signals are out of action and where there is no authorised person in
+
+       control, this variable should be coded 2, and an appropriate code to indicate the state of the traffic
+
+       signals will also normally be necessary under item 1.24 (Special Conditions at Site).
+
+F.     See also "Examples for coding the locations of collisions and vehicles" in Annex 9.
+
+G      Only self-reported collisions by the public reports can use code 9 where the person reporting does
+
+       not know the road classification.
+
+H      Where junction control is not applicable then leave blank e.g. when collision is not at a junction.
+
+                                                  32
+1.18 2nd ROAD CLASS
+
+CODES
+
+1.     Motorway
+
+2.     A(M)
+
+3.     A
+
+4.     B
+
+5.     C
+
+6.     Unclassified
+
+9      Unknown (self-reported only)
+
+[SPACE]      Not applicable
+
+NOTES
+
+A.     To be completed for 'junction collisions' only.
+
+B.     Enter the class, as coded above, of the road at the junction which has not already been coded as
+
+       1st Road Class.
+
+C.     Where, at a junction, there is more than one road to choose from for this variable (i.e. as the second
+
+       road), then the road with the highest class should be chosen.
+
+D.     It is for individual local processing authorities to decide whether or not to separately identify 'C'
+
+       roads. Where this is not done, such a road should be coded 6 'Unclassified'.
+
+E.     Where Junction Type is coded as `Using private drive or entrance', 2nd Road Class should be coded
+
+       `6 ­ Unclassified'.
+
+F.     See also "Examples for coding the locations of collisions and vehicles" in Annex 9.
+
+G      Only self-reported collisions by the public reports can use code 9 where the person reporting does
+
+       not know the road classification.
+
+H      Where there is no second road then leave blank e.g. when collision is not at a junction.
+
+                                                        33
+1.19 2nd ROAD NUMBER
+
+NOTES
+
+A.     Enter the road number of the road whose class was entered at 1.18 (2nd Road Class).
+
+B.     If the road number contains less than four digits, leading zeros should be inserted to the left of the
+
+       number (e.g. A46 is coded 0046).
+
+C.     If 1.18 is coded 5 or 6, the local processing centre will decide whether a road number is used.
+
+D.     If 1.18 is coded 1 - 4, 1.19 must contain a valid road number.
+
+                                         34
+1.20 PEDESTRIAN CROSSING
+
+CODES
+
+00 No physical crossing facility within 50m
+11 Human crossing control by school crossing patrol
+12 Human crossing control by other authorised person
+13 Zebra crossing
+14 Pedestrian light crossing (pelican, puffin, toucan or similar)
+15 Pedestrian phase at traffic signal
+16 Footbridge or subway
+17 Central refuge -- no other controls
+99 Unknown (self-reported only)
+
+NOTES
+
+A.     This section should be coded for every personal injury collision. If, at the time of the collision,
+
+       there is no 'Pedestrian crossing with human control' within 50 metres, enter code 0.
+
+       Only record the presence of a pedestrian crossing if:
+
+       a.  a pedestrian is involved in an collision on, or within 50 metres of, a pedestrian crossing, or
+
+       b.  the pedestrian crossing facility was within 50 metres of the collision, along the route
+
+           travelled or intended to be travelled, by vehicle(s) involved in the collision, and was
+
+           considered to be a factor in the collision, regardless of whether there was direct
+
+           pedestrian involvement.
+
+B.     Codes 11 and 12 should be used regardless of whether the human control site had a physical
+
+       pedestrian crossing facility.
+
+C.     School crossing patrol means 'lollipop' men and women in uniform, who are lawfully appointed.
+
+D.     An 'Other authorised person' means a police officer or a traffic warden in uniform.
+
+E.     A zebra crossing should be coded as such even if the beacons or stripes are defective.
+
+F.     Code 14 includes any pedestrian crossing which is not at a junction, and has traffic lights controlling
+
+       the traffic, and lights controlling pedestrians (or pedestrians and cyclists) crossing.
+
+G. 'Pedestrian phase at traffic signal junction' is any pedestrian crossing at a junction controlled by
+          traffic lights which has an indicator light for pedestrians (or pedestrians and cyclists) only. This does
+          not include normal traffic signals with pedestrian stud crossing points but no special indicator lights
+          for pedestrians.
+
+H.     Where a junction controlled by traffic lights has pedestrian crossings with indicator lights for
+
+       pedestrians on one or more arms (or filter lanes), but no similar facilities on the other arms, allocate
+
+       code 15 or 00 as appropriate to the junction arm at which (or nearest to which) the collision
+
+       occurred.
+
+I.     Where light controls are defective on a light controlled pedestrian crossing, code 14 or 15 should still
+
+       be used.
+
+J.     Code 18 'Central refuge - no other controls' should only be used when the refuge is not part of any
+
+       other pedestrian crossing facility (this code is not applicable to median strips on dual carriageways).
+
+                                      35
+K.  When more than one physical pedestrian crossing facility is present within 50 metres (and both/all
+
+    are deemed to have been a factor in the collision), the nearest one to the collision should be coded.
+
+L.  Raised tables/platforms are not to be considered as pedestrian facilities unless they are marked
+
+    further as Zebra or Pelican Crossing etc.
+
+M. If 1.20 is coded 13, 14, 15 and 17 and 1.16 (Junction Detail) is coded 00, then 1.12 (1st Road Class)
+          must not be coded 1 or 2 (motorway or A(M)).
+
+N   Where a human is controlling a crossing (police officer, traffic warden or lollipop person) this takes
+
+    precedence over other crossing types
+
+O   Only self-reported collisions by the public reports can use code 99 where the person reporting does
+
+    not know if there is a pedestrian crossing
+
+                                                36
+1.21 LIGHT CONDITIONS
+
+CODES
+
+1.     Daylight
+
+4.     Darkness: street lights present and lit
+
+5.     Darkness: street lights present but unlit
+
+6.     Darkness: no street lighting
+
+7.     Darkness: street lighting unknown
+
+NOTES
+
+A.     This section should be coded for all personal injury collisions, whether in daylight or darkness.
+
+B.     'Darkness' means half an hour after sunset to half an hour before sunrise. 'Daylight' means all other
+
+       times.
+
+C.     'Street lights lit' includes instances where alternate lamps are lit. Scattered or isolated lamps which
+
+       are lit should be treated as 'street lights unlit' (code 5).
+
+D.     The distinction between 'street lights unlit' and 'no street lights' is made because it is important in
+
+       assessing factors affecting collision rates.
+
+E.     The use of code 7 should be avoided if at all possible.
+
+                                                     37
+1.22 WEATHER
+
+CODES
+
+1.     Fine without high winds
+
+2.     Raining without high winds
+
+3.     Snowing without high winds
+
+4.     Fine with high winds
+
+5.     Raining with high winds
+
+6.     Snowing with high winds
+
+7.     Fog or mist - if hazard
+
+8.     Other
+
+9.     Unknown (self-reported only)
+
+NOTES
+
+A.     This refers to weather conditions at the time and location of the collision.
+
+B.     'Fine without high winds' means any weather condition which does not have an adverse effect on
+
+       driving (i.e. cannot be coded 2 - 8).
+
+C.     'Raining' includes drizzle, hail and sleet not tending to build up a deposit.
+
+D.     'Snowing' includes sleet building up a deposit.
+
+E.     'Fog' does not include light mists which did not constitute a driving hazard on the road where the
+
+       collision occurred.
+
+F.     The combinations of certain conditions with high winds (codes 4 - 6) should only be coded if the
+
+       winds are deemed to have adversely affected driving conditions for one or more of the vehicles in
+
+       the collision. The use of these codes does not imply that the high winds were a cause of the
+
+       collision.
+
+G. If two or more codes are appropriate, enter the code of the condition which is deemed to have most
+          adversely affected driving conditions.
+
+H.     'Other' should be used to indicate any other adverse weather condition which is not separately
+
+       specified by the codes above. This code should be avoided if at all possible.
+
+I      Code 9 will only exist until all systems have migrated to the 2024 specification. After all systems
+
+       have migrated it will be deprecated
+
+J      High winds would be identified in weather reports as near gale or gale. 35 MPH is the wind speed
+
+       where bridges may become closed to high sided vehicles.
+
+                                              38
+1.23 ROAD SURFACE CONDITION
+
+CODES
+
+1.     Dry
+
+2.     Wet/Damp
+
+3.     Snow
+
+4.     Frost/Ice
+
+5.     Flood (surface water over 3mm deep)
+
+9      Unknown (self-reported only)
+
+NOTES
+
+A.     This refers to the road surface condition at the time of the collision.
+
+B.     Codes 4 and 5 do not necessarily mean that the whole carriageway was covered.
+
+C      Only self-reported collisions by the public reports can use code 9 where the person reporting does
+
+       not know the road surface condition.
+
+D      For drivers who are self-reporting a collision, then it is expected that they would know what the road
+
+       surface condition is and be able to report on them.
+
+                                             39
+1.25a CONDITIONS OR CARRIAGEWAY HAZARDS
+
+CODES
+
+00 None
+11 Defective traffic signals
+12 Permanent road signing or markings defective / obscured or inadequate
+13 Roadworks
+14 Oil / diesel
+15 Mud
+16 Dislodged vehicle load in carriageway
+17 Other object in carriageway
+18 Involvement with previous collision
+19 Pedestrian in carriageway - not injured
+20 Any animal in carriageway (except ridden horse)
+21 Poor or defective road surface
+99 Unknown (self-reported only)
+
+NOTES
+
+A.     This section should be completed for every personal injury collision whether or not such conditions
+
+       were considered to be contributory to the collision. Use code 00 only if there were no special
+
+       conditions or hazards at the collision site.
+
+B.     An automatic traffic signal (including a pelican/puffin/toucan crossing) is 'out' (code 11) if it is totally
+
+       inoperative at the time of the collision (i.e. no light(s) whatsoever in operation). Do not use this code
+
+       to record part time signals which are not in operation (unless there is clear evidence that the part
+
+       time signals are defective).
+
+C.     If roadworks are present and any of the other conditions are also present, code 13 is preferred if the
+
+       roadworks were hit by at least one vehicle.
+
+       Includes collisions occurring within the coned area approaching (or immediately following)
+       roadworks.
+
+D.     A defective road surface (code 21) includes any obvious road surface defect, such as pot holes,
+
+       cracks (but not lack of skid resistance) and surface melting, but not the presence of ice, snow or
+
+       flood.
+
+E.     Codes 16, 17, 18, 19 and 20 are to be used only to indicate an object not expected to be found in
+
+       the carriageway. They should not be used to record impact with a bollard, refuge, kerb etc., which
+
+       are permanent features.
+
+F.     Code 16 should not be used where a vehicle load has been dislodged as a result of the collision
+
+       currently being coded.
+
+G. If a dislodged vehicle load is in the carriageway as a result of a previous collision then use
+          code 18.
+
+H.     If code 18 and another code apply, enter code 18.
+
+I.     Only live animals should be coded under 20. Dead animals (or dead pedestrians) should be coded
+
+       as 'other objects' (code 17). A ridden horse should not be recorded as a hazard as it is already
+
+       recorded as a vehicle type (2.5) and any hazards relating to the equestrian should be recorded as a
+
+       road safety factor.
+
+       'Animal' relates to all animals that may be construed to have been a 'Carriageway Hazard' and not
+       just those animals defined in the road traffic act.
+
+                                                     40
+J.  Code 99 will only exist until all systems have migrated to the 2024 specification. After all systems
+
+    have migrated it will be deprecated, as if the public are unaware of any conditions or carriageway
+
+    hazards then reporting unknown is redundant.
+
+    41
+1.26 SOURCE OF DATA COLLECTED
+
+CODES
+
+1      Officer attended the collision
+
+2      Member of public reported at police station
+
+3      Member of public reported via web
+
+NOTES
+
+A.     Code 1 should be used where a police officer attended the scene of the collision and obtained the
+
+       details for this report. It is not necessary for the reporting officer to have witnessed the actual
+
+       collision for code 1 to be used.
+
+B.     Code 2 should be used for collision reported "over the counter" at a police station) where details are
+
+       recorded by a police officer or member of civilian staff.
+
+C.     Code 3 should only be used where a member of the public records details of the collision
+
+       themselves using a dedicated "self-reporting" form approved by the police. This form may include
+
+       additional "Unknown" codes in some fields.
+
+                                                    42
+1.27 SPECIFICATION MARKER
+Automatically populated in STATS19 export by police systems, see STATS21 for full listings of codes.
+
+                                                                       43
+ANNEX 2 - VEHICLE VARIABLES
+
+                                                                       44
+2.1 RECORD TYPE             2
+
+CODES
+
+21. New vehicle record
+25. Amended vehicle record
+
+NOTES
+
+A.     First box always coded 2 to enable vehicle records to be easily identified during computer
+
+       processing and analysis at local and national levels.
+
+B.     In second box, code 5 only to be used when a vehicle record already sent to external bodies such
+
+       as DfT, Scottish gov, Welsh gov and local authorities. To be used where the original record (21) or
+
+       previously supplied (25) record is to be replaced by a new updated record.
+
+                               45
+2.2 REPORTING POLICE FORCE
+NOTE
+Repeat of Police Force code entered on the attendant circumstances record at item 1.2.
+
+                                                                       46
+2.3 COLLISION REFERENCE
+NOTE
+Repeat of Collision Reference on the attendant circumstances record at item 1.3.
+
+                                                                       47
+2.4 VEHICLE REFERENCE NUMBER
+
+NOTES
+
+A.     The first vehicle coded should be numbered 001 and any subsequent vehicles should be numbered
+
+       in sequence.
+
+B.     No two vehicles in a collision should have the same vehicle reference number.
+
+                              48
+2.5 TYPE OF VEHICLE
+
+CODES
+
+01 Pedal cycle
+02 Motorcycle 50cc and under
+03 Motorcycle over 50cc and up to 125cc
+04 Motorcycle cycle over 125cc and up to 500cc
+05 Motorcycle over 500cc
+08 Taxi / Private hire car
+09 Car
+10 Minibus (8-16 passenger seats)
+11 Bus or coach (17 or more passenger seats)
+16 Ridden horse
+17 Agricultural vehicle (include diggers etc)
+18 Tram / Light rail
+19 Van / Goods vehicle 3.5 tonnes mgw and under
+20 Goods vehicle over 3.5 tonnes mgw and under 7.5 tonnes mgw
+21 Goods vehicle 7.5 tonnes mgw & over
+22 Mobility scooter
+23 Electric Motorcycle
+33 Personal Powered Transporter
+90 Other vehicle
+97 Motorcycle - cc unknown
+98 Goods vehicle - unknown weight
+99 Unknown (self-reported only)
+[SPACE]{2} Unknown (police attended only)
+
+NOTES
+
+A.     Vehicles (other than cars or minibuses used as taxis or private hire vehicles) should be coded
+
+       according to their construction and not according to their use at the time of the collision.
+
+       For example, a van which is being used for the carriage of passengers should nevertheless be
+       coded as a goods vehicle.
+
+       Vehicles of the armed forces should be recorded under the heading appropriate to a civilian vehicle
+       of the same type if there is one, otherwise they should be coded as 'Other vehicle'.
+
+B.     Pedal cycles: this code applies to pedal cycles being ridden in the carriageway or on a cycleway or
+
+       pavement and also applies to toy cars and toy tricycles in the carriageway. Toy cars and toy
+
+       tricycles (designed for children) on the footpath should be ignored and their riders classified as
+
+       pedestrians.
+
+       Pedal cycles category includes electrically assisted pedal cycles as defined in the Electrically
+       Assisted Pedal Cycles Regulations 1983 No 1168. Please fill in a text description of the vehicle type
+       in 2.5a to identify Electrically Assisted Pedal Cycles.
+
+C.     Motorcycle includes mopeds, motor scooters, motorcycle combinations and three wheeled
+
+       motorcycles. Four wheeled "Quad bikes" should be coded 90.
+
+D.     "Electric motor cycle" includes all electrically powered motorcycles over 0.25 kW, whether or not
+
+       they are also equipped with pedals.
+
+E.     "Taxi" includes any vehicle operating as a hackney carriage, regardless of construction, and bearing
+
+       the appropriate district council or local authority hackney carriage plates.
+
+                                            49
+    Vehicles operating as private hire cars (i.e. 'minicabs') may or may not bear private hire plates, but
+    are to be coded 08 in either case.
+
+F.  Car: includes three wheeled cars, estate cars, family multi people vehicle (MPV) e.g. typically can
+
+    seat 7 or 8 people, Land Rovers and similar Sports utility vehicles (SUV) four-wheel drive vehicles.
+
+G. Minibus: includes minibus, micro-bus, post buses and Dial-a-Bus. Minibuses equipped to carry less
+          than 17 seated passengers should be coded 10, even if used as buses.
+
+    Minibuses equipped to carry 17 or more seated passengers should be coded 11.
+
+H.  Bus or coach: This category is to be determined by the construction of the vehicle rather than its
+
+    use. All buses or coaches equipped to carry 17 or more seated passengers should be coded 11,
+
+    regardless of whether or not being used in stage operation.
+
+I.  Agricultural vehicles (includes farm tractors etc.): This category will mainly include agricultural
+
+    tractors (whether or not towing), mobile excavators and front dumpers.
+
+    Goods vehicles used to transport agricultural produce or livestock should be coded 19, 20 or 21 as
+    appropriate. Heavy plant such as large mobile cranes should be coded 90 'Other motor vehicle'.
+
+J.  Goods vehicles (codes 19, 20, 21 and 98) include three-wheeled goods vehicles (provided they are
+
+    not controlled by a pedestrian), tankers, HGV tractors travelling without their semi-trailers, trailers,
+
+    and articulated vehicles as defined in item 2.6, but excluding caravans and 'other tows' which are
+
+    not goods vehicles.
+
+    Code 19 applies to vans (including car based vans) or small goods vehicles (including pick-up
+    trucks) which are licensed for Private and Light Goods use (PLG). Code 19 should be used for
+    vehicles up to 3.5 tonnes maximum gross weight.
+
+    Codes 20 and 21 apply to larger vehicles licensed as over 3.5 tonnes maximum gross weight. This
+    information can normally be determined from the 'taxable weight' on the heavy goods vehicle tax
+    disk. If not on the tax disk the gross vehicle weight will normally be shown on a DfT plate. This is
+    situated in the cab of a rigid or an articulated vehicle and on the nearside of the chassis of a
+    drawbar trailer.
+
+    Use the 'maximum gross weight' or 'train weight' to determine this code. Do not use 'towing unit
+    gross weight' or 'manufacturer's design weight'. Note that certain classes of large vehicles do not
+    require plating tests and may not display weight on the tax disk.
+
+K   Mobility scooter is a powered wheelchair or scooter with a maximum unladen weight of 150 kg and a
+
+    maximum speed of 8 mph. Unpowered wheelchairs are class as pedestrians
+
+L.  Other vehicles are types of vehicle not falling into any of the main categories.
+
+    Examples
+
+    Emergency services                 ambulances, fire engines, recovery vehicles
+    Leisure vehicles                   motor caravans, quad bikes
+    Pedestrian controlled vehicles     street barrows, sweepers, delivery carts
+    with or without a motor which are
+    normally used on the road          refuse vehicles, road sweepers
+    Street maintenance
+
+    Road works                         road rollers, mobile cranes, excavators, dumpers
+
+    Military vehicles                  tanks
+    Heritage vehicles                  traction engine, steam omnibus
+
+    Vehicles drawn by an animal.       cart, trap, buggy, sleigh
+
+                                       50
+    Vehicles being driven remotely by       Some heavy loads and types of caravans
+    a pedestrian                            A bicycle covered with a combustion engine
+    Modified vehicles that do not fit
+    with standard vehicle types
+
+    Excluding
+
+    Vehicles which are normally on          prams
+    the pavement
+                                            horses
+    Animals being led                       should be classed as pedestrians
+    Riders / drivers of toy cars and
+    toy tricycles used by children
+
+    Unattached, stationary caravans are not vehicles and they should be coded under Section 1.25a
+    (Other object in carriageway) as other object in carriageway
+
+M. Codes 01 - 09 should be prefixed with a zero (e.g. 'Car' should be coded 09).
+
+N.  The local processing authority should query any vehicle type coded 01, 02, 16, 17, 18, 22 or 33 if
+
+    1.12 (1st Road Class) is coded 1 or 2.
+
+O. Code 33, 90 and 99 must be accompanied by a description of the vehicle type in 2.5a (Other
+          Vehicle).
+
+P   Personal Powered Transporter (PPTs) includes micro mobility devices.
+
+    The most common type of PPT is an e-scooter and rental ones are the only type of PPT that can be
+    used on public roads. PPT have a maximum speed of 15.5 MPH, weight of 55kg and power 500W.
+
+    PPT sub classifications                 Help text
+    E-scooter rental                        Should be used where the scooter is part of a rental or city centre
+                                            scheme.
+
+    E-scooter private                       Please record the scheme name in the additional details.
+    E-scooter ownership unknown             should be used when there are no rental scheme markings.
+                                            Should only be used for reports where type of e-scooter is unknown
+                                            e.g. failed to stop.
+
+    Powered skateboard                      Includes any four-wheeled device where rider stands between two
+                                            sets of wheels.
+    Standing IC powered scooter             Includes any stand on scooter powered by a small internal
+                                            combustion (IC) engine.
+    Powered self-balancing device           Includes any two-wheeled (parallel to each other) standing balance
+    (without handlebar)                     device with no central handlebar, console, or seat where the rider
+                                            stands between the wheels.
+    Powered self-balancing device           Includes any two-wheel standing balance device with a central
+    (with handlebar)                        handlebar or console at waist level.
+    Powered Unicycle                        Includes any single self-balancing larger wheel where the riders feet
+                                            are positioned on either side of the powered wheel.
+    Powered Monoboard                       Includes any single wide wheel balance device where the riders feet
+                                            are positioned in front and behind the powered wheel, like a
+    Other motorised PPT                     skateboard/snowboard.
+                                            Should be used to cover any other small motorised vehicles, such
+                                            as motorised skates e.g. Ninebot Drift W1 Electric Hovershoes
+
+                                            51
+                               Please record a short description, engine type, number of wheels,
+                               axles and riding position in the additional details.
+
+Q  Autonomous vehicles should be recorded as type 90 Other vehicle and 2.5a should be populated.
+
+R  The following unmotorised devices are not considered vehicles for STATS19 purposes and should
+
+   be recorded as pedestrians
+
+   · Push Scooter
+
+   · Wheelchairs
+
+   · Skateboards
+
+   · Roller blades
+
+   · Prams
+
+S  Only self-reported collisions made by the public can use code 99 where they do not know the
+
+   vehicle. Code 99 should not be used by a driver reporting the collision for the vehicle they are
+
+   responsible for as it is expected that they would know what vehicle they are driving.
+
+T  For police attended collisions where vehicle is unknown by an officer attending then the manoeuvre
+
+   field can be left blank e.g. a failed to stop incidents where vehicle has left the scene.
+
+                               52
+2.5a OTHER VEHICLE
+          FREE TEXT ­ 500 CHARACTERS
+
+NOTES
+
+A.     Additional descriptions are needed to understand some vehicle types. The field can be populated for
+
+       any vehicle type. It should be completed when 2.5 (Type of Vehicle) is coded 33, 90 and 99 to aid
+
+       classification.
+
+B.     The additional characters allowed provides more flexibility to describe or add clarity to a vehicle
+
+       involved in a collision.
+
+C.     Only text relating to the other vehicle should be recorded here. No personal data should be entered
+
+       in the other vehicle free text field.
+
+                                              53
+2.6 TOWING AND ARTICULATION
+
+CODES
+
+0      No tow or articulation
+
+1      Articulated vehicle
+
+2      Double or multiple trailers
+
+3      Caravan
+
+4      Single trailer
+
+5      Other tow
+
+9      Unknown (self-reported only)
+
+[SPACE]  Unknown (police attended only)
+
+NOTES
+
+A.     An articulated vehicle is a tractor with a semi-trailer so constructed that a significant part of the
+
+       weight of the semi-trailer is borne by the tractor. It does not include a tractor without its semi-trailer,
+
+       which should be coded 0, nor a combination made up of a rigid vehicle and a drawbar trailer, which
+
+       should be coded 4. A drawbar trailer has at least 2 axles, the front axle of which is steered by the
+
+       drawbar connecting it to the drawing vehicle.
+
+       Articulated (bendy) buses should be coded 1.
+
+B.     A double/multiple trailer code 2 should be taken to mean two or more trailers.
+
+C.     A caravan code 3 means a two-wheeled or four-wheeled trailer designed for accommodation, or as
+
+       a mobile office etc.
+
+D.     Single trailer code 4 is any rigid vehicle towing a drawbar trailer or trailer with fixed axle(s), other
+
+       than a caravan, via a rigid bar.
+
+E.     Mobile compressors, other heavy plant and equipment, fairground and circus equipment are each to
+
+       be regarded as single trailers - coded 2 or 4 if applicable.
+
+F.     Other tow is any other towing arrangement not defined in codes 0 - 4 and includes vehicles towing
+
+       by rope, and breakdown trucks towing another vehicle by crane-mounted tow or a towing bar but it
+
+       specifically excludes any drawbar trailer.
+
+G. If 2.6 is coded 1 or 2, then 2.5 (Type of Vehicle) should be coded 11, 18, 20, 21, 90 or 98.
+
+H      Only self-reported collisions made by the public can use code 9 unknown where they do not know if
+
+       the vehicle was towing. Code 9 should not be used by a driver reporting the collision for the vehicle
+
+       they are responsible for as it is expected that they would know if they were towing or not.
+
+I      For police attended collisions, where towing status is unknown by an officer attending then the
+
+       towing field can be left blank e.g. a failed to stop incidents where vehicle has left the scene.
+
+                                                      54
+2.7 MANOEUVRES
+
+CODES
+
+01 Reversing
+02 Parked
+03 Waiting to go ahead
+04 Slowing or stopping
+05 Moving off
+06 U-turn
+07 Turning left
+08 Waiting to turn left
+09 Turning right
+10 Waiting to turn right
+11 Changing lane to left
+12 Changing lane to right
+13 Over taking moving vehicle on its offside
+14 Overtaking stationary vehicle on its offside
+15 Overtaking on nearside ("undertaking")
+19 Going ahead
+20 Parking
+99 Unknown (self-reported only)
+[SPACE]{2} Unknown (police attended only)
+
+NOTES
+
+A.     This refers to actions immediately before the collision.
+
+B.     A vehicle in the process of parking should be coded 20 as appropriate, not 02.
+
+C.     A bus/coach stationary at a bus stop should be coded as 'Parked', code 02.
+
+D.     A vehicle moving across the road to park on the offside should be coded 12, even if lanes are not
+
+       marked.
+
+       Code 12 also includes vehicles merging from a slip road.
+
+E.     Code 14 should include where:
+
+       i.       the vehicle being overtaken on the offside is temporarily held up;
+
+       ii.      a parked vehicle is being overtaken on the offside and a vehicle record has been produced
+
+                for that parked vehicle (i.e. the parked vehicle is deemed to have been contributory to the
+
+                collision).
+
+F.     Code 15 should be used where the vehicle being overtaken is parked (see Note E(ii) above), broken
+
+       down in overtaking lane, temporarily held up or moving.
+
+G. Codes 01 - 09 should be prefixed with a zero (e.g. 'Moving off' should be coded 05).
+
+H.     Examples for coding in Annex 9.
+
+I      Code 19 is to be used where the vehicle is following the direction of the road no matter whether it
+
+       turns right or left
+
+J      Code 20 is to be used where a vehicle is manoeuvring to park
+
+K      Only self-reported collisions made by the public can use code 99 where they do not know the
+
+       vehicles manoeuvre. Code 99 should not be used by a driver reporting the collision for the vehicle
+
+                                                 55
+   they are responsible for as it is expected that they would know what manoeuvre they were trying to
+   do.
+
+L  For police attended collisions where vehicle manoeuvre is unknown by an officer attending then the
+
+   manoeuvre field can be left blank e.g. a failed to stop incidents where vehicle has left the scene.
+
+   56
+2.8f VEHICLE MOVEMENT COMPASS POINT FROM
+CODES
+
+0      Parked
+
+1      N
+
+2      NE
+
+3      E
+
+4      SE
+
+5      S
+
+6      SW
+
+7      W
+
+8      NW
+
+9      Unknown (self-reported only)
+
+[SPACE]        Unknown (police attended only)
+
+NOTES
+
+A.     These codes should reflect true compass directions.
+
+B.     The 'from' box gives the direction from which the vehicle had come prior to the collision.
+
+C.     The 'to' box gives the intended direction of the vehicle had there not been an collision.
+
+D.     U turns: these are coded with the same code 'from' and 'to' (e.g. a vehicle travelling from north and
+
+       making a U turn heading back north would be coded 2.8f = 1 and 2.8t = 1.
+
+E.     Stationary vehicles waiting to turn, or to go ahead, should be coded as if they were moving vehicles.
+
+F.     Roundabouts: code both directions as if no roundabout were present (i.e. as if going straight ahead
+
+       or turning, or intending to turn, left or right).
+
+G. Vehicles reversing (for whatever reason) shall be coded as if their intended direction was that in
+          which they were reversing (e.g. A vehicle reversing on the hard shoulder of the northbound
+          carriageway of a dual carriageway should be coded as From North ­ To South).
+
+H      Only self-reported collisions made by the public can use 9 where they do not know the vehicles
+
+       direction. Code 9 should not be used by a driver reporting the collision for the vehicle they are
+
+       responsible for as it is expected that they would know what they were trying to do.
+
+I      For police attended collisions where vehicle direction is unknown by an officer attending then the
+
+       vehicle direction field can be left blank e.g. a failed to stop incidents where vehicle has left the
+
+       scene.
+
+                                                          57
+58
+2.8t VEHICLE MOVEMENT COMPASS POINT TO
+
+CODES
+
+0      Parked
+
+1      N
+
+2      NE
+
+3      E
+
+4      SE
+
+5      S
+
+6      SW
+
+7      W
+
+8      NW
+
+9      Unknown (self-reported only)
+
+[SPACE]        Unknown (police attended only)
+
+NOTES
+
+A.     These codes should reflect true compass directions.
+
+B.     The 'from' box gives the direction from which the vehicle had come prior to the collision.
+
+C.     The 'to' box gives the intended direction of the vehicle had there not been an collision.
+
+D.     U turns: these are coded with the same code 'from' and 'to' (e.g. a vehicle travelling from north and
+
+       making a U turn will be coded 2.8f = 1 and 2.8t = 1.
+
+E.     Stationary vehicles waiting to turn, or to go ahead, should be coded as if they were moving vehicles.
+
+F.     Roundabouts: code both directions as if no roundabout were present (i.e. as if going straight ahead
+
+       or turning, or intending to turn, left or right).
+
+G. Vehicles reversing (for whatever reason) shall be coded as if their intended direction was that in
+          which they were reversing (e.g. A vehicle reversing on the hard shoulder of the northbound
+          carriageway of a dual carriageway should be coded as From North ­ To South).
+
+H      Only self-reported collisions made by the public can use 9 where they do not know the vehicles
+
+       direction. Code 9 should not be used by a driver reporting the collision for the vehicle they are
+
+       responsible for as it is expected that they would know what they were trying to do.
+
+I      For police attended collisions where vehicle direction is unknown by an officer attending then the
+
+       vehicle direction field can be left blank e.g. a failed to stop incidents where vehicle has left the
+
+       scene.
+
+                                                          59
+60
+2.8fe Vehicle direction - from grid reference easting
+2.8fn Vehicle direction - from grid reference northing
+2.8te Vehicle direction - to grid reference easting
+2.8tn Vehicle direction - to grid reference northing
+Optional requirement that can be automatically collected by some systems
+
+Notes
+
+A.     Variables 2.8fe, 2.8fn, 2.8te and 2.8tn are automatically populated by systems like PRONTO,
+
+       CRaSH and single online home. The coordinates are derived from digital map points collected
+
+       around the collision's location.
+
+B.     Point (2.8fe and 2.8fn) should be captured about 10m before the collision
+
+C.     Point (2.8te and 2.8tn) should be captured where the vehicle was intending to go. Again about 10m
+
+       beyond the collision showing intended route.
+
+C.     The aim of collecting these locations is to understand how a vehicle intended to move through a
+
+       junction before interrupted by the collision. It is not intended that it is used to capture the vehicle was
+
+       travelling from Land's End to John o' Groats
+
+       What the data might look like (example from CRASH)
+
+                                                     61
+2.9 VEHICLE LOCATION AT TIME OF COLLISION - RESTRICTED LANE / AWAY FROM MAIN
+CARRIAGEWAY
+
+CODES
+
+00 On main carriageway (not in restricted lane)
+01 Tram / Light rail track
+02 Bus lane / Busway / Restricted lanes
+04 Cycle lane (on main carriageway)
+05 Cycleway or shared use footway (not part of main carriageway)
+06 Lay-by / hard shoulder
+09 Footway (pavement)
+99 Unknown (self-reported only)
+[SPACE]{2} Unknown (police attended only)
+
+NOTES
+
+A.     Tram/Light rail track: Collisions occurring on tram/light rail track, where track forms part of the
+
+       highway. This includes sections where the track shares the road with other motorised traffic or forms
+
+       a segregate Has designated lane in the road.
+
+       Where track sections can only be used by trams and no other road users then these are not
+       STATS19 reportable and collisions would be reportable to HSE or Rail Accident Investigation
+       Branch.
+       Collision does not necessarily have to involve tram or light rail vehicle.
+
+B.     Bus lane: Lane marked off within main carriageway for use by buses (and possibly other permitted
+
+       vehicles such as taxis and pedal cycles). Code 02 should be used even if lane restriction was not in
+
+       force at the time of the collision.
+
+C.     Busway: Section of highway segregated from main carriageway, for use by buses (including guided
+
+       buses see Note M), and possibly other permitted vehicles such as taxis and pedal cycles.
+
+D.     Cycle lane: Lane (advisory or mandatory) marked off within main carriageway for use by pedal
+
+       cycles only.
+
+E.     Cycleway: Forms part of the highway (road in Scotland) but is not part of the main carriageway.
+
+       Includes shared use on footway (pavement) whether or not separated by white line.
+
+F.     Footway (pavement): Footway, for use by pedestrians only, which forms part of the highway but is
+
+       separated from the main carriageway. Includes grass verges.
+
+G. Other restricted lanes within the main carriageway, not listed above, (e.g. for high occupancy
+          vehicles or goods vehicles) should be coded 02.
+
+H.     Vehicles involved in collisions on the hard shoulder when it is being used as a running lane,
+
+       should be coded 00.
+
+I.     If 1.12 (1st Road Class) is coded 1 or 2 then 2.9 must be coded 00, 02 or 05 - 06
+
+J      Only self-reported collisions made by the public can use code 99 where they do not know the
+
+       vehicles location. Code 99 should not be used by a driver reporting the collision for the vehicle they
+
+       are responsible for as it is expected that they would know what the characteristics of the road.
+
+K      For police attended collisions where vehicle direction is unknown by an officer attending then the
+
+       vehicle direction field can be left blank e.g. a failed to stop incidents where vehicle has left the
+
+       scene.
+
+                                            62
+L  Guided Busway can be recorded in STATS19 but whether it is STATS19 recorded depends on the
+
+   characteristics of the route where the collision happened.
+
+   Included
+
+   On road ­ Collisions on these sections should be included in STATS19, as would any other
+   bus operating on a public highway.
+
+   Guideway that shares space with other highway users
+   Collisions where interaction with other traffic is possible should be included in STATS19 e.g.
+   at junctions between public highways and guided busways or where the guided busway
+   runs down the central reservation of a road.
+
+   Excluded
+
+             Guideway that does not share space with other highway users. Collisions on Guideways
+             where there is no interaction with other traffic or where the guided busway does not form
+             part of the highway should not be included in STATS19 reports even if an collision occurs
+             between guided buses. These sections behave more like railways than roads
+
+             63
+2.10 JUNCTION LOCATION OF VEHICLE
+
+CODES
+
+0      Not at or within 20m of a junction
+
+1.     Approaching junction or waiting / parked at junction approach
+
+2.     Cleared junction or waiting/parked at junction exit
+
+3.     Leaving roundabout
+
+4.     Entering roundabout
+
+5.     Leaving main road
+
+6.     Entering main road
+
+7.     Entering from slip road
+
+8      Mid junction ­ on roundabout or on main road
+
+9      Unknown (self-reported only)
+
+[SPACE]        Unknown (police attended only)
+
+NOTES
+
+A.     Codes 1 and 2 include vehicles waiting in a queue. Use code 0 if collision occurs in queue more
+
+       than 20 metres from junction.
+
+B.     Code 3 includes late lane changes immediately prior to leaving roundabout.
+
+C.     Codes 4 and 6 only apply to vehicles attempting to enter the circulatory part of the roundabout or the
+
+       main road. Code 1 should be used for vehicles waiting to enter the roundabout/main road.
+
+D.     Code 5 includes vehicles leaving the main road on to a slip road.
+
+E.     If 1,14 is a roundabout or 1.16 (Junction Detail) is coded 13 , 16 ,17, 18, 19 then 2.10 must be
+
+       coded 1 - 7.
+
+       If 1.16 is coded 00, 2.10 must be coded 0.
+
+F.     See also "Examples for coding the locations of collisions and vehicles" in Annex 9.
+
+G      Only self-reported collisions made by the public can use 9 where they do not know the vehicles
+
+       position in relationship with a junction. Code 9 should not be used by a driver reporting the collision
+
+       for the vehicle they are responsible for as it is expected that they would know if they were at a
+
+       junction.
+
+H      For police attended collisions where vehicle direction is unknown by an officer attending then the
+
+       vehicle direction field can be left blank e.g. a failed to stop incidents where vehicle has left the
+
+       scene.
+
+                                                   64
+2.11 SKIDDING AND OVERTURNING
+
+CODES
+
+0.     No skidding, jack-knifing or overturning
+
+1.     Skidded
+
+2.     Skidded and overturned
+
+3.     Jack-knifed
+
+4.     Jack-knifed and overturned
+
+5.     Overturned
+
+9      Unknown (self-reported only)
+
+[SPACE]  Unknown (police attended only)
+
+NOTES
+
+A.     'Jack-knifed' should be entered in preference to 'skidded' when both apply.
+
+B.     'Skidded' or 'Jack-knifed' should be entered, where appropriate, irrespective of whether it is
+
+       considered to have been a cause or a result of the collision.
+
+C.     A vehicle which, as a result of the collision, was at any time on its roof, side, front or rear should be
+
+       recorded as having overturned, even though it may have come to rest on its wheels. Two-wheeled
+
+       motor vehicles and pedal cycles should only be coded 0 or 1. Such a vehicle is not regarded as
+
+       'overturned' when lying on its side.
+
+D.     Only articulated vehicles can jack knife.
+
+E      Only self-reported collisions made by the public can use code 9 unknown where they do not know if
+
+       the vehicle skidded or overturned. Code 9 should not be used by a driver reporting the collision for
+
+       the vehicle they are responsible for as it is expected that they would know if they had skidded or
+
+       overturned.
+
+F      For police attended collisions where skidded or overturned is unknown by an officer attending then
+
+       the skidded or overturned field can be left blank e.g. a failed to stop incidents where vehicle has left
+
+       the scene.
+
+                                                  65
+2.12 HIT OBJECT IN CARRIAGEWAY
+
+CODES
+
+00. None
+01. Previous collision
+02. Roadworks
+04. Parked vehicle
+05. Bridge - roof
+06. Bridge - side
+07. Bollard / Refuge
+08. Open door of vehicle
+09. Central island of roundabout
+10. Kerb
+11. Other object
+12. Any animal (except ridden horse)
+99 Unknown (self-reported only)
+[SPACE]{2} Unknown (police attended only)
+
+NOTES
+
+A.     If more than one of the items above are hit, the code selected should be the one which the vehicle
+
+       hit first.
+
+B.     Kerb includes build out within traffic calming schemes. Road humps, speed cushions and similar
+
+       traffic calming features should not be recorded in hit object in carriageway. These features used
+
+       to modify traffic speed are part of the road and are controlled through "The Highways (Road Humps)
+
+       Regulations 1999" (https://www.legislation.gov.uk/uksi/1999/1025/contents/made). If such an item
+
+       is considered to have contributed to the collision, this can be recorded as a road safety factor.
+
+C.     Code 11 includes pedestrians which were already dead before they were hit, but otherwise
+
+       excludes pedestrians or anything recorded elsewhere as a vehicle.
+
+D.     Code 12 excludes animals pulling vehicles (e.g. horse and trap).
+
+       'Animal' relates to all animals that may be construed to have been a 'Carriageway Hazard' and not
+       just those animals defined in the road traffic act.
+
+E.     If 2.12 is coded 11, item 1.25a (Carriageway Hazards) must not be coded 00. It is important to know
+
+       what type of hazard was present
+
+F.     If any vehicle runs into vehicle(s) which were involved in a previous collision, use code 01.
+
+       If a vehicle runs into debris associated with a previous collision or takes avoiding action and hits
+       another object in the carriageway, code 02 - 12 as appropriate, and use code 18 for variable 1.25a.
+
+       If 2.12 is coded 01, 1.25a must be coded 18.
+
+G. If any vehicle is involved with roadworks (Code 02) then 1.24 (Special Conditions at Site) should be
+          coded 13.
+
+H.     If 2.12 is coded 09 then 1.14 (Road Type) must be coded 1
+
+I.     Codes 1 - 9 should be prefixed with a zero (e.g. 'Roadworks' Code 02).
+
+                                                     66
+J  Only self-reported collisions made by the public can use code 99 if they do not know what object
+
+   was hit in the carriageway. Code 99 should not be used by a driver reporting the collision for the
+
+   vehicle they are responsible for as it is expected that they would know what they had hit.
+
+K  For police attended collisions where object that was hit is unknown by an officer attending then the
+
+   hit in the carriageway field can be left blank e.g. a failed to stop incidents where vehicle has left the
+
+   scene.
+
+           67
+2.13 VEHICLE LEAVING CARRIAGEWAY
+
+CODES
+
+0.     Did not leave carriageway
+
+1.     Left carriageway nearside
+
+2.     Left carriageway nearside and rebounded
+
+3.     Left carriageway straight ahead at junction
+
+4.     Left carriageway offside onto central reservation
+
+5.     Left carriageway offside onto central reservation and rebounded
+
+6.     Left carriageway offside and crossed central reservation
+
+7.     Left carriageway offside
+
+8.     Left carriageway offside and rebounded
+
+9      Unknown (self-reported only)
+
+[SPACE]  Unknown (police attended only)
+
+NOTES
+
+A.     If a vehicle leaves the carriageway more than once, record the first occurrence.
+
+B.     Enter Code 0 if any vehicle hit the kerb and rebounded staying in carriageway.
+
+C.     Code 3 applies to 'T' or staggered junctions where a vehicle on the minor road crossed the main
+
+       road and left the carriageway opposite its approach road.
+
+D.     Codes 7 and 8 should not be used for dual carriageways.
+
+E.     A vehicle is 'Leaving the carriageway' when the vehicle reaches (temporarily or permanently) a
+
+       position such that one or more of its wheels are on (or beyond) the limit of the carriageway in which
+
+       it was originally travelling. This includes entering a separated busway or cycleway but not simply
+
+       crossing a white line to enter a bus or cycle lane
+
+F.     The hard shoulder should be treated as part of the carriageway.
+
+G. Footways are not part of the carriageway (e.g. a vehicle leaving the carriageway nearside on to the
+          footway should be coded 1).
+
+H.     Hitting the centre of a roundabout constitutes having left carriageway offside and should be coded 7
+
+       or 8 as appropriate.
+
+I.     If a vehicle hits a central reservation (code 4, 5 or 6), then 1.14 (Road Type) must be coded 3 'Dual
+
+       carriageway'.
+
+J.     Rebounded (Codes 2, 5 and 8) means returned after hitting something (e.g. the central reservation,
+
+       road furniture, parked vehicles etc). If this item is coded 2, 5 or 8 then 2.14 must refer to what the
+
+       vehicle hit initially and cannot, therefore, be coded 00, 08 or 09.
+
+K.     Pedal cycles away from the carriageway (e.g. on cycleway or shared use footway) should be coded
+
+       0 in all cases.
+
+L      Only self-reported collisions made by the public can use code 9 unknown where they do not know if
+
+       the vehicle left the carriageway. Code 9 should not be used by a driver reporting the collision for the
+
+       vehicle they are responsible for as it is expected that they would know if they left carriageway.
+
+M      For police attended collisions where vehicle left the carriageway is unknown by an officer attending
+
+       then the vehicle left the carriageway can be left blank e.g. a failed to stop incidents where vehicle
+
+       has left the scene.
+
+                                                    68
+2.14 FIRST OBJECT HIT OFF CARRIAGEWAY
+
+CODES
+
+00. None
+01. Road sign / Traffic signal
+02. Lamp post
+03. Telegraph pole / Electricity pole
+04. Tree
+05. Bus stop / Bus shelter
+06. Central crash barrier
+07. Nearside or offside crash barrier
+08. Submerged in water (completely)
+09. Entered ditch
+10. Other permanent object
+11. Wall or fence
+99 Unknown (self-reported only)
+[SPACE]{2} Unknown (police attended only)
+
+NOTES
+
+A.     If more than one of the items above are hit, the code selected should be the one the vehicle hit first.
+
+B.     If pedestrian railings or grass or other bank are hit, then Code 10 should be used.
+
+C.     If any vehicle is involved with a bus stop (Code 05), item 1.12 (1st Road Class) cannot be
+
+       'Motorway' (code 1 or 2).
+
+D.     If any vehicle is involved with a central crash barrier (Code 06) then 1.14 (Road Type) should be
+
+       coded 3 'Dual carriageway'.
+
+E.     Codes 0 - 9 should be prefixed with a zero (e.g. 'Lamp post' Code 02).
+
+F      Only self-reported collisions made by the public can use code 9 unknown where they do not know
+
+       what the first object that was hit off the carriageway. Code 9 should not be used by a driver reporting
+
+       the collision for the vehicle they are responsible for as it is expected that they would know what the
+
+       first object that was hit off the carriageway.
+
+G      For police attended collisions where the first object that was hit off the carriageway is unknown by
+
+       an officer attending then the first object that was hit off the carriageway can be left blank e.g. a failed
+
+       to stop incidents where vehicle has left the scene.
+
+                                                       69
+2.16 FIRST POINT OF IMPACT
+
+CODES
+
+0.     Did not impact
+
+1.     Front
+
+2.     Back
+
+3.     Offside
+
+4.     Nearside
+
+9      Unknown (self-reported only)
+
+[SPACE]         Unknown (police attended only)
+
+NOTES
+
+A.     This should be the first point of the vehicle to come into contact with another vehicle, pedestrian or
+
+       object. Damage to the vehicle need not have occurred.
+
+B.     If a vehicle stops suddenly to avoid another vehicle/pedestrian/object in road, but there is no impact,
+
+       then enter code 0.
+
+C.     Only self-reported collisions made by the public can use code 9 unknown where they do not know if
+
+       the first point of impact. Code 9 should not be used by a driver reporting the collision for the vehicle
+
+       they are responsible for as it is expected that they would first point of impact.
+
+D.     For police attended collisions where first point of impact is unknown by an officer attending then the
+
+       first point of impact field can be left blank e.g. a failed to stop incidents where vehicle has left the
+
+       scene.
+
+                           Front                              Did not impact
+                                                              Unknown (self-rep only)
+
+    Nearside                                    Offside
+
+                       Back
+
+                                                          70
+2.21 SEX OF DRIVER
+
+CODES
+
+1.     Male
+
+2.     Female
+
+3.     Not known
+
+NOTES
+
+A.     Code 3 'Not known (Not traced) should be used in the case of a 'failed to stop' driver, or where the
+
+       police are unable to trace the driver of the vehicle. However, where this information becomes
+
+       available later (e.g. where a driver is pursued and caught or discovered through investigation), it
+
+       should be updated.
+
+B.     If a driver is injured, then the sex entered here must be repeated in item 3.7 (Sex of Casualty) for
+
+       the driver casualty record for this vehicle.
+
+C      Why we ask this question: Your answer is key to understanding trends in road safety. It also helps
+
+       road safety organizations, charities ,and local and central government to understand what
+
+       demographics to target for road interventions and monitoring road safety issues.
+
+       How to answer: Please select either "Female" or "Male". If you are considering how to answer, use
+       the sex recorded on an official identification document such as a driving licence, birth certificate or
+       passport.
+
+                                                     71
+2.22 AGE OF DRIVER
+
+NOTES
+
+A.     Where an exact age at last birthday is not known, enter an estimate.
+
+B.     Enter age in years, ignoring additional months. Unused spaces to the left of the age should be
+
+       coded 0 (e.g. for child cyclist aged 9 years 11 months, enter 009).
+
+C.     Leave blank if it is not possible to make a reasonable estimate. Do not enter a local default code
+
+       such as 000, 099 or 999 to indicate 'not known'. It is expected that all fatalities will have age
+
+       populated.
+
+D.     This data should be entered even if the driver is not injured.
+
+E.     A blank is acceptable if the driver failed to stop , or if the vehicle was parked and unattended (so no
+
+       driver). However, where this information becomes available later (e.g. where a `failed to stop' driver
+
+       is pursued and caught), it should be updated.
+
+F.     If a driver is injured, then the age entered here must be repeated in item 3.8 (Age of Casualty) for
+
+       the driver casualty record for this vehicle.
+
+G. If 2.5 (Vehicle Type) is a motorised vehicle coded 02 - 05, 08 - 11, 17 - 21, 23, 33, 97 or 98 then the
+          local processing authority should query the driver age if this is under 16.
+
+                                                     72
+2.23a BREATH TEST
+
+CODES
+
+0.     Not applicable
+
+1.     Positive
+
+2.     Negative
+
+3.     Not requested
+
+4.     Refused to provide
+
+5.     Driver not contacted at time of collision
+
+6.     Not provided (medical reasons)
+
+7      Device / test not available
+
+8      No driver present
+
+9      Not collected (Self-reported only)
+
+NOTES
+
+A.     This item refers to breath tests required under sections 6(1) or 6(2) of the Road Traffic Act 1988, but
+
+       not to those required under section 7 of the Act, from persons arrested under sections 6(5) or
+
+       section 4(6) of the Act. If the breath test required under sections 6(1) or 6(2) is positive, it should be
+
+       so reported irrespective of whether a possible second breath test under section 7 or a blood or urine
+
+       test confirms or contradicts the results of the first breath test.
+
+B.     'Not applicable' should only be used to cover pedal cyclists and other non-motor vehicle drivers to
+
+       whom the legislation does not apply (i.e. any conditions not referred to in Sections 6(1) or 6(2) of the
+
+       Road Traffic Act 1988).
+
+C.     'Not requested' should be used where it was decided not to require a breath test.
+
+D.     'Refused to provide' should be used where a driver refuses a breath test, irrespective of whether
+
+       prosecution follows or not.
+
+E.     'Not contacted' should be used when a driver, from whom a test may be required, absents
+
+       themselves from the scene of the collision, or where the police do not attend the collision scene.
+
+       Also includes vehicles which are parked and unattended.
+
+F.     'Not provided (medical reasons)' includes cases in which a hospital doctor or paramedic objected to
+
+       the breath test and cases in which injury (including death) or circumstances rendered a breath test
+
+       impracticable. Where code 6 and code 0 both apply, use code 0.
+
+G. If 2.5 (Vehicle Type) is coded 02 - 05, 08 - 11, 17 - 21, 23, 33, 97 or 98 then 2.23a must not be
+          coded 0.
+
+H      Where the device / test is not available at the roadside use code 7
+
+I      Use code 8 where there is no driver present e.g. unattended parked car
+
+J      Self-reported collisions do not require this information, so use code 9 for these reports as only a
+
+       police officer can collect this data.
+
+K      A positive test is where someone is over the legal limit
+
+       In England and Wales a positive test would be above 35 micrograms of alcohol per 100ml of breath
+       or more than 80 milligrams per 100ml of blood
+
+       In Scotland (from 5th December 2014) a positive test would be above 22 micrograms of alcohol per
+       100ml of breath or more than 50 milligrams per 100 ml of blood
+
+L      A negative result is where someone is under the limit or has no alcohol present.
+
+                                                  73
+2.23b DRUG TEST
+
+CODES
+
+0.     Not applicable
+
+1.     Positive
+
+2.     Negative
+
+3.     Not requested
+
+4.     Refused to provide
+
+5.     Driver not contacted at time of collision
+
+6.     Not provided (medical reasons)
+
+7      Device / test not available
+
+8      No driver present
+
+9      Not collected (Self-reported only)
+
+NOTES
+
+A.     This item refers to preliminary drug tests as specified under sections 6C(1) or 6C(2) of the Road
+
+       Traffic Act 1988, but not to those required under section 7 of the Act, from persons arrested under
+
+       sections 6(5) or section 4(6) of the Act. If the preliminary drug test required under sections 6C(1) or
+
+       6C(2) is positive, it should be so reported irrespective of whether a possible blood or urine test
+
+       confirms or contradicts the results of the preliminary test.
+
+B.     'Not applicable' should only be used to cover pedal cyclists and other non-motor vehicle drivers to
+
+       whom the legislation does not apply (i.e. any conditions not referred to in Sections 6(1) or 6(2) of the
+
+       Road Traffic Act 1988).
+
+C.     'Not requested' should be used where it was decided not to require a drug test.
+
+D.     'Refused to provide' should be used where a driver refuses a drug test, irrespective of whether
+
+       prosecution follows or not.
+
+E.     'Not contacted' should be used when a driver, from whom a test may be required, absents
+
+       themselves from the scene of the collision, or where the police do not attend the collision scene.
+
+       Also includes vehicles which are parked and unattended.
+
+F.     'Not provided (medical reasons)' includes cases in which a hospital doctor or paramedic objected to
+
+       the drug test and cases in which injury (including death) or circumstances rendered a drug test
+
+       impracticable. Where code 6 and code 0 both apply, use code 0.
+
+G. If 2.5 (Vehicle Type) is coded 02 - 05, 08 - 11, 17 - 21, 23, 33, 97 or 98 then 2.23b must not be
+          coded 0.
+
+H      Where the device / test is not available at the roadside use code 7
+
+I      Use code 8 where there is no driver present e.g. unattended parked car
+
+J      Self-reported collisions do not require this information so use code 9 for these reports, as only a
+
+       police officer can collect this data.
+
+K      A positive test is where someone is over the legal limit
+
+L      A negative result is where someone is under the limit or has no drugs present.
+
+                                                  74
+2.24 DID VEHICLE STOP AT SCENE OF COLLISION
+
+CODES
+
+0.     Vehicle stopped at scene of collision
+
+1.     Failed to stop at scene of collision
+
+2.     Vehicle did not collide and did not stop, but did contribute to a collision.
+
+NOTES
+
+A.     ' Vehicle stopped at scene of collision ' is to be coded when a vehicle, whether in, or contributing to
+
+       the collision, stops at the scene of the collision and vehicle/driver data is obtainable.
+
+B.     Where `Failed to stop at scene of collision' is used, it is likely that most information about the vehicle
+
+       and its driver will be unknown. However, where this information becomes available later (e.g. where
+
+       a 'hit and run driver' is pursued and caught), it should be entered in the appropriate boxes elsewhere
+
+       on STATS19.
+
+       e.g. person crossing the road and was then hit by a car. The car does not stop, the driver would
+       have been aware of the collision and has chosen not to stop and exchange details
+
+C.     'Non-stop vehicle, not hit' includes those cases where a vehicle was involved in, or contributory to,
+
+       an collision, but did not or was not hit, and then left the scene of the collision so that little information
+
+       is known for either the vehicle or its driver. Such a vehicle cannot be described as a 'hit and run' as
+
+       the driver may be unaware of the collision.
+
+       e.g. A lorry overtakes a cyclist and the sideways air blast knocks the cyclist off their bike causing an
+       injury. A collision between the vehicles has not occurred and the driver might be unaware that they
+       had caused the cyclist to crash, but the lorry played a part in the cyclists collision
+
+       e.g. vehicle V3 stopped suddenly causing V1 to stop and then V2 crashes into V1. V3 was not
+       impacted, but V3 actions may have played a part in the collision.
+
+                                                    75
+2.26 VEHICLE REGISTRATION MARK
+
+NOTES
+
+A.     The Vehicle Registration Mark (VRM) of all motor vehicles involved in a personal injury collision
+
+       should be reported with the following exceptions:
+
+       i.    foreign or diplomatic vehicles e.g. 101 D 101,900 X 400 other formats are also be used
+
+       ii.   military vehicles e.g. 11aa11, aa11aa other formats are also be used
+
+       iii.  vehicles displaying trade plates. e.g. they are either red-on-white or white-on-red
+
+             coloured
+
+B.     For the vehicles listed in Note A above and for vehicles for which the registration is unknown or for
+
+       which a registration mark is not required, the boxes should be left blank.
+
+C.     Blank spaces in the middle of a VRM containing less than seven characters, should be removed.
+
+       e.g. A12 BCD should be entered as A12BCD
+
+D.     Where the VRM is less than seven characters long, it should be left justified, and the remaining
+
+       boxes be left blank.
+
+       EXAMPLE:        A 1 2 BCD
+
+E.     Only text relating to the vehicle registration mark of vehicle should be recorded here. No personal
+
+       data should be entered in the vehicle registration mark free text field.
+
+                                  76
+2.27 DRIVER HOME POSTCODE
+
+DRIVER HOME POSTCODE or one of the following CODES
+
+1.     Unknown
+
+2.     Non-UK resident
+
+3.     Parked and unattended
+
+NOTES
+
+A.     Complete as far as possible if full postcode not known.
+
+B.     Special codes should be inserted in left hand box.
+
+C.     If the postcode is not immediately available, leave blank.
+
+D.     Students living away from home should give the postcode for their temporary address during term
+
+       time and for their permanent address at all other times.
+
+E.     Only text relating to the driver home postcode of vehicle should be recorded here. No personal data
+
+       should be entered in the driver home postcode free text field.
+
+                              77
+2.29a JOURNEY PURPOSE OF DRIVER OR RIDER
+
+CODES
+
+1.     Journey as part of work
+
+2.     Commuting to / from work
+
+6      Not known or not requested
+
+7      Education and educational escort
+
+8      Emergency vehicle (blue light) on response
+
+9      Personal business or leisure
+
+NOTES
+
+A.     Include under code 7 only journeys in which school pupils up to and including 18 years of age are
+
+       travelling, or being taken, to or from school. Pre-school playgroups should be regarded as schools
+
+       for this purpose.
+
+B      Where a journey has more than one purpose, enter the code relevant to the journey purpose at the
+
+       time at which the collision occurred. For example, the journey purpose in an collision involving a
+
+       parent travelling to work and taking a child to school should be coded 7 if the child is in or leaving
+
+       the vehicle when the collision occurs, but should be coded 2 if the collision occurs after the child has
+
+       alighted from the vehicle.
+
+C.     A driver/rider involved in an collision whilst travelling to school to collect a pupil, or returning home
+
+       after having taken a pupil to school, should be coded 7, if this is the only purpose for the journey.
+
+D.     Enter code 1 for bus or taxi drivers transporting children to/from school.
+
+E.     If the driver/rider is not available to be asked then the journey purpose should be coded 6.
+
+F.     A commuting journey to be coded 2 is the journey made to get to work at the beginning of each
+
+       working day or shift, or the journey made after work to get home from work.
+
+G. Code 7 include journeys to/from pre-school or after-school activities based at the school but
+          exclude journeys made to/from school activities which are not based at the school itself. Journeys
+          between school and childcare organisation/childminder are included, but journeys between childcare
+          and the pupil's home are not.
+
+                                                   78
+2.32 MAKE/TYPE OF VEHICLE
+
+Optional requirement that can be collected by some systems
+
+NOTES
+
+A.     Record the make of the vehicle e.g. Ford
+
+B.     Only text relating to the Make/Type of vehicle should be recorded here. No personal data should be
+
+       entered in the Make/Type free text field.
+
+                                                  79
+2.33 MODEL/CC/OUTPUT OF VEHICLE
+Optional requirement that can be collected by some systems
+
+NOTES
+
+A.     Record the model and characteristics of the vehicle e.g. Fiesta
+
+B.     Only text relating to the Model/cc/output of vehicle should be recorded here. No personal data
+
+       should be entered in the Model/cc/output free text field.
+
+       80
+2.34 DRIVING LICENCE APPROPRIATE FOR VEHICLE
+
+CODES
+
+1      Full
+
+2      Provisional
+
+3      Unlicensed
+
+4      Not known or not required
+
+[SPACE]      Not collected
+
+NOTES
+
+A      Use code 1 where driver has a full licence that is suitable for vehicle being driven Please ensure that
+
+       the driving licence refers to and represents the class of vehicle being driven, and not directly to the
+
+       driver themselves.
+
+B      Use code 2 where driver has a provisional licence that is suitable for the vehicle being driven
+
+C      Use Code 3 where driver does not have a licence that is suitable for the vehicle being driven
+
+D      Use Code 4 where it has not been possible to check licence
+
+E      Where driving licence appropriate for vehicle is not applicable then leave blank e.g. cyclist
+
+                                  81
+2.35 WAS VEHICLE LEFT HAND DRIVE?
+
+CODES
+
+1.     No
+
+2.     Yes
+
+9      Unknown
+
+[SPACE]     Not collected
+
+NOTES
+
+A.     Enter Code 1 (No) for pedal cycles, motor cycles, ridden horses, mobility scooters and all other
+
+       vehicles for which Left Hand Drive is not an option.
+
+B      Code 1 for right hand drive cars that are designed to be driven on the left hand side of the road with
+
+       the controls (steering wheel on the right), this is the most common configuration in the UK
+
+C      Code 2 for left hand drive cars that are designed to be driven on the right hand side of the road with
+
+       the controls (steering wheel on the left), this is an uncommon configuration in the UK
+
+D      For police attended collisions where vehicle left hand drive is unknown by an officer attending then
+
+       the field can be left blank e.g. a failed to stop incidents where vehicle has left the scene.
+
+                                   82
+ANNEX 3 - CASUALTY VARIABLES
+
+                                                                       83
+3.1 RECORD TYPE              3
+
+CODES
+
+31. New casualty record
+35. Amended casualty record
+
+NOTES
+
+A.     First box always coded 3 to enable casualty records to be easily identified during computer
+
+       processing and analysis at local and national levels.
+
+B.     In second box, code 5 only to be used when a casualty record already sent to external bodies such
+
+       as DfT, Scottish gov, Welsh gov and local authorities. To be used where the original record (31) or
+
+       previously supplied (35) record is to be replaced by a new updated record.
+
+                                84
+3.2 REPORTING POLICE FORCE
+NOTE
+Repeat of Police Force code entered on the attendant circumstances record at item 1.2
+
+                                                                       85
+3.3 COLLISION REFERENCE
+NOTE
+Repeat of Collision Reference entered on the attendant circumstances record at item 1.3.
+
+                                                                       86
+3.4 VEHICLE REFERENCE NUMBER
+
+NOTES
+
+A.     Repeat of vehicle reference number on the associated vehicle record at item 2.4.
+
+B.     A casualty record for a vehicle occupant should quote the vehicle reference number of the vehicle
+
+       which the casualty occupied.
+
+C.     A pedestrian casualty record should quote the vehicle reference number of the vehicle by which the
+
+       pedestrian was first hit.
+
+                                     87
+3.5 CASUALTY REFERENCE NUMBER
+
+NOTES
+
+A.     The first casualty coded should be numbered 001 and the subsequent casualties should be
+
+       numbered in sequence.
+
+B.     No two casualties in an collision should have the same casualty reference number.
+
+                               88
+3.6 CASUALTY CLASS
+
+CODES
+
+1.     Driver / rider
+
+2.     Vehicle / pillion passenger
+
+3.     Pedestrian
+
+NOTES
+
+A.     For code 1 the term rider relates to the person in control of a bicycle, motorcycle, ridden horse or
+
+       personal powered transporters and any other person on the vehicle would be a pillion passenger.
+
+       The term driver relates to a person driving any other type of motorised vehicle.
+
+       A person who, having been in control of a vehicle, falls from it (or is injured in the course of
+       dismounting from it), should be recorded as 'Driver or rider' of that vehicle.
+
+       Code 1 includes a person riding a toy / children's cycle, tricycle or pedal car on the carriageway.
+
+       There can only be one casualty coded as driver for any vehicle
+
+B.     Code 2 includes any person in or on the vehicle who is not controlling the vehicle.
+
+       A passenger includes
+
+       i     any occupant of a tandem bicycle who is not controlling the machine
+
+       ii    passengers on combination machines whether occupying sidecar or pillion.
+
+       iii   persons riding on the roof, boot or bonnet of a vehicle
+
+       iv.   persons injured in the course of alighting or dismounting from a vehicle
+
+       v.    Code 2 also includes a child who releases a vehicle's hand brake.
+
+C.     Code 3 includes:
+
+       i.    person on an unpowered push scooter, roller skates, pedal car, balance bike or skateboard;
+
+       ii.   Child driving / riding an electric powered toy designed for children
+
+       iii.  person wheeling or holding a bicycle (whether on footpath or road);
+
+       iv.   person pushing or pulling a vehicle or operating a pedestrian controlled vehicle;
+
+       v.    person leading or herding animals;
+
+       vi.   occupant of a pram or pushchair;
+
+       vii. a driver or passenger who has alighted safely from a vehicle and then sustains injury in a
+                 collision, whether injured by his own or some other vehicle;
+
+       viii. person of unpowered mode of transport other than a cyclist, holding on to the back of a
+                 vehicle (e.g. on roller skates or skateboard);
+
+                                                 89
+    ix.    a person involved in a collision after safely alighting from a bus/coach and who is injured
+
+           by some other vehicle (which would then be recorded as the vehicle involved).
+
+    x.     a person injured away from the highway (e.g. in house or garden) by a vehicle which has
+
+           lost control on a roads managed by the highways authority.
+
+D.  A pedal cyclist riding across a pedestrian (or toucan) crossing should be coded 1.
+
+E.  If 3.6 is coded 3, then 3.10 (Pedestrian Location) must be coded 01 - 10 and 3.11 (Pedestrian
+
+    Movement) must be coded 1 - 9,
+
+F.  If a vehicle is stationary and performing some other function other than being driven e.g. the vehicle
+
+    has a crane and a person is injured unloading goods. This type of incident would fall under the
+
+    Health and Safety Executive (HSE) remit for reporting casualties at work and would not be a
+
+    STATS19 reportable collision. Collisions that occur in construction sites would also fall into the HSE
+
+    remit
+
+                                    90
+3.7 SEX OF CASUALTY
+
+CODES
+
+1.     Male
+
+2.     Female
+
+3      Unknown
+
+NOTE
+
+If the casualty is a driver, then the sex entered here must be the same as that in item 2.21 (Sex of Driver) for
+the driver.
+
+A      Why we ask this question: Your answer is key to understanding trends in road safety. It also helps
+
+       road safety organisations, charities and local and central government to understand what
+
+       demographics to target for road interventions and monitoring road safety issues.
+
+       How to answer: Please select either "Female" or "Male". If you are considering how to answer, use
+       the sex recorded on an official identification document such as a driving license, birth certificate or
+       passport.
+
+B      Code 3 Should only be used where the casualties sex cannot be determined by an officer attended
+
+       the scene (e.g. casualty had already left the collision in an ambulance)
+
+                     91
+3.8 AGE OF CASUALTY
+
+NOTES
+
+A.     Where an exact age at last birthday is not known, enter a reasonable estimate.
+
+       If no estimate is made it will not be possible to classify the casualty as even child or adult. Thus
+       every effort should be made to estimate an age.
+
+B.     Enter age in years, ignoring additional months (e.g. an 11 month old baby is 000 years).
+
+C.     Unused spaces to the left of the age should be coded 0 (e.g. for a child casualty aged 9 years, enter
+
+       009).
+
+D.     Leave blank if it is not possible to make a reasonable estimate. Do not enter 000, 099 or 999 to
+
+       indicate 'not known'. It is expected that all fatalities will have age populated unless the person's
+
+       identity cannot be established.
+
+E.     If the casualty is a driver, then the age entered here must be the same as that in item 2.22 (Age of
+
+       Driver) for the driver.
+
+                                        92
+3.9a SEVERITY OF CASUALTY
+
+Optional requirement that can be automatically collected by some systems
+
+Where possible legacy collision severity should be automatically populated by police systems based on the
+injuries of the casualty recorded in 3.22.
+
+CODES
+
+1.     Fatal
+
+2.     Serious
+
+3.     Slight
+
+NOTES
+
+Severity of casualty is a calculated field captured by systems like PRONTO, CRaSH and single online home.
+derived from 3.22
+
+                93
+3.9b SEVERITY
+
+Optional requirement that can be automatically collected by some systems
+
+Where possible legacy collision severity should be automatically populated by police systems based on the
+injuries of the casualty recorded in 3.22.
+
+CODES
+
+1      Killed
+
+3      Slight
+
+5      Very Serious
+
+6      Moderately Serious
+
+7      Less Serious
+
+NOTES
+
+Severity is a calculated field captured by systems like PRONTO, CRaSH and single online home derived
+from 3.22
+
+                           94
+3.10 PEDESTRIAN LOCATION
+
+CODES
+
+01. In carriageway, crossing on pedestrian crossing
+02. In carriageway, crossing within zig-zag lines at crossing approach
+03. In carriageway, crossing within zig-zag lines at crossing exit
+04. In carriageway, crossing elsewhere within 50 metres of pedestrian crossing
+05. In carriageway, crossing elsewhere
+06. On footway or verge
+07. On refuge, central island or central reservation
+08. In centre of carriageway, not on refuge, central island or central reservation
+09. In carriageway, not crossing
+10. Unknown or other
+
+NOTES
+
+A.     If the casualty was not a pedestrian, leave these boxes blank.
+
+B.     Codes 02 and 03 are only applicable to zebra and pelican/puffin/toucan crossings.
+
+C.     A 'pedestrian crossing the road' is defined as one wholly or partly on the carriageway who has the
+
+       intention to cross from one footway to another, or to a central reservation or refuge.
+
+D.     If there is conflict between codes 05 and 08, enter code 05.
+
+E.     If 3.10 is coded 01 or 04, then either 1.20 must be coded 11, 12, 13, 14, 15, 16 or 17
+
+       If 3.10 is coded 02 or 03 then 1.20 must be coded 13 or 14.
+
+F.     If 3.10 is left blank, then 3.6 (Casualty Class) must be coded 1 or 2.
+
+G. Codes 1 - 9 should be prefixed with zero (e.g. 'In carriageway, crossing elsewhere' code 05).
+
+                          95
+3.11 PEDESTRIAN MOVEMENT
+
+CODES
+
+1.     Crossing from driver's nearside
+
+2.     Crossing from driver's nearside - masked by parked or stationary vehicle
+
+3.     Crossing from driver's offside
+
+4.     Crossing from driver's offside - masked by parked or stationary vehicle
+
+5.     In carriageway, not crossing (e.g. could be standing still or playing)
+
+6.     In carriageway, not crossing (e.g. could be standing still or playing), but masked by parked or
+
+       stationary vehicle
+
+7.     Walking along in carriageway - facing traffic
+
+8.     Walking along in carriageway - back to traffic
+
+9.     Unknown or other
+
+NOTES
+
+A.     If the casualty was not a pedestrian, leave this box blank.
+
+B.     In codes 1 - 4 'driver' means driver of vehicle which injured the pedestrian. Where a pedestrian was
+
+       struck by more than one vehicle, this should be the driver of the first vehicle.
+
+C.     In codes 5 and 6, include person lying in the carriageway, (e.g. drunk) and people who were not
+
+       moving in any clearly defined manner immediately prior to the collision.
+
+D.     Where 3.10 (Pedestrian Location) is coded 06 'On footway or verge', or where the pedestrian is not
+
+       in the carriageway, 3.11 should be coded 9 'Unknown or other'.
+
+E.     If 3.11 is left blank, then 3.6 (Casualty Class) must be coded 1 or 2.
+
+F.     If 3.11 is coded 1 - 4, then 3.10 (Pedestrian Location) should not be coded 06 or 09.
+
+G. If 3.11 is coded 5 - 8, then 3.10 should not be coded 01 - 05.
+
+                                                       96
+3.14 SEAT BELTS OR CHILD RESTRAINTS IN USE
+
+CODES
+
+0.     Not applicable
+
+1.     Worn and independently confirmed
+
+2.     Worn but not independently confirmed
+
+3.     Not worn
+
+4.     Unknown
+
+NOTE
+
+A.     This information is required for casualties, who are occupants of vehicles in which the wearing of
+
+       seat belts is mandatory. The requirement was expanded in include serious and slight injuries
+
+       following the STATS19 review, It is expected that for all fatalities the use of seat belts or child
+
+       restraints populated (0, 1, 2, 3)
+
+       Code 0 should be used for vehicles that do not use seatbelts for the rider controlling the vehicle e.g.
+       bicycle, motorcycle, ridden horse, personal powered transporters, trams.
+
+       Owners of classic cars which were made pre-1965 do not need to install or wear a seatbelt as the
+       vehicle was originally manufactured without one.
+
+B.     This information is required for casualties, who are occupants of vehicles in which the wearing of
+
+       seat belts is mandatory. The requirement was expanded in include serious and slight injuries
+
+       following the STATS19 review, It is expected that for all fatalities the use of seat belts or child
+
+       restraints populated (0, 1, 2, 3)
+
+C.     Code 0 should be used for vehicles that do not use seatbelts for the rider controlling the vehicle e.g.
+
+       bicycle, motorcycle, ridden horse, personal powered transporters, trams.
+
+D.     Owners of classic cars which were made pre-1965 do not need to install or wear a seatbelt as the
+
+       vehicle was originally manufactured without one.
+
+E.     Code 1 Worn and independently confirmed
+
+       ·  First responders tell officer seat belt was worn
+
+       ·  Police officer saw the seat belt on the casualty in situ when they attended
+
+       ·  There is evidence (e.g. bruising or seat belt was cut in process of removing casualty)
+
+F.     Code 2 Worn but not independently confirmed
+
+       ·  First responders tell officer seat belt was worn
+
+       ·  Police officer saw the seat belt on the casualty in situ when they attended
+
+       ·  There is evidence (e.g. bruising or seat belt was cut in process of removing casualty)
+
+G. Code 3 Not worn
+
+       ·  Seat belt was secured behind the person to get around safety features of the vehicle
+
+       ·  Improper use of seatbelt e.g. seatbelts are only designed to hold one person in place, so
+
+          where more than one person is using the same belt, it should be recorded as not worn
+
+                                                97
+3.15 VEHICLE PASSENGER POSITION
+
+CODES
+
+0.     Not a vehicle passenger
+
+1.     Front seat passenger
+
+2.     Rear seat passenger
+
+3      Pillion passenger
+
+9      Unknown (self-reported only)
+
+NOTES
+
+A.     This is intended to be used only in respect of car and taxi/private hire passenger casualties to show
+
+       whether they were in a front or rear seat. The code to be entered is to be related to the seat which
+
+       the casualty occupied immediately prior to the collision.
+
+B.     Vehicle drivers should be coded 0.
+
+C.     Casualties who were riding on the outside of the vehicle should be coded as front seat passengers.
+
+D.     Casualties in the middle row of family vans/multi-people carriers should be coded 2. This also
+
+       applies to passengers in minibuses which are used as taxis or private hire vehicles.
+
+E.     Only self-reported collisions made by the public can use Code 9
+
+                                           98
+3.16 BUS OR COACH PASSENGER
+
+CODES
+
+0.     Not a bus or coach passenger
+
+1.     Boarding
+
+2.     Alighting
+
+3.     Standing passenger
+
+4.     Seated passenger
+
+9      Unknown (self-reported only)
+
+NOTES
+
+A.     Bus or Coach includes all vehicles within 2.5 (Type of Vehicle) code 11 (i.e. buses, coaches,
+
+       minibuses equipped to carry 17 or more seated passengers).
+
+B.     A person involved in an collision after safely alighting from a bus or coach should be classed as a
+
+       pedestrian (i.e. code 0), and the bus or coach should only be recorded if it was subsequently
+
+       involved in the collision.
+
+C.     A person who falls from a bus or coach, or is boarding (code 1) or alighting (code 2) and is struck by
+
+       another vehicle, should be recorded as a passenger, and the bus/coach should then be recorded as
+
+       a vehicle involved. Codes 1 and 2 should only be used to indicate that the casualty was actually
+
+       engaged in boarding or alighting from a bus/coach. They should not be used if the injured person
+
+       was inside the vehicle passenger compartment either moving to alight or moving to a seat after
+
+       boarding. Code 3 should be used in these circumstances (the injury will normally occur when the
+
+       casualty is in the vicinity of the platform or doors).
+
+D.     Codes 3 and 4 are to be used for passengers of a bus or coach injured other than when they were
+
+       boarding or alighting.
+
+E      Only self-reported collisions made by the public can use code 9
+
+                                     99
+3.18 CASUALTY HOME POSTCODE
+
+Enter CASUALTY HOME POSTCODE or one of the following codes
+
+1.     Unknown
+
+2.     Non-UK resident
+
+NOTES
+
+A.     Complete as far as possible if full postcode not known.
+
+B.     Special codes should be inserted in left hand box.
+
+C.     If the postcode is not immediately available, leave blank.
+
+D.     Students living away from home should give the postcode for their temporary address during term
+
+       time and for their permanent address at all other times.
+
+E.     Only text relating to the casualty home postcode should be recorded here. No personal data should
+
+       be entered in the casualty home postcode free text field.
+
+                             100
+3.19a PEDESTRIAN ROAD MAINTENANCE WORKER
+
+CODES
+
+0.     Not applicable
+
+2.     Not known
+
+3      Road maintenance / Utility worker
+
+4      Emergency service worker
+
+5      Vehicle recovery / Breakdown worker
+
+NOTES
+
+A.     If the casualty was not a pedestrian, leave this box blank.
+
+B.     Code 3 applies to road maintenance or utility workers at, or within the coned area approaching (or
+
+       immediately following), roadworks, whether or not they were actively engaged in road maintenance
+
+       activities when the collision occurred.
+
+C.     Code 4 applies to any blue light responders
+
+D.     Code 5 applies to people involved in breakdown assistance and recovery operations
+
+E.     Code 0 applies to all other pedestrians.
+
+                                                    101
+3.20 HELMET WORN
+
+CODES
+
+0.     Not applicable
+
+1.     Yes
+
+2.     No
+
+3.     Unknown
+
+NOTES
+
+A.     Codes 1 - 3 apply to any riders of vehicle where helmets are used e.g. pedal cyclists, motorbikes,
+
+       ridden horse and powered personal transporters.
+
+B.     Use Code 2 if the helmet was worn, but was not strapped up or was incorrectly worn..
+
+                       102
+3.21 ADMITTED TO HOSPITAL
+
+CODES
+
+0      No
+
+1      Admitted overnight to hospital ward
+
+2      Attended A&E
+
+3      Not Attended
+
+Optional requirement that can be collected by some systems
+
+NOTES
+
+A.     Admitted to hospital overnight, as an inpatient. The overnight stay in hospital is not an indication of
+
+       severity, as there are lots of reasons why someone might be admitted to hospital that are not due to
+
+       injuries sustained in collision e.g. pregnancy, underlying health conditions, the very old or young.
+
+B.     Attended accident and emergency (A&E) but not admitted to hospital overnight. A&E is used for
+
+       serious injuries and life-threatening emergencies.
+
+C.     Did not attend hospital
+
+                                            103
+3.22 MOST SEVERE INJURY
+
+CODES
+
+01 Deceased
+02 Broken neck or back
+03 Severe head injury, unconscious
+04 Severe chest injury, extreme difficulty breathing
+05 Internal injuries
+06 Multiple severe injuries, unconscious
+07 Loss of arm of leg (or part)
+08 Fractured pelvis or upper leg
+09 Other chest injury (not bruising or shallow cut)
+10 Deep penetrating or puncture wound
+11 Multiple severe injuries, conscious
+12 Fractured lower leg, ankle or foot
+13 Fractured arm, collarbone or hand
+14 Deep cuts or lacerations
+15 Other head injury (not bruising, shallow cut or dental injuries)
+16 Whiplash or neck pain
+17 Shallow cuts, lacerations, abrasions, or dental injuries (loss of tooth)
+18 Sprains, strains and dislocation
+19 Bruising
+20 Shock (Requiring roadside attention)
+
+NOTES
+
+A.     Code 01 `Deceased' includes only those cases where death occurs in less than 30 days as a result
+
+       of the collision.
+
+       The 30 day fatality definition used by STATS19 comes from the United Nations Economic
+       Commission for Europe (UNECE). It's designed to facilitate international comparisons for road
+       safety by establishing standardised reporting rules between countries.
+
+       `Deceased' does not include death from natural causes or suicide, however only a coroner or
+       procurator fiscal can make these determinations, so it is expected that these cases will be included
+       in STATS19 until a ruling is made.
+
+       It is rare for someone to die more the 30 days of a collision from the injuries sustained, but it can
+       happen. In these rare circumstances days are counted as each 24 hour period following the time of
+       collision. So a casualty that dies within 719 hours and 59minutes (29 days x 24 hours + 23 hours
+       and 59 Minutes) of the collision they would be classed as a fatality and one that died 720 hours or
+       more would not be classed as a fatality using this definition. For STATS19 reporting purposes
+       deaths as a result of the collision that occurred over 719 hours and 59minutes from the collision
+       should be recorded as a severe injury.
+
+B.     Where Other chest injury or other head injury (codes 09 or 15) are selected then it is expected that
+
+       3.22a is used to provide additional context
+
+C.     Shock can be coded 05 or 20
+
+       There are two main types of shock related to collisions, mental shock and circulatory shock. Both
+       are relevant in their own ways, but circulatory shock is the one that can be considered life
+       threatening.
+
+       Circulatory shock is defined as inadequate perfusion of the tissues and in trauma this is down to
+       massive haemorrhage. As it can be internal, definitely not always obvious. However increased heart
+       rate and decreased blood pressure are the key indicators. Circulatory shock would be recorded as
+       05.
+
+                                                    104
+    All other shock should use code 20. As every casualty and circumstance is different following a
+    collision. To try and improve the accuracy of shock recording the addition of "Requiring roadside
+    attention" was added. Roadside attention hasn't been defined what and it would be for
+    officers/medical responders at the scene to determine if shock was an appropriate injury to be
+    recorded.
+
+D.  Burns
+
+    Where burns extend over more than one part of the body, then codes 6 or 11 should be used
+    depending on whether casualty was conscious. Where burns are isolated to just one area use the
+    most appropriate body location from the injury codes and use 3.22a is used to provide additional
+    context
+
+    Friction burns from seatbelt or airbag deployment should be coded as 17
+
+E.  Examples of Severe head injury (code 03) Traumatic head injuries, fracture of skull, traumatic
+
+    amputation of part of head, damage to brain.
+
+F.  Examples of Severe chest injury, extreme difficulty breathing (code 04) Injury/fracture to ribs.
+
+    Casualty may exhibit extreme difficulty in breathing.
+
+G. Examples of Internal injuries (code 05) Injuries to organs, blood vessels or nerves (including shock
+          that requires hospital treatment)
+
+H.  Multiple severe injuries, unconscious (code 06) Any combination of two or more severe injuries in
+
+    the body and the casualty is unconscious
+
+I.  Other chest injury (not bruising or shallow cut) (code 09) 'Other chest injury' is for non-superficial
+
+    injuries only applicable to the chest e.g. broken sternum.
+
+J.  Deep penetrating or puncture wound (code 10) includes 0pen or impaling wound which may reach
+
+    internal organs.
+
+K.  Multiple severe injuries, conscious (code 11) includes any combination of two or more injuries in the
+
+    body and the casualty is conscious.
+
+L.  Deep cuts or lacerations (code 14) includes deep cut that is more than skin deep. Internal muscle or
+
+    fat is exposed.
+
+M. Other head injury (not bruising, shallow cut or dental injuries)(code 09). The use of 'Other head
+          injury' is for non-superficial injuries only applicable to the head e.g. broken jaw, loss of eye
+
+    SUPERFICIAL injuries that just happen to be on the head (bruised cheek, scrapes, minor cuts,
+    minor dental injuries e.g. loss of a tooth etc) should be put in the relevant category - such as
+    'bruising' and 'shallow cuts/lacerations/abrasions').
+
+N.  Whiplash or neck pain (code 16) includes dislocation and sprain of joints and ligaments stretched at
+
+    neck level.
+
+O. Shallow cuts, lacerations, abrasions, or dental injuries (loss of tooth) (code 17) Superficial injury that
+          is only skin deep. No internal muscle or fat is exposed.
+
+P.  Sprains, strains and dislocation (code 18) Dislocation and injury of muscle (other than the neck
+
+    which should be put in the relevant category e.g. Whiplash or neck pain')
+
+Q. 3.22a can be used to provide additional context for any injury
+
+                                              105
+3.22a MOST SEVERE INJURY FREE TEXT
+
+FREE TEXT ­ 50 CHARACTERS
+
+NOTES
+
+A.     Additional descriptions are needed to understand some injuries. The field can be populated for any
+
+       injury type. It should be completed when 3.22 (Most Severe Injury) is coded 9 and 15 to aid
+
+       classification.
+
+B.     Only text relating to the injury should be recorded here. No personal data should be
+
+                                    106
+ANNEX 4 ­ ROAD SAFETY FACTORS
+
+                                                                      107
+4.1 ROAD SAFETY FACTORS
+
+Road Safety Factors (RSF) were introduced following the STATS19 review to replace contributory factors
+with a system using fewer categories and options.
+
+RSF's are collected across 6 categories closely aligned with the safe system pillars.
+
+Catagories                       Codes
+Behaviour or inexperience        B1 to B8
+Distraction or impairment        D1 to D7
+Non-motorised road users or PPT  P1 to P5
+Roads Codes                      R1 to R5
+Speed behaviour                  S1 to S5
+Vehicles Codes                   V1 to V5
+
+NOTES
+
+1.     Collisions attended by an officer must have at least one RSF selected, preferably at least 3
+
+2.     Officers can select up to six factors, relevant to the collision
+
+2.     Only include factors which have contributed to the collision (e.g. do not include B2 Driver/rider
+
+       disobeyed double white lines unless it was relevant to the collision).
+
+3.     More than one factor may, if appropriate, be related to the same road user.
+
+4.     The same factor may be related to more than one road user.
+
+                                 108
+Behaviour or inexperience
+Codes B1 to B8 should be used where
+
+B1 Driver / rider illegal turn / direction of travel or failed to comply with traffic sign / signal or road
+          markings
+
+          Driver/Rider did not stop at automatic traffic signal set at red. Code applies to permanent and
+          temporary traffic signals (e.g. at roadworks).
+          Driver/Rider did not stop at "Stop" sign or give way at "Give Way" sign or road markings. Includes
+          manually operated Stop/Go signs at roadworks.
+          Driver/rider caused collision by failing to stop (whether intentionally or not) at a pedestrian crossing.
+          For this code, a pedestrian crossing is defined as a Zebra crossing or Pelican, Puffin, Toucan or
+          similar light controlled crossing. Central refuges, without any traffic control, are not treated as
+          pedestrian crossings for the purposes of this code.
+          Includes turning left/right at junctions (or performing a "U-turn") where this is not permitted, or
+          travelling the wrong way down a one way street or on the wrong side of a dual carriageway.
+          Includes turnings where specific vehicle types are banned (e.g. car turning at a junction where only
+          buses are permitted to turn).
+          Do not use this code where a driver crossed briefly onto the wrong side of the road during a
+          manoeuvre (e.g. overtaking).
+
+B2 Driver/rider disobeyed double white lines
+
+          Driver/rider deliberately crossed double white line road markings prior to collision.
+
+          Do not use this code to record a vehicle crossing the double white lines as result of losing control.
+
+          Double white lines on the road have specific meanings in the Highway Code. Solid double white
+          lines, means you MUST NOT cross or straddle them unless it is safe and you need to enter
+          adjoining premises or a side road.
+
+B3 Driver / rider overshot junction or poor turn / manoeuvre
+
+          Applies where driver/rider did not stop at a junction and overshot the stop line or give way markings.
+
+          Applies to any manoeuvre performed by the driver/rider which caused, or contributed to, the collision
+          . Examples include reversing, turning left, right or U-turn, changing lanes or overtaking.
+
+          Also include poor vehicle positioning (e.g. in middle of road, in wrong lane at junction or encroaching
+          into bus/cycle lane).
+
+B4 Ineffective observation by either the driver, rider or pedestrian
+
+Driver/rider
+
+·             Failed to look where they were going
+
+·             Looked, but misinterpreted what they saw (looked but did not see).
+
+·             Driver/rider was not paying attention to the road ahead.
+
+·             Misinterpreted the intentions or actions of another road user. Includes misjudging a gap
+
+              in
+
+   the traffic when entering a main road, misjudging an overtaking manoeuvre (including
+
+   passing too close to motorised vehicles) or wrongly anticipating the vehicle ahead in a
+
+   queue moving off.
+
+                                     109
+Pedestrian
+
+·           failed to check the road for traffic when entering the carriageway, or looked but
+
+            misinterpreted what they saw (looked but did not see).
+
+B5 Driver/rider inexperienced or learner
+
+          Nervous
+
+          Driver/rider behaved in such a nervous or uncertain manner that other road users were unable to
+          predict their likely path, or driver/rider panicked in response to circumstances on the road.
+
+          Learner or inexperienced driver/rider
+
+          Use this code where inexperience of driving in general, or inexperience of the particular type of
+          vehicle, caused or contributed to the collision.
+
+          Includes inexperienced pedal cyclists or horse riders. Also includes under-age motor vehicle
+          driver/riders.
+
+          Do not use this code simply to record the presence of a learner or inexperienced driver/rider.
+
+          Inexperience of driving on the left
+
+          Includes a temporary lapse by a foreign driver otherwise familiar with driving on the left. Code may
+          be used in conjunction with codes B1, B4 and v4
+
+          Unfamiliar with model of vehicle
+
+          Use this code where a reasonably experienced driver/rider makes an error because of lack of
+          familiarity with a particular model of vehicle. Examples include a motor cycle rider on a machine with
+          a larger engine capacity than they are used to or a car driver unfamiliar with the controls in a
+          different model of car.
+
+B6 Driver/rider passing too close to another road user or pedestrian
+
+          Use this code whether or not there was contact between another road user or pedestrian and the
+          passing vehicle.
+          Identify the passing vehicle in the "Which participant" box (not the cyclist, horse rider or pedestrian).
+          Includes contact with overhanging wing mirrors.
+
+B7 Vehicle door opened into path of another road user or pedestrian
+
+          Driver or passenger opened a vehicle door causing a collision with another vehicle (e.g. pedal cycle
+          or motor cycle) or caused a passing vehicle to swerve which then contributed to a collision.
+
+          Also applies to buses in which passengers are injured by opening or closing doors.
+
+          Includes drivers who close vehicle door, trapping an alighted passenger's clothing, and then driving
+          off.
+
+B8 Sudden braking or braking in a way unsuitable for conditions
+
+          To be used where a vehicle's sudden braking caused, or contributed to, a collision (regardless of
+          whether the driver/rider was blameworthy). Do not use this code simply to record that a vehicle
+          braked suddenly if this did not cause, or contribute to, the collision.
+
+          Includes vehicles braking suddenly for safety cameras.
+
+            110
+Distraction or impairment
+Codes D1 to D7 should be used where
+
+D1 Affected by alcohol
+          Driver / rider / pedestrian was affected by alcohol and behaved in a way which caused, or
+          contributed to, the collision - whether or not they were above the legal limit.
+
+D2 Affected by drugs
+          Driver / rider / pedestrian was affected by drugs and behaved in a way which caused, or contributed
+          to, the collision. Applies to illicit drugs as well as all medicines, whether prescription or 'over the
+          counter'.
+
+D3 Driver/rider too tired to drive/ride safely
+          Driver/rider was so tired that they could not drive effectively or were unable to perceive hazards.
+
+D4 Driver/rider had uncorrected or defective eyesight
+          Driver/rider's poor vision helped bring about the collision. Includes driver/rider not wearing glasses
+          when they should or wearing the wrong glasses. Drivers are responsible for wearing the correct
+          spectacles they need for driving
+
+D5 Illness or disability
+          Includes driver / rider / pedestrian either suddenly overcome by illness (e.g. fit or blackout) or
+          generally affected by illness (e.g. cold or 'flu), or driver/rider suffering from a permanent disability,
+          which contributed to the collision. Includes where a driver/rider sneezing or coughing contributes to
+          the collision.
+          Also includes driver/riders suffering from poor mental health (e.g. depression, dementia).
+
+D6 Using mobile device
+          Includes 'hand held' and 'hands free' phones, where their use (or attempted use) contributed to the
+          collision, whether or not the driver has been reported for an offence.
+          Includes motorcycle PPT and pedal cycle riders.
+
+D7 Distraction to driver/rider from inside/outside or on vehicle
+          Use this code where a driver/rider was distracted by an event or action (including passenger action)
+          occurring within the vehicle which prevented them from paying attention to the road.
+          Examples of distracted inside the vehicle include using navigation devices, adjusting media players ,
+          attending to child in distress, eating or drinking, lighting/dropped cigarette or wasp in vehicle.
+          Examples of distracted outside the vehicle (e.g. headlight dazzle, admiring the scenery, reading
+          advertisement hoarding, collision on opposite carriageway) and which prevented them from paying
+          full attention to the driving environment before the collision.
+
+                                                                      111
+Non-motorised road users or PPT (i.e. Pedestrian, cyclist, equestrian, mobility scooter or Personal
+Powered Transporter)
+Codes P1 to P5 should be used where
+
+P1 Incorrect use of crossing facility by person crossing the road
+          Pedestrian entered the carriageway at any crossing with pedestrian lights while the lights indicated
+          that the pedestrian should wait. Includes pedestrians entering the carriageway at a zebra crossing
+          but failing to give the driver sufficient time to stop.
+          Code should not be used at traffic signal junctions without pedestrian phase.
+
+P2 Vehicle entering road from pavement
+          Pedal cyclist or PPT contributed to the collision by riding from the pavement into the road.
+          Also includes cyclist or PPT crossing road on pedestrian or toucan crossing.
+          Vehicle crossing pavement to the road (from private drive to enter or leave main carriageway.
+
+P3 Pedestrian showing risk taking behaviour in carriageway
+          Pedestrian was acting in a dangerous manner in the carriageway either deliberately or through
+          negligence. Examples include children playing in the street, deliberately crossing in front of
+          speeding traffic or people collapsing drunk in the carriageway.
+
+P4 Pedestrian careless or in a hurry
+          Pedestrian either behaved in a negligent or thoughtless manner or was in a hurry and, therefore,
+          behaved in an unsafe manner. This covers cases where the person shows lack of concern about the
+          possible consequences of their actions (careless), acts in spite of the likely consequences
+          (reckless), or fails to consider the consequences of their actions as a result of being in a hurry.
+          Also includes cases where a pedestrian was distracted (e.g. using mobile phone).
+
+P5 Pedestrian, cyclist, equestrian hard to see
+          To be used in collisions where, if clothing had been brighter, then they would have been seen in
+          time and the collision would not have occurred. Can be used in conjunction with code V5 if
+          applicable.
+
+                                                                      112
+Roads
+Codes R1 to R5 should be used where the road itself, or related street furniture, is deemed to have
+contributed to the collision.
+R1 Poor or defective road surface or deposits on road
+
+          Includes any obvious road surface defect such as potholes and cracks. Also includes roads where a
+          worn surface or poor skid resistance is thought to have contributed to the collision. Include any
+          deposit arising from human (or animal) activity which has made sections of the road surface slippery
+          or which has caused traction control problems for a vehicle.
+          Also consider if new section 1.25a Conditions or carriageway hazards should be populated.
+
+R2 Road surface was slippery due to weather
+          To be used where the weather has caused the road surface to become slippery. This will be, mainly,
+          wet or icy roads.
+
+R3 Driver/riders view obscured by stationary or parked vehicles
+          The view of the driver/rider was obscured by a stationary or parked vehicle, so they failed to
+          recognise the path of another road user (e.g. vehicle pulling out from junction or pedestrian crossing
+          road) leading, either directly to a collision with that road user, or to the driver taking avoiding action,
+          which then resulted in a collision.
+          The vehicle identified in the "Which participant" boxes should be the vehicle which was affected by
+          the obscured vision not the masking vehicle.
+
+R4 Drivers/riders view obscured by vegetation, buildings, layout or road signs
+          To be used where driver/rider's vision
+                     was affected by trees, hedges or any other form of vegetation.
+                     was affected by the road layout (e.g. failing to see pedestrian crossing road at bend, or
+                     vehicle overtaking near crest of hill).
+                     was affected by buildings, road signs, street furniture or any other man-made feature on, or
+                     near, the highway.
+
+R5 Drivers/riders vision affected by adverse weather or dazzling sun
+          To be used where driver/rider's vision
+                     was affected by dazzle either directly by the sun or by the sun's reflection.
+                     was affected by these weather conditions and this contributed to the collision.
+                     was affected by spray not the vehicle causing the spray.
+
+                                                                      113
+Speed behaviour
+
+Codes S1 to S5 should be used where
+
+S1 Driver/rider exceeding speed limit
+
+          Driver/rider caused, or contributed to the collision, by exceeding the posted speed limit. This code
+          should also be used in cases where the actions of another road user were the immediate cause of
+          the collision but a speeding vehicle also contributed to causing the collision.
+          Includes exceeding variable speed limits (e.g. on motorways) and speed limits based on vehicle
+          type (including towing).
+
+S2 Driver/rider travelling too fast for conditions (including loss of control or swerving)
+
+          Driver/rider was travelling within the speed limit, but their speed was not appropriate for the road
+          conditions and/or vehicle type (including towing), and contributed to the collision.
+          Use when swerving is a definite decision on the part of the driver to change direction suddenly. Do
+          not use this code simply to record that a vehicle swerved if this did not cause, or contribute to, the
+          collision.
+          This code should be used where a driver/rider lost control of their vehicle, thereby causing or
+          contributing to an collision, whether or not they were considered to be at fault. Wherever possible, at
+          least one more code should be allocated to the same driver/rider to give an indication of why they
+          lost control.
+          Includes unpowered vehicles (equestrians and cyclists) as well as motorised ones.
+
+S3 Vehicle used in course of crime
+
+S4 Driver/rider being aggressive, dangerous or reckless
+
+          Use this code where
+                · where the road user (including pedal cyclist) was driving/riding in an aggressive and/or
+                     dangerous manner which caused, or contributed to, the collision. Includes cases where the
+                     driver/rider was competing (or similar interaction) with another road user. Also includes road
+                     rage, but not physical violence outside the vehicle.
+                · where vehicles were racing
+                · where diver/rider either behaved in a negligent or thoughtless manner or was in a hurry and,
+                     therefore, behaved in an unsafe manner. This covers cases where the person shows lack of
+                     concern about the possible consequences of their actions (careless), acts in spite of the
+                     likely consequences (reckless), or fails to consider the consequences of their actions as a
+                     result of being in a hurry.
+                · where driver/rider was too close to the vehicle in front to avoid collision.
+
+S5 Driver/rider moving too slowly for conditions
+
+          Use this code where a slow moving vehicle e.g. farm tractor caused or contributed to the collision,
+          even if the vehicle was not hit.
+
+                                                                      114
+Vehicles
+Codes V1 to V5 should be used where a vehicle (including, where appropriate, pedal cycles, ridden horses,
+horse drawn vehicles or other non-motor vehicles) defect is identified as contributing to the collision or
+where there are grounds for suspecting that the defect contributed.
+V1 Vehicle defective tyres
+
+          Tyres are a critical part of a vehicles ability to move and stop. Defective tyres can contribute to the
+          collision. Common tyre related issues includes (Blow-outs, Punctures, Over or under inflated tyres,
+          Insufficient tread, tyre detached from wheel, Delamination).
+          Only to be used in cases where tyre defects contributed to the collision.
+
+V2 Vehicle defect (excluding tyres and lights)
+          The components that make up a vehicle are a critical to its safe function. Defective parts can
+          contribute to the collision. Common parts related issues includes (Defective brakes, worn-out brake
+          pads, Brake fluid leaks, Defective or missing mirrors, Braking System Failure or faulty, Defective
+          steering or suspension, Engine Failure / malfunction, Sensor failure, Defective Steering system,
+          Faulty Fuel System or storage, Wheel detached).
+          Only to be used in cases where the vehicle defect contributed to the collison.
+
+V3 Vehicle or trailer was overloaded or poorly loaded
+          Includes vehicles carrying too many passengers and load movement in goods vehicles.
+
+V4 Driver/Rider view obscured by blind spot
+          This refers to cases where a driver is unable to see a pedestrian or another vehicle because of a
+          blind spot caused by the design of the vehicle (e.g. windscreen or door pillars) or inadequate
+          coverage of the mirrors.
+          Includes restricted rear vision caused by vehicle loading and blind spots on left hand drive vehicles.
+
+V5 Vehicle with defective lights or not using headlights when visibility is reduced
+          Only to be used if there was a fault with the lights or indicators.
+          Also use code V5 to record a pedal cyclist without lights.
+          Not displaying lights at night or in poor visibility
+
+                                                                      115
+Retired or collected in another way
+
+104 Inadequate or masked signs or road markings
+
+          The warning or directional road signs or road markings, at the collision location, could not be clearly
+          seen or read.
+
+          Includes road signs which are obscured by trees/vegetation or where the sign is unreadable due to
+          glare or poor condition. Also includes road markings which have been worn away or covered by
+          snow.
+
+          This code should also be used where the size, siting or lack of road signs or markings contributed to
+          the collision.
+
+105 Defective traffic signals
+
+          A totally, or partially, defective automatic traffic signal contributed to the collision.
+
+          Includes traffic signals which have previously been damaged by vehicle impact and have become
+          misaligned.
+
+          Part-time signals outside the times of normal operation (and, therefore, not illuminated) should not
+          be regarded as defective.
+
+106 Traffic calming (e.g. speed cushions, road humps, chicanes)
+
+          To be included where any traffic calming measure has contributed to the collision.
+
+107 Temporary road layout (e.g. contraflow)
+
+          Includes contraflow sections on dual carriageways, single alternate line working at roadworks on two
+          way roads and all other locations where a temporary road layout has contributed towards an
+          collision.
+
+108 Road layout (e.g. bend, hill, narrow carriageway)
+
+          Use this code where the permanent layout of the road has contributed to the collision, including
+          narrow lanes on dual carriageways and/or adverse camber.
+
+          This code is likely to be used often in conjunction with other codes (e.g. loss of control on bend or
+          poor driver behaviour on narrow road).
+
+          This code should not be used where the road layout contributed to a visibility problem and in such
+          cases use the appropriate code from the group headed 'Vision affected by' (codes 701 to 710).
+
+109 Animal or object in carriageway
+
+          'Animal' includes any animal (not just those defined in the Road Traffic Act) which contributed to the
+          collision, whether or not the animal was hit. Excludes ridden horses and animals pulling vehicles
+          (e.g. horse and trap) because these are treated as vehicles in their own right. Pedestrians are also
+          not included.
+
+          'Object' is defined as any object which the driver would not expect to find in the carriageway (e.g.
+          dislodged vehicle load, fallen tree) and which caused or contributed to the collision. Excludes
+          permanent features such as bollards, refuges, kerb etc.
+
+110 Slippery inspection cover or road marking.
+
+          To be included where any slippery inspection cover or road marking, has contributed to the collision
+
+                                                                      116
+309 Vehicle travelling along pavement
+          Code can apply to any vehicle type (including ridden horses) travelling along the pavement. Code
+          only applies to vehicles which were intentionally travelling along the pavement. Includes pedal cycle
+          riders or drivers of electric invalid vehicles colliding with pedestrians, or being hit by vehicles
+          emerging from private driveways.
+          Do not include vehicles which were travelling along or across the pavement as a result of having
+          lost control on the main carriageway. Also, skateboards, toy scooters and toy tricycles are not
+          defined as vehicle types and should not be included within this code.
+          This code is not intended for use with shared use facilities.
+
+402 Junction restart (moving off at junction)
+          Identifies a driver/rider who has successfully stopped (or slowed to give way) at a junction, but has
+          then moved off, and in doing so, has contributed to an collision. As with code 401, other codes can
+          be used to explain why this action was taken (e.g. impairment or distraction).
+
+404 Failed to signal or misleading signal
+          Indicates that driver/rider misled another road user (including pedestrian) by either giving a bad
+          signal or by not signalling at all.
+
+705 Dazzling headlights
+          The vehicle identified in the "Which participant" boxes should be the vehicle in which the driver/rider
+          was dazzled by headlights not the vehicle displaying the dazzling lights.
+
+709 Visor or windscreen dirty, scratched or frosted etc.
+          Only use this code where a dirty or scratched windscreen or visor affected the driver/rider's vision
+          and contributed to the collision.
+          Includes frost covered windscreen or misted windscreen/visor.
+          Do not use this code simply to record the presence of a dirty/scratched windscreen or visor.
+
+801 Crossing road masked by stationary or parked vehicle
+          Pedestrian entered the carriageway from behind a stationary or parked vehicle which obscured
+          him/her from the view of oncoming traffic.
+          Code will often be used in conjunction with code 701.
+
+999 Other ­ Please specify
+
+                                                                      117
+4.2 ROAD SAFETY FACTORS PARTICIPANT TYPE
+
+CODES
+
+V      Vehicle
+
+C      Casualty
+
+U      Uninjured pedestrian
+
+NOTES
+
+A.     The participant type should be identified by the relevant vehicle or casualty reference number (e.g.
+
+       001, 002 etc), preceded by "V" if factor applies to a vehicle, driver/rider or the road environment (e.g.
+
+       V002), or "C" if the factor relates to a pedestrian or passenger casualty (e.g. C001).
+
+B.     Enter "U000" if the factor relates to an uninjured pedestrian.
+
+                             118
+4.3 ROAD SAFETY FACTORS PARTICIPANT TYPE REFERENCE
+
+CODES
+
+000 Uninjured pedestrian
+
+NOTES
+
+A.     The participant type reference should be identified by the relevant vehicle or casualty reference
+
+       number (e.g. 001, 002 etc), preceded by "V" if factor applies to a vehicle, driver/rider or the road
+
+       environment (e.g. V002), or "C" if the factor relates to a pedestrian or passenger casualty (e.g.
+
+       C001).
+
+B.     Enter "U000" if the factor relates to an uninjured pedestrian.
+
+                          119
+4.4 ROAD SAFETY FACTOR CONFIDENCE
+
+CODES
+
+A      Very likely
+
+B      Possible
+
+NOTES
+
+                                   120
+ANNEX 5 ­ DELETIONS RECORDS
+
+                                                                      121
+5.1 RECORD TYPE
+CODE
+41. Collision is no longer STATS19 reportable
+
+                                                                      122
+5.2 REPORTING POLICE FORCE
+NOTE
+Repeat of Police Force code entered on the attendant circumstances record at item 1.2
+
+                                                                      123
+5.3 COLLISION REFERENCE FOR REMOVAL
+NOTE
+Repeat of Collision Reference entered on the attendant circumstances record at item 1.3.
+
+                                                                      124
+5.4 DELETION AUTHORITY
+
+NOTE
+
+The deletion authority is the body that has made that the collision is no longer STATS19 reportable
+
+A.    For police forces reporting their own collision for removal this would be repeat of Police Force code
+
+      entered on the attendant circumstances record at item 1.2
+
+B.    For highways authorities use the ONS geographic administrative code that best describes reporting
+
+      authority. ONS codes exist for districts, local authorities, police forces and countries.
+
+      [ESW]{1} [0-9]{8}
+
+C.    For deletion authorities that do not align to an existing ONS geography administrative code please
+
+      contact DfT (see ANNEX 8 - CENTRAL GOVERNMENT ENQUIRY POINTS) who will allocate a
+
+      suitable code
+
+                         125
+5.5    COLLISION DATE       D D MMY Y Y Y
+
+NOTES
+
+A.     The first two boxes are to be used for the day, the second two for the month and the remaining four
+
+       boxes for the year.
+
+B.     Unused boxes to the left of the day or month are to be entered as zeros (e.g. 4th May 2024 would be
+
+       coded as 04052024).
+
+                            126
+5.6 DELETION REASON
+CODES
+11 Ruled a suicide by a coroner
+12 Ruled a medical episode by a medical professional
+13 Collision occurred on Private Road
+14 Collision occurred on Car Park
+15 Collision reported to police after 30 days
+16 Collision occurred on closed road
+17 Duplicate of another record
+18 Record found to be a non-injury collision
+19 Record transferred to another police force
+20 Record has insufficient information to form a STATS19 record
+21 Record entered in error or training issue
+22 DfT end of year validation
+NOTES
+
+                                                                      127
+5.7 DUPLICATE POLICE FORCE REFERENCE
+NOTE
+Repeat of Police Force code entered on the attendant circumstances record at item 1.2
+
+                                                                      128
+5.8 COLLISION REFERENCE FOR RETENTION
+NOTE
+Where a duplicate record is detected and identified in (5.2 and 5.3) then the collision they are a duplicate of
+should be recorded in 5.8. Repeat of Collision Reference being retained entered on the attendant
+circumstances record at item 1.3 for the record to be kept e.g. if Essex record 1234567 is found to be a
+duplicate of 7654321, then 7654321 would be recorded in 5.8 and 1234567 in 1.3
+
+                                                                      129
+ANNEX 6 - POLICE FORCE CODE NUMBERS
+
+ENGLAND                              WALES
+
+1  Metropolitan Police               60        North Wales
+                                     61        Gwent
+3  Cumbria                           62        South Wales
+                                     63        Dyfed-Powys
+4  Lancashire
+
+5  Merseyside
+
+6  Greater Manchester
+
+7  Cheshire
+
+10 Northumbria
+
+11 Durham
+
+12 North Yorkshire                   SCOTLAND
+
+13 West Yorkshire
+
+14 South Yorkshire                   99        Police Scotland
+
+16 Humberside
+
+17 Cleveland
+
+20 West Midlands
+
+21 Staffordshire
+
+22 West Mercia
+
+23 Warwickshire
+
+30 Derbyshire
+
+31 Nottinghamshire
+
+32 Lincolnshire
+
+33 Leicestershire
+
+34 Northamptonshire
+
+35 Cambridgeshire
+
+36 Norfolk
+
+37 Suffolk
+
+40 Bedfordshire
+
+41 Hertfordshire
+
+42 Essex
+
+43 Thames Valley
+
+44 Hampshire
+
+45 Surrey
+
+46 Kent
+
+47 Sussex
+
+48 City of London
+
+50 Devon and Cornwall
+
+52 Avon and Somerset
+
+53 Gloucestershire
+
+54 Wiltshire
+
+55 Dorset
+
+                        130
+ANNEX 7 - LOCAL AUTHORITY CODE NUMBERS
+
+Local authority codes should follow Office for National Statistics coding available from
+https://www.ons.gov.uk/methodology/geography/geographicalproducts/namescodesandlookups/namesandc
+odeslistings
+
+                                                                      131
+ANNEX 8 - CENTRAL GOVERNMENT ENQUIRY POINTS
+
+ENGLAND
+          email: stats19@dft.gov.uk
+
+WALES
+          email: stats.transport@wales.gov.uk
+
+SCOTLAND
+          email: transtat@scotland.gov.uk
+
+                                                                      132
+ANNEX 9: EXAMPLES FOR CODING THE LOCATIONS OF COLLISIONS AND VEHICLES
+
+Collisio  De scription                 1.12 1.12 Label 1.13 1.14  1.14 Label  1.16a  1.16a Label 1.17 1.17 Label 1.18 1.18 Label 1.19 Veh               2.7  2.7 Label      2.1 2.10 Label
+    n
+                                                                                                                                                                                    Not at or
+          Veh 1 hits offside of Veh 2                                                                                                           1       11   Changing        0 within 20m of
+                                                                                                                                                             lane to left
+          whilst moving to nearside                                                                                                                                                 a junction
+                                                                                     Not at or within 20
+1 lane on main carriageway of 1           Motorway  4  3 Dual carriageway     00     metres of junction                                                                             Not at or
+                                                                                                                                                                             0 within 20m of
+          motorway, 100 metres from
+                                                                                                                                                                                    a junction
+          junction                                                                                                                              2       19 Going ahead
+
+          Veh 1 crashes on M4 exit
+
+          slip road, 500m from                                                                                                                                                    Not at or
+                                                                                                                                                                            0 within 20m of
+2 junction with motorway main 1           Motorway  4  7          Slip Road   blank                                                             1       19 Going ahead
+                                                                                                                                                                                  a junction
+          carriageway and 500m from
+
+          roundabout
+
+                                                                                                                                                                               Approaching
+
+                                                                                                                                                                               junction or
+
+                                                                                                                                                1       4    Slowing or     1  waiting /
+                                                                                                                                                             stopping          parked at
+          Veh 1 crashes into rear of
+                                                                                                                                                                               junction
+          Veh 2 which is waiting in
+                                                                                                              Automatic                                                        approach
+3 queue on slip road, 10m              1  Motorway  4  7          Slip Road   blank                       2  traffic signal  3  A road    3102
+                                                                                                                                                                               Approaching
+          from junction with
+                                                                                                                                                                               junction or
+          roundabout
+                                                                                                                                                             Waiting to go     waiting /
+                                                                                                                                                2       3    ahead          1  parked at
+
+                                                                                                                                                                               junction
+
+                                                                                                                                                                               approach
+
+                                                                                                                                                1       5 Moving off        4  Entering
+                                                                                                                                                        19 Going ahead         roundabout
+
+          Veh 1 pulled out from slip                                                                          Automatic                                                        Mid junction ­
+                                                                                                             traffic signal
+4 road onto roundabout and             3  A road 3102 1           Roundabout  blank                       2                  1  Motorway  4                                    on
+
+          hits nearside of vehicle 2                                                                                                            2                           8 roundabout
+
+                                                                                                                                                                               or on main
+
+                                                                                                                                                                               road
+
+          Veh 1 crashes into rear of                                                                                                                                              Not at or
+                                                                                                                                                                            0 within 20m of
+          Veh 2, which braked                                                                                                                        1  19 Going ahead
+                                                                                                                                                     2                            a junction
+5 suddenly whist on                    3  A road 3102 1           Roundabout  blank                                                                                               Not at or
+          roundabout, its more than                                                                                                                  1                      0 within 20m of
+                                                                                                                                          4                  Slowing or           a junction
+          20m from any entry/exit                                                                                                                       4    stopping
+                                                                                                                                                     2
+          roads
+
+          Veh 1 joining main                                                                                                                            12   Changing       7  Entering from
+                                                                                                                                                             lane to right     slip road
+
+          carriageway of motorway                                                                            Give way or                                                       Mid junction ­
+                                                                                                             uncontrolled
+6 from entry slip collides with 1         Motorway  4  3 Dual carriageway     19     Other junction       4                  1                                                 on
+
+          Veh 2 which is in nearside                                                                                                                    19 Going ahead      8 roundabout
+
+          lane                                                                                                                                                                 or on main
+
+                                                                                                                                                                               road
+
+                                                                                     133
+ANNEX 10: NATIONAL COLLISION REPORTING FORM
+A reference copy of the reporting form is available from:
+https://draft-origin.publishing.service.gov.uk/guidance/road-accident-and-safety-statistics-guidance#data-
+collection
+
+                                                                      134
+ANNEX 11: PEDESTRIAN DIRECTION AND CO-ORDINATES
+
+3.12 PEDESTRIAN DIRECTION
+
+For reference only
+
+Pedestrian direction was recommended for removal by the STATS19 review, however, with the rise of online
+reporting having additional information that allows the police to understand public reported collisions
+
+Optional requirement that can be collected by some systems
+
+CODES
+
+0.     Standing still
+
+1.     North
+
+2.     North east
+
+3.     East
+
+4.     South east
+
+5.     South
+
+6.     South west
+
+7.     West
+
+8.     North west
+
+9.     Unknown
+
+NOTES
+
+A.     If the casualty was not a pedestrian, leave this box blank.
+
+B.     The actual, or intended, direction of travel of the pedestrian should be coded using one of the above
+
+codes, or the nearest approximation, where the direction of travel did not fall exactly on one of the given
+
+directions.
+
+C.     A rough sketch plan of the collision scene is recommended, followed by checking on a suitable map
+
+to verify directions. Using the general direction of a road will not be appropriate in most cases.
+
+D.     Code 9 should be avoided if at all possible.
+
+E.     If 3.12 is left blank, then 3.6 (Casualty Class) must be coded 1 or 2.
+
+                                                     135
+3.12fe PEDESTRIAN LOCATION FROM EASTING
+3.12fn PEDESTRIAN LOCATION FROM NORTHING
+
+Optional requirements that can be automatically collected by some systems
+
+The pedestrian location coordinate easting is a calculated field captured by systems like PRONTO, CRaSH
+and single online home.
+
+Notes
+
+A.     Variables 3.10fe and 3.10fn are automatically populated by systems like PRONTO, CRaSH and
+
+       single online home. The coordinates are derived from digital map points collected around the
+
+       collision's location.
+
+B.     Point (3.12fe and 3.12fn) should be captured about 10m before the collision
+
+C.     The aim of collecting the locations is to help the police understand how a pedestrian intended to
+
+       move before interrupted by the collision.
+
+                                                  136
+ANNEX 12 - VARIABLES WHERE THE COLLECTION STATUS HAS CHANGED AS A RESULT OF A
+
+STATS19 REVIEW
+
+STATS19           Variable Name           Date             Notes
+  Code                                 Removed
+
+1.4      Severity of Accident          1 Jan 1994
+
+1.8      Day of Week                   1 Jan 1994
+
+1.26     Overtaking Manoeuvre Patterns Early 1980s Code 1.26 now `Place Accident Reported'
+
+2.9a     Vehicle Location at Time of   1 Jan 2005 Values 1 -3 now incorporated within Code
+
+         Accident - Road                           2.10 'Junction Location of Vehicle'
+
+2.15     Vehicle Prefix/Suffix Letter  1 Jan 1994
+
+2.17     First Contact Between each    1 Jan 2011
+
+         Vehicle
+
+2.18     Part(s) Damaged               1 Jan 2005
+
+2.19     Number of Axles               1 Jan 1989
+
+2.20     Max. Permissible Gross Weight 1 Jan 1994
+
+2.28     Foreign Registered Vehicle    1 Jan 2011 Replaced by 2.35 ­ Was Vehicle Left Hand
+
+                                                   Drive?
+
+3.12     Pedestrian direction          1 Jan 2024  Deprecated from STATS19 requirement
+                                                   but police requested this information be
+                                                   collected when collisions submitted by the
+                                                   public as it gives
+
+3.13     School Pupil Casualty         1 Jan 2011
+                                       1 Jan 1994 Reinstated 1 Jan 2011
+3.14     Seat Belt Usage
+
+                                       137
+ANNEX 13 ­ STATS20 CHANGELOG
+
+Date of change                Description of change
+
+November 2025   Changelog added to document
+November 2025   Page numbering and table of contents updated to match latest changes
+November 2025   Updated road types to be reported on in section 2 ­ this clarifies the
+                difference between private and unadopted roads for the purposes of
+November 2025   STATS19 reporting
+November 2025   Clarified that collisions involving only a pedestrian and a parked vehicle
+November 2025   should not be reported (sections 2, 3, and 4)
+                Updated Annex 3 ­ question 3.10 to reference the 2024 specification
+                options in Annex 1 question 1.20
+                Annex 7 ­ removed broken link to list of local authorities
+
+                              138
+
