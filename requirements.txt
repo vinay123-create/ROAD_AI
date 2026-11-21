@@ -1,8 +1,8 @@
 
-numpy
-pandas
-scikit-learn
-joblib
-fastapi
-uvicorn[standard]
-httpx
+numpy==2.4.4
+pandas==3.0.2
+scikit-learn==1.9.0
+joblib==1.5.3
+fastapi==0.163.2
+uvicorn[standard]==0.54.0
+httpx==0.28.1
