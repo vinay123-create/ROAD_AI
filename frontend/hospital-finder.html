@@ -1,140 +1,468 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoadGuard AI | Hospital Finder</title>
 
-    <title>RoadGuard AI - Nearby Hospital Finder</title>
+    <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-    <!-- Leaflet CSS -->
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
-
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background: #f8fafc;
-            color: #1e293b;
+        :root {
+            --bg: #080d19;
+            --panel: #111a2b;
+            --panel-light: #172338;
+            --border: rgba(148, 163, 184, 0.15);
+            --cyan: #22d3ee;
+            --blue: #3b82f6;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --green: #34d399;
         }
 
-        h2 {
-            color: #1e293b;
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .navbar {
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            background: rgba(8, 13, 25, 0.95);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 21px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.6px;
+        }
+
+        .brand-icon {
+            width: 39px;
+            height: 39px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #0891b2, #2563eb);
+            font-size: 22px;
+        }
+
+        .brand span:last-child {
+            color: var(--cyan);
+        }
+
+        .back-link {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 11px 17px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            transition: 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--cyan);
+            border-color: var(--cyan);
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 48px 0 70px;
+        }
+
+        .hero {
+            margin-bottom: 30px;
+        }
+
+        .eyebrow {
+            color: var(--cyan);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(30px, 4vw, 43px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 13px;
+        }
+
+        .hero h1 span {
+            color: var(--cyan);
+        }
+
+        .hero p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 14px;
+            max-width: 650px;
+        }
+
+        .instruction {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 17px 20px;
+            background: rgba(34, 211, 238, 0.07);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 12px;
+            margin-bottom: 22px;
+        }
+
+        .instruction-icon {
+            font-size: 23px;
+        }
+
+        .instruction strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .instruction p {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .map-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        .map-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 7px 16px;
+            gap: 12px;
+        }
+
+        .map-heading h2 {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .map-heading p {
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .map-tag {
+            color: var(--green);
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            border-radius: 30px;
+            padding: 7px 11px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
         }
 
         #map {
-            height: 500px;
+            height: 510px;
             width: 100%;
-            border-radius: 10px;
-            border: 1px solid #ddd;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            z-index: 1;
+        }
+
+        .map-legend {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+            padding: 16px 7px 5px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .legend-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+
+        .status-card {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-top: 24px;
+        }
+
+        .status-icon {
+            font-size: 21px;
         }
 
         #status {
-            margin-top: 15px;
-            font-weight: bold;
-            color: #334155;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        #status.loading {
+            color: var(--cyan);
+        }
+
+        #status.error {
+            color: #fb7185;
+        }
+
+        .results-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 35px 0 17px;
+        }
+
+        .results-heading h2 {
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .results-heading span {
+            color: var(--muted);
+            font-size: 11px;
         }
 
         #results {
-            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
         }
 
         .hospital {
-            padding: 18px;
-            margin-bottom: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: white;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 21px;
+            transition: 0.25s;
+        }
+
+        .hospital:hover {
+            transform: translateY(-4px);
+            border-color: rgba(34, 211, 238, 0.45);
+            background: var(--panel-light);
         }
 
         .hospital h3 {
-            color: #2563eb;
-            margin-top: 0;
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 17px;
+        }
+
+        .hospital p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 11px;
+        }
+
+        .hospital .distance {
+            color: var(--cyan);
+            font-weight: 700;
         }
 
         .hospital a {
             display: inline-block;
-            margin-top: 8px;
-            padding: 9px 14px;
-            background: #2563eb;
+            margin-top: 9px;
+            padding: 11px 16px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #0891b2, #2563eb);
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            transition: 0.2s;
         }
 
         .hospital a:hover {
-            background: #1d4ed8;
+            filter: brightness(1.2);
+            transform: translateY(-2px);
         }
 
-        .info {
+        .footer {
+            text-align: center;
+            padding: 28px 15px;
+            border-top: 1px solid var(--border);
             color: #64748b;
-            font-size: 14px;
+            font-size: 11px;
         }
 
-        .error {
-            color: #dc2626 !important;
-        }
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 0 5%;
+                height: 68px;
+            }
 
-        .loading {
-            color: #2563eb !important;
-        }
+            .brand {
+                font-size: 17px;
+            }
 
-        .distance {
-            font-weight: bold;
-        }
+            .container {
+                width: 92%;
+                padding-top: 35px;
+            }
 
-        @media (max-width: 600px) {
+            .hero h1 {
+                letter-spacing: -1px;
+            }
 
-            body {
-                margin: 10px;
+            .map-card {
+                padding: 10px;
             }
 
             #map {
                 height: 400px;
             }
 
+            .map-heading {
+                align-items: flex-start;
+            }
+
+            .map-tag {
+                font-size: 9px;
+            }
+
+            #results {
+                grid-template-columns: 1fr;
+            }
         }
-
     </style>
-
 </head>
 
 <body>
 
-    <h2>RoadGuard AI - Nearby Hospital Finder</h2>
+    <nav class="navbar">
+        <a href="index.html" class="brand">
+            <div class="brand-icon">✚</div>
+            <div>ROADGUARD <span>AI</span></div>
+        </a>
 
-    <p>
-        Select an accident location anywhere in the United Kingdom
-        to find nearby hospitals.
-    </p>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </nav>
 
-    <!-- Map -->
-    <div id="map"></div>
+    <main class="container">
 
-    <!-- Status -->
-    <p id="status">
-        Select an accident location on the UK map.
-    </p>
+        <section class="hero">
+            <div class="eyebrow">EMERGENCY RESPONSE SYSTEM</div>
+            <h1>Nearby <span>Hospital Finder</span></h1>
+            <p>
+                Locate nearby hospitals across the United Kingdom.
+                Select an accident location on the map to identify
+                hospitals within a 5 km radius and find the nearest
+                available medical facilities.
+            </p>
+        </section>
 
-    <!-- Hospital Results -->
-    <div id="results"></div>
+        <section class="instruction">
+            <div class="instruction-icon">📍</div>
+            <div>
+                <strong>Select an accident location</strong>
+                <p>
+                    Click anywhere inside the UK map. RoadGuard AI will
+                    search for nearby hospitals automatically.
+                </p>
+            </div>
+        </section>
 
+        <section class="map-card">
+            <div class="map-heading">
+                <div>
+                    <h2>Interactive UK Map</h2>
+                    <p>Select a location to begin your search</p>
+                </div>
+                <div class="map-tag">● LIVE MAP</div>
+            </div>
 
-    <!-- Leaflet JavaScript -->
+            <div id="map"></div>
+
+            <div class="map-legend">
+                <div class="legend-item">
+                    <span class="legend-dot" style="background:#ef4444"></span>
+                    Accident location
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot" style="background:#3b82f6"></span>
+                    Nearby hospitals
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot" style="background:#22d3ee"></span>
+                    5 km search radius
+                </div>
+            </div>
+        </section>
+
+        <section class="status-card">
+            <div class="status-icon">⚡</div>
+            <p id="status">
+                Select an accident location on the UK map to find nearby hospitals.
+            </p>
+        </section>
+
+        <section>
+            <div class="results-heading">
+                <h2>Nearby Hospitals</h2>
+                <span>Sorted by nearest distance</span>
+            </div>
+
+            <div id="results"></div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        © 2026 RoadGuard AI · Intelligent Road Safety System
+    </footer>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-
     <script>
-
         // =====================================================
         // 1. BACKEND CONFIGURATION
         // =====================================================
@@ -154,33 +482,23 @@
         );
 
         const map = L.map("map", {
-
             maxBounds: ukBounds,
-
             maxBoundsViscosity: 1.0,
-
             minZoom: 5
-
         }).setView(
-
             [54.5, -3.0],
-
             6
-
         );
 
 
         // OpenStreetMap tiles
 
         L.tileLayer(
-
             "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-
             {
                 attribution: "&copy; OpenStreetMap contributors",
                 maxZoom: 19
             }
-
         ).addTo(map);
 
 
@@ -214,25 +532,17 @@
                 (lon2 - lon1) * Math.PI / 180;
 
             const a =
-
                 Math.sin(dLat / 2) ** 2 +
-
                 Math.cos(lat1 * Math.PI / 180) *
-
                 Math.cos(lat2 * Math.PI / 180) *
-
                 Math.sin(dLon / 2) ** 2;
 
             const c = 2 * Math.atan2(
-
                 Math.sqrt(a),
-
                 Math.sqrt(1 - a)
-
             );
 
             return R * c;
-
         }
 
 
@@ -243,17 +553,11 @@
         function escapeHTML(value) {
 
             return String(value).replace(/[&<>"']/g, char => ({
-
                 "&": "&amp;",
-
                 "<": "&lt;",
-
                 ">": "&gt;",
-
                 '"': "&quot;",
-
                 "'": "&#39;"
-
             })[char]);
 
         }
@@ -266,19 +570,14 @@
         function clearHospitalMarkers() {
 
             hospitalMarkers.forEach(marker => {
-
                 map.removeLayer(marker);
-
             });
 
             hospitalMarkers = [];
 
             if (searchCircle) {
-
                 map.removeLayer(searchCircle);
-
                 searchCircle = null;
-
             }
 
         }
@@ -297,16 +596,12 @@
                 const detail = data.detail;
 
                 if (typeof detail === "string") {
-
                     return detail;
-
                 }
 
                 if (detail && typeof detail === "object") {
-
                     return detail.message ||
                         JSON.stringify(detail);
-
                 }
 
                 return "Something went wrong.";
@@ -334,7 +629,6 @@
 
             const currentRequest = ++searchRequestId;
 
-
             status.className = "loading";
 
             status.textContent =
@@ -348,42 +642,26 @@
             // Show 5 km search radius
 
             searchCircle = L.circle(
-
                 [lat, lon],
-
                 {
-
                     radius: SEARCH_RADIUS,
-
                     color: "#2563eb",
-
                     fillColor: "#3b82f6",
-
                     fillOpacity: 0.08,
-
                     weight: 2
-
                 }
-
             ).addTo(map);
 
 
             try {
 
-                // =================================================
                 // CALL FASTAPI BACKEND
-                // =================================================
 
                 const url =
-
                     `${API_BASE_URL}/hospitals/nearby?` +
-
                     `latitude=${encodeURIComponent(lat)}&` +
-
                     `longitude=${encodeURIComponent(lon)}&` +
-
                     `radius=${SEARCH_RADIUS}`;
-
 
                 const response = await fetch(url);
 
@@ -398,22 +676,17 @@
 
                 }
 
-
                 const data = await response.json();
 
 
                 // Ignore outdated requests
 
                 if (currentRequest !== searchRequestId) {
-
                     return;
-
                 }
 
 
-                // =================================================
                 // PROCESS HOSPITAL DATA
-                // =================================================
 
                 const hospitals = data.hospitals.map(hospital => ({
 
@@ -426,15 +699,10 @@
                     phone: hospital.phone || "Not available",
 
                     distance: calculateDistance(
-
                         lat,
-
                         lon,
-
                         hospital.latitude,
-
                         hospital.longitude
-
                     )
 
                 }));
@@ -443,15 +711,11 @@
                 // Sort by nearest distance
 
                 hospitals.sort(
-
                     (a, b) => a.distance - b.distance
-
                 );
 
 
-                // =================================================
                 // HANDLE EMPTY RESULTS
-                // =================================================
 
                 if (hospitals.length === 0) {
 
@@ -465,20 +729,14 @@
                 }
 
 
-                // =================================================
                 // DISPLAY HOSPITAL MARKERS
-                // =================================================
 
                 hospitals.forEach(hospital => {
 
                     const marker = L.marker([
-
                         hospital.latitude,
-
                         hospital.longitude
-
                     ]).addTo(map);
-
 
                     marker.bindPopup(`
 
@@ -496,28 +754,21 @@
 
                     `);
 
-
                     hospitalMarkers.push(marker);
 
                 });
 
 
-                // =================================================
                 // DISPLAY SEARCH STATUS
-                // =================================================
 
                 status.className = "";
 
                 status.textContent =
-
                     `${hospitals.length} hospitals found ` +
-
                     `within ${SEARCH_RADIUS / 1000} km.`;
 
 
-                // =================================================
                 // DISPLAY HOSPITAL CARDS
-                // =================================================
 
                 hospitals.slice(0, 10).forEach(hospital => {
 
@@ -544,7 +795,6 @@
                     distance.className = "distance";
 
                     distance.textContent =
-
                         `Distance: ${hospital.distance.toFixed(2)} km`;
 
 
@@ -554,7 +804,6 @@
                         document.createElement("p");
 
                     phone.textContent =
-
                         `Phone: ${hospital.phone}`;
 
 
@@ -564,9 +813,7 @@
                         document.createElement("a");
 
                     link.href =
-
                         `https://www.google.com/maps/dir/?api=1&destination=` +
-
                         `${hospital.latitude},${hospital.longitude}`;
 
                     link.target = "_blank";
@@ -579,17 +826,11 @@
                     // Append card elements
 
                     card.append(
-
                         name,
-
                         distance,
-
                         phone,
-
                         link
-
                     );
-
 
                     results.appendChild(card);
 
@@ -601,25 +842,17 @@
                 // Ignore errors from outdated requests
 
                 if (currentRequest !== searchRequestId) {
-
                     return;
-
                 }
 
-
                 console.error(
-
                     "Hospital Finder Error:",
-
                     error
-
                 );
-
 
                 status.className = "error";
 
                 status.textContent = error.message;
-
 
                 results.innerHTML = "";
 
@@ -642,20 +875,15 @@
             // Remove previous accident marker
 
             if (accidentMarker) {
-
                 map.removeLayer(accidentMarker);
-
             }
 
 
             // Add selected accident marker
 
             accidentMarker = L.marker([lat, lon])
-
                 .addTo(map)
-
                 .bindPopup("Selected Accident Location")
-
                 .openPopup();
 
 
@@ -683,9 +911,7 @@
 
         console.log("Country restriction: United Kingdom");
 
-
     </script>
 
 </body>
-
 </html>

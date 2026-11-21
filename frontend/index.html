@@ -4,163 +4,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#07111f">
     <title>RoadGuard AI | Intelligent Road Safety</title>
 
     <style>
+        :root {
+            --bg: #07111f;
+            --panel: #101e31;
+            --line: rgba(148,180,215,.17);
+            --text: #edf5ff;
+            --muted: #9bb0c9;
+            --blue: #42b8ff;
+            --cyan: #72e2f2;
+            --green: #45d6a0;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            color: #1e293b;
+            font-family: Inter, Arial, sans-serif;
+            background: radial-gradient(
+                ellipse at 50% -15%,
+                #183b61 0%,
+                #0a1728 48%,
+                #06101d 100%
+            );
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .18;
+            background-image:
+                linear-gradient(rgba(100,180,230,.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100,180,230,.08) 1px, transparent 1px);
+            background-size: 54px 54px;
         }
 
         nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 7%;
-            background: #0f172a;
-            color: white;
+            padding: 19px 7%;
+            background: rgba(5,15,28,.88);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(18px);
         }
 
         .logo {
-            font-size: 25px;
-            font-weight: bold;
-            color: #38bdf8;
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: -.6px;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--blue);
         }
 
         nav a {
-            color: white;
+            color: var(--muted);
             text-decoration: none;
-            margin-left: 25px;
+            margin-left: 28px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        nav a:hover {
+            color: var(--cyan);
         }
 
         .hero {
+            position: relative;
             text-align: center;
-            padding: 75px 20px;
-            background: linear-gradient(135deg, #0f172a, #1e3a5f);
-            color: white;
+            padding: 105px 20px 95px;
+            overflow: hidden;
+            background: radial-gradient(
+                ellipse at 50% 100%,
+                rgba(37,151,220,.22),
+                transparent 58%
+            );
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(87,190,245,.15);
+            border-radius: 50%;
+            width: 520px;
+            height: 520px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -35%);
+            box-shadow: 0 0 80px rgba(42,164,230,.08);
+        }
+
+        .hero::after {
+            width: 700px;
+            height: 700px;
         }
 
         .hero h1 {
-            font-size: 42px;
-            margin-bottom: 18px;
+            position: relative;
+            font-size: clamp(36px, 5vw, 64px);
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 22px;
+            background: linear-gradient(100deg, #fff 20%, #8cddff 75%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .hero p {
-            color: #cbd5e1;
+            position: relative;
+            max-width: 690px;
+            margin: auto;
+            color: #b4c7dc;
             font-size: 17px;
-            line-height: 1.7;
+            line-height: 1.8;
+        }
+
+        .hero-tag {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+            padding: 8px 15px;
+            border: 1px solid rgba(66,184,255,.3);
+            border-radius: 30px;
+            color: var(--cyan);
+            background: rgba(66,184,255,.08);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         .container {
-            max-width: 1100px;
-            margin: 45px auto;
-            padding: 0 20px;
+            position: relative;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 25px 24px 70px;
         }
 
         .section-title {
-            margin-bottom: 25px;
+            margin: 22px 0 25px;
         }
 
         .section-title h2 {
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-size: 27px;
+            letter-spacing: -.6px;
+            margin-bottom: 8px;
         }
 
         .section-title p {
-            color: #64748b;
+            color: var(--muted);
             line-height: 1.6;
         }
 
         .features {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
         }
 
         .feature-card {
-            background: white;
-            padding: 30px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                145deg,
+                rgba(21,41,64,.96),
+                rgba(11,26,43,.96)
+            );
+            border: 1px solid var(--line);
+            padding: 32px;
+            border-radius: 20px;
+            box-shadow: 0 20px 55px rgba(0,0,0,.18);
+            transition: transform .25s, border-color .25s;
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            right: -70px;
+            top: -90px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(50,177,239,.09);
+            filter: blur(5px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(66,184,255,.5);
         }
 
         .feature-icon {
-            font-size: 38px;
-            margin-bottom: 18px;
+            position: relative;
+            width: 58px;
+            height: 58px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: rgba(57,174,235,.13);
+            border: 1px solid rgba(92,202,255,.2);
+            font-size: 29px;
+            margin-bottom: 24px;
         }
 
         .feature-card h3 {
+            position: relative;
             font-size: 22px;
             margin-bottom: 12px;
         }
 
         .feature-card p {
-            color: #64748b;
-            line-height: 1.7;
-            margin-bottom: 22px;
+            position: relative;
+            color: var(--muted);
+            line-height: 1.75;
+            margin-bottom: 26px;
+            min-height: 84px;
         }
 
         .feature-card a {
-            display: inline-block;
-            padding: 12px 20px;
-            background: #2563eb;
-            color: white;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 13px 18px;
+            border-radius: 10px;
+            background: linear-gradient(100deg, #168fe0, #36bdf1);
+            color: #031322;
             text-decoration: none;
-            border-radius: 7px;
-            font-weight: bold;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 8px 25px rgba(34,160,226,.2);
+            transition: .2s;
         }
 
         .feature-card a:hover {
-            background: #1d4ed8;
+            filter: brightness(1.12);
+            transform: translateY(-1px);
         }
 
-        .hospital-btn {
-            background: #059669 !important;
-        }
-
-        .hospital-btn:hover {
-            background: #047857 !important;
+        .feature-card .hospital-btn {
+            background: linear-gradient(100deg, #12a982, #4ce0b4);
+            color: #03251d;
         }
 
         .about {
-            margin-top: 50px;
-            padding: 30px;
-            background: white;
-            border-radius: 14px;
-            line-height: 1.8;
+            margin-top: 25px;
+            padding: 30px 32px;
+            background: rgba(16,31,49,.8);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            line-height: 1.85;
+            color: var(--muted);
+        }
+
+        .about h2 {
+            color: var(--text);
+            font-size: 22px;
+            margin-bottom: 12px;
         }
 
         footer {
-            margin-top: 60px;
+            border-top: 1px solid var(--line);
             padding: 25px;
             text-align: center;
-            background: #0f172a;
-            color: #cbd5e1;
+            color: #7890aa;
+            background: rgba(4,12,22,.7);
+            font-size: 13px;
         }
 
         @media(max-width: 700px) {
             nav {
+                padding: 16px 20px;
                 flex-direction: column;
-                gap: 18px;
+                gap: 15px;
             }
 
             nav a {
-                margin: 0 8px;
+                margin: 0 10px;
             }
 
-            .hero h1 {
-                font-size: 30px;
+            .hero {
+                padding: 76px 20px;
             }
 
             .features {
                 grid-template-columns: 1fr;
+            }
+
+            .feature-card p {
+                min-height: 0;
+            }
+
+            .container {
+                padding-inline: 16px;
             }
         }
     </style>
@@ -168,9 +327,8 @@
 
 <body>
 
-    <!-- NAVIGATION -->
     <nav>
-        <div class="logo">🛡 RoadGuard AI</div>
+        <div class="logo">🛡 RoadGuard <span>AI</span></div>
 
         <div>
             <a href="#home">Home</a>
@@ -179,35 +337,33 @@
         </div>
     </nav>
 
-
-    <!-- HERO SECTION -->
     <section class="hero" id="home">
 
-        <h1>Intelligent Road Safety System</h1>
+        <div class="hero-tag">INTELLIGENT ROAD SAFETY SYSTEM</div>
+
+        <h1>Smarter Roads.<br>Safer Journeys.</h1>
 
         <p>
             Predict accident severity and locate nearby hospitals
             using Machine Learning and geographical data.
+            Bringing intelligent analysis to road safety.
         </p>
 
     </section>
 
-
-    <!-- MAIN FEATURES -->
     <main class="container" id="features">
 
         <div class="section-title">
-            <h2>Our Features</h2>
+            <h2>RoadGuard Intelligence</h2>
 
             <p>
-                Explore RoadGuard AI's intelligent road safety tools.
+                Explore our intelligent tools designed to support
+                road safety analysis and emergency awareness.
             </p>
         </div>
 
-
         <div class="features">
 
-            <!-- SEVERITY PREDICTION -->
             <div class="feature-card">
 
                 <div class="feature-icon">🚦</div>
@@ -226,8 +382,6 @@
 
             </div>
 
-
-            <!-- HOSPITAL FINDER -->
             <div class="feature-card">
 
                 <div class="feature-icon">🏥</div>
@@ -248,8 +402,6 @@
 
         </div>
 
-
-        <!-- ABOUT -->
         <section class="about" id="about">
 
             <h2>About RoadGuard AI</h2>
@@ -266,8 +418,6 @@
 
     </main>
 
-
-    <!-- FOOTER -->
     <footer>
         <p>© 2026 RoadGuard AI | Intelligent Road Safety</p>
     </footer>

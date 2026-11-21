@@ -1,35 +1,64 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="theme-color" content="#07111f">
     <title>RoadGuard AI - Accident Analysis</title>
 
-    <!-- Leaflet Map -->
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    >
+    <!-- Leaflet CSS - Existing map dependency -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
     <style>
-        * {
-            box-sizing: border-box;
+        :root {
+            --bg: #07111f;
+            --panel: #101e31;
+            --line: rgba(148,180,215,.17);
+            --text: #edf5ff;
+            --muted: #9bb0c9;
+            --blue: #42b8ff;
+            --cyan: #72e2f2;
+            --green: #45d6a0;
         }
 
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            background: #f1f5f9;
-            color: #1e293b;
+            font-family: Inter, Arial, sans-serif;
+            background: radial-gradient(
+                ellipse at 50% -15%,
+                #183b61 0%, #0a1728 48%, #06101d 100%
+            );
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .13;
+            background-image:
+                linear-gradient(rgba(100,180,230,.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100,180,230,.08) 1px, transparent 1px);
+            background-size: 54px 54px;
         }
 
         nav {
-            background: #0f172a;
-            color: white;
-            padding: 18px 6%;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(5,15,28,.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--line);
+            color: var(--text);
+            padding: 17px clamp(18px,6vw,86px);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -37,239 +66,294 @@
         }
 
         nav h2 {
-            color: #38bdf8;
             margin: 0;
+            color: #8cddff;
+            font-size: 21px;
+            letter-spacing: -.5px;
         }
 
         nav a {
-            color: white;
+            color: #b6c9de;
             text-decoration: none;
+            font-weight: 650;
+            font-size: 14px;
         }
 
+        nav a:hover { color: var(--cyan); }
+
         .hero {
-            background: linear-gradient(135deg, #0f172a, #1e3a5f);
-            color: white;
+            position: relative;
             text-align: center;
-            padding: 45px 20px;
+            padding: 55px 20px 50px;
+            background: radial-gradient(
+                ellipse at 50% 100%,
+                rgba(37,151,220,.2), transparent 60%
+            );
+            border-bottom: 1px solid var(--line);
         }
 
         .hero h1 {
-            margin-top: 0;
+            font-size: clamp(29px,4vw,44px);
+            letter-spacing: -1.2px;
+            margin: 0 0 12px;
+            background: linear-gradient(100deg,#fff,#8cddff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .hero p {
-            color: #cbd5e1;
-            line-height: 1.6;
+            color: #b4c7dc;
+            line-height: 1.7;
+            margin: 0;
         }
 
         .container {
-            max-width: 1050px;
-            margin: 35px auto;
-            padding: 0 20px;
+            position: relative;
+            max-width: 1120px;
+            margin: 34px auto 0;
+            padding: 0 22px;
         }
 
         .panel {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+            background: linear-gradient(
+                145deg,
+                rgba(18,35,55,.97),
+                rgba(11,25,42,.97)
+            );
+            border: 1px solid var(--line);
+            padding: clamp(21px,3vw,32px);
+            border-radius: 20px;
+            margin-bottom: 23px;
+            box-shadow: 0 18px 55px rgba(0,0,0,.17);
         }
 
         .panel h2 {
-            margin-top: 0;
+            margin: 0 0 18px;
+            font-size: 23px;
+            letter-spacing: -.5px;
+            color: #f1f7ff;
         }
+
+        .panel > p.detail { margin-bottom: 12px; }
 
         label {
             display: block;
-            font-weight: bold;
-            margin: 18px 0 8px;
+            font-weight: 700;
+            font-size: 14px;
+            margin: 20px 0 9px;
+            color: #dceafa;
         }
 
         input, select {
             width: 100%;
-            padding: 13px;
-            border: 1px solid #cbd5e1;
-            border-radius: 7px;
+            padding: 14px 15px;
+            border: 1px solid rgba(151,184,218,.24);
+            border-radius: 11px;
             font-size: 15px;
-            background: white;
+            background: #0a192b;
+            color: #edf5ff;
+            outline: none;
+            transition: border .2s, box-shadow .2s;
+        }
+
+        input::placeholder { color: #7188a3; }
+
+        input:focus, select:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(66,184,255,.12);
         }
 
         button {
-            border: none;
-            padding: 13px 22px;
-            border-radius: 7px;
+            border: 0;
+            padding: 14px 22px;
+            border-radius: 11px;
             cursor: pointer;
             font-size: 15px;
-            font-weight: bold;
-            color: white;
-            background: #2563eb;
+            font-weight: 800;
+            color: #041625;
+            background: linear-gradient(100deg,#28a9ed,#72d9f7);
+            box-shadow: 0 9px 25px rgba(36,163,226,.2);
+            transition: transform .2s, filter .2s;
         }
 
         button:hover {
-            background: #1d4ed8;
+            filter: brightness(1.08);
+            transform: translateY(-1px);
         }
 
         button:disabled {
-            background: #94a3b8;
+            opacity: .55;
             cursor: not-allowed;
+            transform: none;
         }
 
         .submit-btn {
             width: 100%;
-            margin-top: 22px;
+            margin-top: 24px;
+        }
+
+        .hint, .detail {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.75;
         }
 
         .hint {
-            color: #64748b;
-            font-size: 13px;
-            line-height: 1.5;
-            margin-top: 7px;
+            margin-top: 8px;
+            font-size: 12px;
         }
 
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none !important; }
 
         .status {
-            padding: 13px;
-            border-radius: 7px;
-            margin-bottom: 18px;
-            line-height: 1.5;
+            padding: 14px 16px;
+            border-radius: 11px;
+            margin: 0 0 18px;
+            line-height: 1.55;
+            border: 1px solid transparent;
         }
 
         .loading {
-            background: #eff6ff;
-            color: #1d4ed8;
+            background: rgba(36,133,220,.12);
+            color: #8dd5ff;
+            border-color: rgba(66,184,255,.25);
         }
 
         .success {
-            background: #dcfce7;
-            color: #166534;
+            background: rgba(36,190,132,.12);
+            color: #78e8bd;
+            border-color: rgba(69,214,160,.25);
         }
 
         .warning {
-            background: #fef3c7;
-            color: #92400e;
+            background: rgba(232,171,55,.12);
+            color: #f7cf7d;
+            border-color: rgba(232,171,55,.25);
         }
 
         .error {
-            background: #fee2e2;
-            color: #991b1b;
+            background: rgba(230,75,85,.12);
+            color: #ff9ca3;
+            border-color: rgba(230,75,85,.25);
         }
 
         .result-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
+            grid-template-columns: repeat(2,minmax(0,1fr));
+            gap: 17px;
         }
 
         .result-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 20px;
-            border-radius: 10px;
+            background: rgba(5,17,31,.55);
+            border: 1px solid var(--line);
+            padding: 24px;
+            border-radius: 15px;
+            min-width: 0;
+        }
+
+        .result-box h3 {
+            font-size: 18px;
+            margin: 0 0 14px;
+            color: #eaf4ff;
         }
 
         .severity {
-            font-size: 29px;
-            font-weight: bold;
-            margin: 12px 0;
+            font-size: clamp(32px,4vw,44px);
+            font-weight: 850;
+            letter-spacing: -1px;
+            margin: 14px 0;
         }
 
-        .severity.Slight {
-            color: #16a34a;
-        }
-
-        .severity.Serious {
-            color: #d97706;
-        }
-
-        .severity.Fatal {
-            color: #dc2626;
-        }
-
-        .detail {
-            color: #64748b;
-            font-size: 14px;
-            line-height: 1.7;
-        }
+        .severity.Slight { color: #45d6a0; }
+        .severity.Serious { color: #ffbf5e; }
+        .severity.Fatal { color: #ff6577; }
 
         #map {
             width: 100%;
-            height: 400px;
-            border-radius: 10px;
-            margin-top: 15px;
+            height: 410px;
+            border-radius: 14px;
+            margin-top: 16px;
+            border: 1px solid var(--line);
+            z-index: 1;
+            overflow: hidden;
         }
 
         .hospital-card {
-            border: 1px solid #e2e8f0;
-            padding: 17px;
-            border-radius: 9px;
+            border: 1px solid var(--line);
+            padding: 19px;
+            border-radius: 14px;
             margin-top: 13px;
-            background: #fff;
+            background: rgba(6,19,34,.72);
         }
 
         .hospital-card h3 {
-            margin-top: 0;
-            color: #2563eb;
+            margin: 0 0 10px;
+            color: #8cddff;
+            font-size: 17px;
         }
 
         .hospital-card p {
-            line-height: 1.5;
+            line-height: 1.6;
+            color: var(--muted);
+            margin: 7px 0;
         }
 
         .hospital-card a {
-            display: inline-block;
-            background: #059669;
-            color: white;
+            display: inline-flex;
+            background: linear-gradient(100deg,#0c9c7a,#40d6ac);
+            color: #03251d;
             text-decoration: none;
             padding: 10px 15px;
-            border-radius: 6px;
-            margin-top: 5px;
-        }
-
-        .hospital-card a:hover {
-            background: #047857;
-        }
-
-        .hospital-card.nearest {
-            border: 2px solid #16a34a;
-        }
-
-        .nearest-label {
-            color: #15803d;
-            font-weight: bold;
+            border-radius: 9px;
+            margin-top: 8px;
+            font-weight: 800;
             font-size: 13px;
         }
 
+        .hospital-card.nearest {
+            border-color: rgba(69,214,160,.55);
+            box-shadow: 0 0 0 1px rgba(69,214,160,.08);
+        }
+
+        .nearest-label {
+            color: #65e0b1;
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: .7px;
+            margin-bottom: 10px;
+        }
+
         .notice {
-            background: #fefce8;
-            border: 1px solid #fde68a;
-            padding: 15px;
-            border-radius: 8px;
-            color: #854d0e;
-            line-height: 1.6;
-            margin-top: 18px;
-            font-size: 14px;
+            background: rgba(235,181,65,.09);
+            border: 1px solid rgba(235,181,65,.28);
+            padding: 16px;
+            border-radius: 12px;
+            color: #f4d18b;
+            line-height: 1.7;
+            margin-top: 20px;
+            font-size: 13px;
         }
 
         footer {
-            background: #0f172a;
-            color: white;
-            padding: 22px;
+            border-top: 1px solid var(--line);
+            background: rgba(4,12,22,.7);
+            color: #7890aa;
+            padding: 24px;
             text-align: center;
             margin-top: 50px;
+            font-size: 13px;
         }
 
-        @media(max-width: 650px) {
-            .result-grid {
-                grid-template-columns: 1fr;
-            }
+        .leaflet-container { font-family: inherit; }
 
-            nav {
-                flex-direction: column;
-            }
+        @media(max-width:650px) {
+            .result-grid { grid-template-columns: 1fr; }
+            nav { flex-direction: column; }
+            .hero { padding: 42px 18px; }
+            .container { padding: 0 13px; }
+            .panel { padding: 20px; }
+            #map { height: 340px; }
         }
     </style>
 </head>
@@ -282,7 +366,6 @@
         <a href="index.html">← Back to Home</a>
     </nav>
 
-
     <!-- HERO -->
     <section class="hero">
         <h1>Accident Severity Analysis</h1>
@@ -291,7 +374,6 @@
             and discover nearby hospitals.
         </p>
     </section>
-
 
     <main class="container">
 
@@ -363,7 +445,6 @@
 
         </section>
 
-
         <!-- PREDICTION RESULTS -->
         <section id="predictionSection" class="panel hidden">
 
@@ -419,7 +500,6 @@
 
         </section>
 
-
         <!-- HOSPITAL RESULTS -->
         <section id="hospitalSection" class="panel hidden">
 
@@ -435,15 +515,12 @@
 
     </main>
 
-
     <footer>
         <p>© 2026 RoadGuard AI | Intelligent Road Safety</p>
     </footer>
 
-
     <!-- LEAFLET -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 
     <script>
 
@@ -651,6 +728,7 @@
             missingBox.classList.remove("hidden");
 
             if (data.features) {
+
                 const details = document.createElement("details");
 
                 const summary = document.createElement("summary");
@@ -661,6 +739,7 @@
 
                 pre.style.whiteSpace = "pre-wrap";
                 pre.style.overflowWrap = "anywhere";
+
                 pre.textContent = JSON.stringify(
                     data.features,
                     null,
@@ -790,7 +869,7 @@
                 });
 
 
-                // Fit map to show the selected location and hospitals
+                // Fit map to show selected location and hospitals
 
                 const allMarkers = [
                     accidentMarker,
